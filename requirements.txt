@@ -1,0 +1,26 @@
+# ==============================================================================
+# OCR FinSight - Dependencies
+# ==============================================================================
+
+# Core ML Frameworks
+tensorflow>=2.15.0          # Main framework (Model Subclassing, GradientTape, TensorBoard)
+easyocr>=1.7.1              # Pre-trained CRNN model for OCR
+
+# Image Processing
+opencv-python>=4.8.0        # Image preprocessing
+Pillow>=10.0.0              # Image handling
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Web Framework
+fastapi>=0.104.0            # REST API
+uvicorn>=0.24.0             # ASGI server
+python-multipart>=0.0.6     # File upload support
+jinja2>=3.1.0               # HTML templates
+
+# Utilities
+scikit-learn>=1.3.0         # Metrics, train/test split
+matplotlib>=3.7.0           # Visualization
+tqdm>=4.65.0                # Progress bars
