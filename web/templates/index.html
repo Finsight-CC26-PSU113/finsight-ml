@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR FinSight - Premium Receipt Intelligence</title>
+    <!-- Modern Typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Premium Stylesheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <div class="title-wrapper">
+                    <h1>OCR <span class="gradient-text">FinSight</span></h1>
+                    <p>Sistem Pengenalan Entitas Struk Belanja Hibrida AI</p>
+                </div>
+            </div>
+            <div class="header-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">Model Siap (GPU Akselerasi)</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Left Column: Upload & Control Panel -->
+            <section class="panel control-panel glass-card">
+                <div class="panel-header">
+                    <h2>Unggah Struk Belanja</h2>
+                    <p class="subtitle">Mendukung format gambar ritel kompleks</p>
+                </div>
+
+                <!-- Drag and Drop Zone -->
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <div class="drop-content">
+                        <div class="upload-icon-wrapper">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <span class="drop-title">Seret & Lepas Gambar Di Sini</span>
+                        <span class="drop-separator">atau</span>
+                        <button type="button" class="btn btn-outline" id="browseBtn">Jelajahi Berkas</button>
+                    </div>
+                    <!-- Image Preview Area -->
+                    <div class="preview-container" id="previewContainer" hidden>
+                        <img id="imagePreview" alt="Pratinjau Struk">
+                        <div class="preview-overlay">
+                            <button type="button" class="btn-remove" id="removeBtn" title="Ganti Gambar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Action Button -->
+                <button type="button" class="btn btn-primary btn-block" id="processBtn" disabled>
+                    <span class="btn-text">Ekstrak Entitas</span>
+                    <div class="spinner" id="btnSpinner" hidden></div>
+                </button>
+
+                <!-- Processing States Log (Micro Animations) -->
+                <div class="processing-log" id="processingLog" hidden>
+                    <div class="log-step" id="stepUpload">
+                        <span class="step-dot"></span>
+                        <span class="step-label">Mengunggah citra ke peladen...</span>
+                    </div>
+                    <div class="log-step" id="stepOCR">
+                        <span class="step-dot"></span>
+                        <span class="step-label">Menjalankan EasyOCR Engine...</span>
+                    </div>
+                    <div class="log-step" id="stepAI">
+                        <span class="step-dot"></span>
+                        <span class="step-label">Klasifikasi AI 7-Kategori & Cascading...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Interactive Results Display -->
+            <section class="panel results-panel glass-card">
+                <!-- Initial Placeholder -->
+                <div class="empty-state" id="resultsEmpty">
+                    <div class="empty-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Belum Ada Data Diekstrak</h3>
+                    <p>Unggah dan proses struk di panel sebelah kiri untuk melihat pemetaan metrik kecerdasan buatan.</p>
+                </div>
+
+                <!-- Populated Results Container -->
+                <div class="results-content" id="resultsContent" hidden>
+                    <!-- Tabs Switcher -->
+                    <div class="results-tabs">
+                        <button class="tab-btn active" data-tab="summary">Ikhtisar Entitas</button>
+                        <button class="tab-btn" data-tab="geometry">Penanda Geometri</button>
+                        <button class="tab-btn" data-tab="json">JSON Respons</button>
+                    </div>
+
+                    <!-- Tab 1: Summary Metrics -->
+                    <div class="tab-pane active" id="pane-summary">
+                        <!-- Top Summary Cards -->
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-icon store-accent">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                </div>
+                                <div class="metric-details">
+                                    <span class="metric-label">Nama Bisnis / Toko</span>
+                                    <span class="metric-value" id="valStore">-</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-icon date-accent">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                </div>
+                                <div class="metric-details">
+                                    <span class="metric-label">Tanggal Transaksi</span>
+                                    <span class="metric-value" id="valDate">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Paid Accent Widget -->
+                        <div class="total-widget glass-card-inner">
+                            <span class="total-label">Total Tagihan (Rp)</span>
+                            <div class="total-amount-wrapper">
+                                <span class="currency-prefix">Rp</span>
+                                <span class="total-value" id="valTotal">0</span>
+                            </div>
+                            <div class="total-badge">AI Confidence: Puncak Prioritas</div>
+                        </div>
+
+                        <!-- Extracted Address Optional -->
+                        <div class="address-section" id="addressSection" hidden>
+                            <span class="section-title">Kontak & Lokasi</span>
+                            <p class="address-text" id="valAddress">-</p>
+                        </div>
+
+                        <!-- Extracted Items Table -->
+                        <div class="items-section">
+                            <div class="section-header">
+                                <span class="section-title">Daftar Barang Belanjaan</span>
+                                <span class="items-counter" id="valItemsCount">0 Item</span>
+                            </div>
+                            <div class="table-container">
+                                <table class="items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Deskripsi Item</th>
+                                            <th class="text-center">Kuantitas</th>
+                                            <th class="text-right">Harga Satuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="itemsTableBody">
+                                        <!-- Inject via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Geometric Visualizer -->
+                    <div class="tab-pane" id="pane-geometry" hidden>
+                        <div class="visualizer-wrapper">
+                            <div class="canvas-container" id="canvasContainer">
+                                <img id="canvasImage" alt="Struk Terpetakan">
+                                <div id="boxesContainer" class="boxes-overlay"></div>
+                            </div>
+                            <div class="visualizer-legend">
+                                <span class="legend-item"><span class="legend-color store"></span>STORE</span>
+                                <span class="legend-item"><span class="legend-color addr"></span>ADDRESS</span>
+                                <span class="legend-item"><span class="legend-color date"></span>DATE</span>
+                                <span class="legend-item"><span class="legend-color item"></span>ITEM</span>
+                                <span class="legend-item"><span class="legend-color total"></span>TOTAL</span>
+                                <span class="legend-item"><span class="legend-color other"></span>OTHER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Raw JSON Response -->
+                    <div class="tab-pane" id="pane-json" hidden>
+                        <div class="json-header">
+                            <span>Waktu Pemrosesan: <b id="valProcessingTime">0</b> detik</span>
+                            <button type="button" class="btn-copy" id="copyJsonBtn">Salin JSON</button>
+                        </div>
+                        <pre class="json-code"><code id="jsonOutput">{}</code></pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Script -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

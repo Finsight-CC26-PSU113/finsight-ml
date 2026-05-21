@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Upload - OCR FinSight</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .upload-box {
+            border: 3px dashed #00f2fe;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            cursor: pointer;
+            background: rgba(0, 242, 254, 0.05);
+        }
+        .upload-box:hover {
+            background: rgba(0, 242, 254, 0.1);
+        }
+        button {
+            background: #00f2fe;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px;
+        }
+        button:hover {
+            background: #00d4e0;
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        #preview {
+            max-width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        #result {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: rgba(0, 242, 254, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Upload - OCR FinSight</h1>
+    <p>Simple test page untuk upload dan ekstraksi</p>
+
+    <div class="upload-box" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        <h2>📤 Klik atau Drag & Drop Gambar</h2>
+        <p>Mendukung JPG, PNG, dll</p>
+    </div>
+
+    <div id="previewContainer" style="display: none;">
+        <h3>Preview:</h3>
+        <img id="preview" alt="Preview">
+        <button id="changeBtn">Ganti Gambar</button>
+        <button id="processBtn">Ekstrak Sekarang</button>
+    </div>
+
+    <div id="statusContainer" style="display: none;">
+        <div class="status" id="status">Memproses...</div>
+    </div>
+
+    <div id="resultContainer" style="display: none;">
+        <h3>Hasil Ekstraksi:</h3>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const preview = document.getElementById('preview');
+        const changeBtn = document.getElementById('changeBtn');
+        const processBtn = document.getElementById('processBtn');
+        const statusContainer = document.getElementById('statusContainer');
+        const status = document.getElementById('status');
+        const resultContainer = document.getElementById('resultContainer');
+        const result = document.getElementById('result');
+
+        let currentFile = null;
+
+        // Click to upload
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Drag and drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.background = 'rgba(0, 242, 254, 0.2)';
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.background = 'rgba(0, 242, 254, 0.05)';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.background = 'rgba(0, 242, 254, 0.05)';
+            
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        // Change button
+        changeBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Process button
+        processBtn.addEventListener('click', async () => {
+            if (!currentFile) return;
+
+            statusContainer.style.display = 'block';
+            resultContainer.style.display = 'none';
+            status.textContent = 'Mengunggah gambar...';
+            processBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('file', currentFile);
+
+            try {
+                status.textContent = 'Memproses dengan OCR + AI...';
+                
+                const response = await fetch('/api/extract', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                status.textContent = '✅ Berhasil!';
+                resultContainer.style.display = 'block';
+                result.textContent = JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                status.textContent = '❌ Error: ' + error.message;
+                result.textContent = 'Error: ' + error.message;
+                resultContainer.style.display = 'block';
+            } finally {
+                processBtn.disabled = false;
+            }
+        });
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Hanya file gambar yang didukung!');
+                return;
+            }
+
+            currentFile = file;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+                statusContainer.style.display = 'none';
+                resultContainer.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        console.log('Test upload page loaded successfully!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "EasyOCR (Current)",
+    "status": "success",
+    "init_time": 3.8627686500549316,
+    "ocr_time": 2.3193204402923584,
+    "lines_detected": 55,
+    "avg_confidence": 0.7086104914291133
+  },
+  {
+    "name": "PaddleOCR",
+    "status": "not_installed"
+  },
+  {
+    "name": "Donut",
+    "status": "not_installed"
+  },
+  {
+    "name": "TrOCR",
+    "status": "not_installed"
+  }
+]
