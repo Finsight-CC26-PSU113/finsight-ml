@@ -125,12 +125,51 @@ python3 scripts/finetune_easyocr.py \
 ## Requirements
 
 - Python 3.10+
-- CUDA GPU (recommended, RTX 3050+ tested)
 - EasyOCR 1.7.x
 - TensorFlow 2.15+
 - PyTorch 2.x
 
 See `requirements.txt` for full list.
+
+---
+
+## Deployment Specifications
+
+### Measured RAM Usage (Inference Only, CPU Mode)
+
+| Component                    | RAM       |
+| ---------------------------- | --------- |
+| Python + TensorFlow baseline | ~300 MB   |
+| BiLSTM Classifier            | ~200 MB   |
+| EasyOCR (CPU mode)           | ~1,450 MB |
+| Inference overhead           | ~170 MB   |
+| **Total**                    | **~2 GB** |
+
+Inference time per image: **~2–3 seconds (CPU)**
+
+### Minimum VPS Spec
+
+| Component   | Minimum          | Recommended                      |
+| ----------- | ---------------- | -------------------------------- |
+| **RAM**     | **4 GB**         | 8 GB                             |
+| **CPU**     | 2 vCPU           | 4 vCPU                           |
+| **Storage** | 10 GB SSD        | 20 GB SSD                        |
+| **GPU**     | Not required     | NVIDIA T4 (for faster inference) |
+| **OS**      | Ubuntu 22.04 LTS | Ubuntu 22.04 LTS                 |
+
+> GPU is **not required** for inference. CPU-only mode works fine for low-to-medium traffic.
+
+### VPS Provider Pricing (4 GB RAM)
+
+| Provider     | Spec                        | Price/month           |
+| ------------ | --------------------------- | --------------------- |
+| Vultr        | 4 GB RAM, 2 vCPU, 80 GB SSD | ~$20                  |
+| DigitalOcean | 4 GB RAM, 2 vCPU, 80 GB SSD | ~$24                  |
+| IDCloudHost  | 4 GB RAM, 2 vCPU            | ~Rp 200–250k          |
+| Biznet Gio   | 4 GB RAM, 2 vCPU            | ~Rp 250–300k          |
+| Railway      | 4 GB RAM, shared CPU        | ~$10–15 (pay per use) |
+
+> For demo/capstone: **Railway** or **Render** (cheapest). For production: **IDCloudHost** or **Vultr**.
 
 ---
 
