@@ -41,13 +41,30 @@ class OCREngine:
         
         Args:
             languages: List kode bahasa (default dari config).
-            gpu: Gunakan GPU (default dari config).
+            gpu: Gunakan GPU (default: auto-detect, fall back to CPU).
         """
         if self._reader is not None:
             return  # Sudah diinisialisasi
             
         self._languages = languages or OCR_LANGUAGES
-        self._gpu = gpu if gpu is not None else OCR_GPU
+        
+        # Auto-detect GPU availability for cross-platform compatibility
+        if gpu is None:
+            gpu_requested = OCR_GPU
+            if gpu_requested:
+                try:
+                    import torch
+                    gpu_available = torch.cuda.is_available()
+                    if not gpu_available:
+                        print("[OCREngine] GPU requested but not available, falling back to CPU")
+                    self._gpu = gpu_available
+                except ImportError:
+                    print("[OCREngine] PyTorch not available, using CPU")
+                    self._gpu = False
+            else:
+                self._gpu = False
+        else:
+            self._gpu = gpu
         
         print(f"[OCREngine] Loading EasyOCR model (languages={self._languages}, gpu={self._gpu})...")
         self._reader = easyocr.Reader(

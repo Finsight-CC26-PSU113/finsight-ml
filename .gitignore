@@ -92,6 +92,9 @@ models/extracted_receipts_smart/
 # models/test_results/test_results.json
 # models/test_results/view_results.html
 
+# ── Dataset Transaction Classifier (data only, not scripts) ──
+Dataset Transaction Classifier/
+
 # ── Unused scripts ───────────────────────────────────────────
 scripts/analyze_learning_performance.py
 scripts/analyze_model_learning.py
