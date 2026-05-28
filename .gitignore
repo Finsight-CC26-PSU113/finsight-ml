@@ -70,7 +70,7 @@ backup_*/
 backup_model_v1/
 backup_stability_fix_*/
 docs_archive/
-logs/
+# logs/ is tracked — TensorBoard logs needed for checklist
 
 # ── Large / unused model files ───────────────────────────────
 models/mobilenetv2_receipt_detector_final.keras
