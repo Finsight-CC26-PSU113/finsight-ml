@@ -2,84 +2,55 @@
 
 ML pipeline untuk membaca struk belanja (Malaysia & Indonesia) menggunakan fine-tuned EasyOCR + BiLSTM classifier.
 
+📖 **[API Documentation → docs/API.md](docs/API.md)**
+
 ---
 
 ## Architecture
 
 ```
-Receipt Image
-    ↓
-[EasyOCR Fine-tuned]  → Extract text + bounding boxes
-    ↓
-[BiLSTM Classifier]   → Label each line (STORE/DATE/ITEM/TOTAL/etc)
-    ↓
-[Rule-based Extractor]→ Structured JSON output
-    ↓
-{store, date, items, total}
+Image → EasyOCR (text + bbox) → BiLSTM Classifier (label per line) → Extractor → JSON
 ```
 
----
+**ML Pipeline:**
 
-## Models
-
-| Model              | File                                      | Accuracy      | Description                      |
-| ------------------ | ----------------------------------------- | ------------- | -------------------------------- |
-| BiLSTM Classifier  | `models/best_weights.weights.h5`          | **92.95%**    | Label classification (7 classes) |
-| Online Learning    | `models/online_model.h5`                  | ~50-70%       | Updated via user corrections     |
-| Fine-tuned EasyOCR | `models/finetuned_easyocr/best_model.pth` | **81.1% CER** | Receipt-specific OCR             |
-
-### Label Classes
-
-`STORE` · `ADDRESS_CONTACT` · `DATE` · `ITEM_DESC` · `ITEM_PRICE/QTY` · `TOTAL_PAYMENT` · `OTHER`
+- **EasyOCR** — deteksi teks + bounding box, fine-tuned pada 33K crops struk
+- **BiLSTM Classifier V2** — klasifikasi 7 label per baris (85% acc, DATE recall 96%)
+- **Extractor** — regex + rule-based untuk ekstrak store, date, items, total
 
 ---
 
-## Quick Start (Cross-Platform)
+## Quick Start
 
-Bekerja di **Windows native, Linux, macOS, Docker** — tidak perlu WSL.
-
-### Option 1: Automated Setup (Recommended)
+### Install
 
 ```bash
-# Python 3.10–3.12 required
+# Python 3.10–3.12, Windows/Linux/macOS (no WSL required)
 python setup.py            # CPU mode (works everywhere)
 python setup.py --gpu      # GPU mode (NVIDIA + CUDA 12.1)
-python setup.py --check    # Verify existing installation
 ```
 
-### Option 2: Manual Install
+### Run API (FastAPI)
 
 ```bash
-# Critical: install numpy<2.0 FIRST (compatibility)
-pip install "numpy>=1.26,<2.0"
-
-# Install rest
-pip install -r requirements.txt
+python web/api_v2.py
+# → http://localhost:8000/api/docs  (Swagger UI)
+# → POST /api/scan                  (scan receipt)
 ```
 
-### Run the App
+### Run Demo UI (Flask)
 
 ```bash
 python web/simple_app.py
 # → http://localhost:5000
 ```
 
----
-
-## Docker Deployment (Production)
+### Docker
 
 ```bash
-# Build
-docker build -t ocr-finsight .
-
-# Run
-docker run -p 5000:5000 ocr-finsight
-
-# Or with docker-compose
 docker-compose up
+# → http://localhost:8000
 ```
-
-The container uses CPU-only PyTorch and works on any Linux server (no GPU/CUDA needed).
 
 ---
 
@@ -87,132 +58,156 @@ The container uses CPU-only PyTorch and works on any Linux server (no GPU/CUDA n
 
 ```
 src/
-├── config.py              # Centralized config
-├── ocr_engine.py          # EasyOCR wrapper (auto GPU/CPU detection)
-├── model.py               # BiLSTM classifier architecture
-├── extractor.py           # Regex-based value extraction
-├── preprocessing.py       # Image preprocessing
-├── text_cleaner.py        # OCR text normalization
-├── online_learning.py     # Inference + post-processing rules
-└── auto_evaluation.py     # Performance monitoring
+├── config.py           # Paths & hyperparameters
+├── ocr_engine.py       # EasyOCR wrapper (auto GPU/CPU)
+├── model.py            # BiLSTM classifier architecture
+├── extractor.py        # Structured data extraction
+├── preprocessing.py    # Image preprocessing (deskew, denoise)
+├── text_cleaner.py     # OCR text normalization
+├── text_post_processor.py  # Post-processing rules
+├── online_learning.py  # Post-processing label rules
+└── auto_evaluation.py  # Performance monitoring
 
 web/
-├── simple_app.py          # Flask app (main entry — recommended)
-├── app_v2.py              # Alternative Model V2 app
-└── templates/             # HTML templates
+├── api_v2.py           # FastAPI production backend  ← MAIN API
+└── simple_app.py       # Flask demo UI
 
 scripts/
-├── generate_combined_groundtruth.py   # Gemini-based labeling (1 call → cls + ocr)
-├── generate_classification_groundtruth.py  # Classification-only labeling
-├── generate_ocr_groundtruth.py        # OCR-only labeling
-├── train_classifier_v2.py             # Train BiLSTM from new data
-├── finetune_easyocr.py                # Fine-tune EasyOCR
-└── test_real_case.py                  # End-to-end test
+├── generate_combined_groundtruth.py  # Gemini labeling (cls + OCR)
+├── finetune_easyocr.py               # Fine-tune EasyOCR CRNN
+├── train_classifier_v2.py            # Train BiLSTM classifier
+└── train_transaction_classifier.py   # Transaction category classifier
 
 models/
-├── best_weights.weights.h5            # BiLSTM base weights
-├── online_model.h5                    # Online learning weights
-└── finetuned_easyocr/best_model.pth   # Fine-tuned EasyOCR
+├── classifier_v2/best_weights.weights.h5   # BiLSTM V2 (2.7MB)
+├── best_weights.weights.h5                 # BiLSTM V1 (online learning)
+├── online_model.h5                         # Online learning weights
+└── finetuned_easyocr/best_model.pth        # Fine-tuned EasyOCR
+
+docs/
+└── API.md              # Full API documentation
 ```
 
 ---
 
-## Generating Training Data (Optional)
+## Models
 
-Jika ingin label ulang dataset dengan kategori yang lebih akurat menggunakan Gemini Vision:
+| Model                | File                                           | Accuracy           | Notes                       |
+| -------------------- | ---------------------------------------------- | ------------------ | --------------------------- |
+| BiLSTM Classifier V2 | `models/classifier_v2/best_weights.weights.h5` | **85%** (DATE 96%) | Trained on 44K lines, MY+ID |
+| Fine-tuned EasyOCR   | `models/finetuned_easyocr/best_model.pth`      | **81.1% CER**      | 33K crops                   |
+| BiLSTM V1 (fallback) | `models/best_weights.weights.h5`               | 92.95%             | Older dataset               |
+
+### Label Classes
+
+| Label             | Description                    |
+| ----------------- | ------------------------------ |
+| `STORE`           | Nama toko/bisnis               |
+| `ADDRESS_CONTACT` | Alamat, telp, email, NPWP      |
+| `DATE`            | Tanggal & waktu (semua format) |
+| `ITEM_DESC`       | Nama barang/menu               |
+| `ITEM_PRICE/QTY`  | Harga & jumlah                 |
+| `TOTAL_PAYMENT`   | Total, subtotal, pajak, diskon |
+| `OTHER`           | Lainnya                        |
+
+---
+
+## API
+
+Full docs: **[docs/API.md](docs/API.md)**
 
 ```bash
-# Combined: classification + OCR ground truth in 1 API call (saves quota)
-python scripts/generate_combined_groundtruth.py \
-    --api-key YOUR_GEMINI_KEY \
-    --max-images 500
+# Scan receipt
+curl -X POST http://localhost:8000/api/scan \
+     -F "image=@receipt.jpg"
 
-# Train BiLSTM with new labels
-python scripts/train_classifier_v2.py --epochs 50
-
-# Fine-tune EasyOCR with new OCR pairs
-python scripts/finetune_easyocr.py --epochs 20
+# Health check
+curl http://localhost:8000/api/health
 ```
 
-Free tier Gemini quota: ~500 requests/day per API key.
+Response:
+
+```json
+{
+  "store": "Ichiban Sushi",
+  "date": "Aug 19, 2024 6:32:54 PM",
+  "items": [{"name": "Beef Teriyaki Ramen", "qty": 1, "price": 42000}],
+  "total": 257565.0,
+  "totals": {"grand_total": 257565.0, "subtotal": 223000.0, "tax": 23415.0, ...}
+}
+```
+
+---
+
+## Training New Data
+
+```bash
+# 1. Label dataset dengan Gemini Vision (1 API call = classifier + OCR data)
+python scripts/generate_combined_groundtruth.py \
+    --api-keys KEY1 KEY2 KEY3 \
+    --model gemini-3.1-flash-lite \
+    --max-images 500
+
+# 2. Train BiLSTM classifier
+wsl python3 scripts/train_classifier_v2.py --epochs 50
+
+# 3. Fine-tune EasyOCR
+wsl python3 scripts/finetune_easyocr.py --epochs 20
+```
 
 ---
 
 ## Performance
 
-| Component        | Metric               | Value        |
-| ---------------- | -------------------- | ------------ |
-| OCR (fine-tuned) | Character Accuracy   | **81.1%**    |
-| OCR (fine-tuned) | Exact Match per line | **58.8%**    |
-| Classifier       | Test Accuracy        | **92.95%**   |
-| Inference (CPU)  | Per image            | ~2–3 seconds |
-| RAM (inference)  | Total                | ~2 GB        |
+| Component            | Metric        | Value        |
+| -------------------- | ------------- | ------------ |
+| BiLSTM Classifier V2 | Test Accuracy | **85%**      |
+| BiLSTM Classifier V2 | DATE Recall   | **96.4%**    |
+| EasyOCR (fine-tuned) | Char Accuracy | **81.1%**    |
+| Inference (CPU)      | Per image     | ~2–3 seconds |
+| RAM (inference)      | Total         | ~2 GB        |
 
 ---
 
-## Deployment Specifications
+## Deployment
 
-### Minimum VPS Spec (Production)
+### Minimum VPS Spec
 
-| Component   | Minimum       | Recommended                      |
-| ----------- | ------------- | -------------------------------- |
-| **RAM**     | **4 GB**      | 8 GB                             |
-| **CPU**     | 2 vCPU        | 4 vCPU                           |
-| **Storage** | 10 GB SSD     | 20 GB SSD                        |
-| **GPU**     | Not required  | NVIDIA T4 (for faster inference) |
-| **OS**      | Ubuntu 22.04+ | Ubuntu 22.04+ / Debian 12        |
+| Resource | Minimum       | Recommended   |
+| -------- | ------------- | ------------- |
+| RAM      | 4 GB          | 8 GB          |
+| CPU      | 2 vCPU        | 4 vCPU        |
+| Storage  | 10 GB SSD     | 20 GB SSD     |
+| OS       | Ubuntu 22.04+ | Ubuntu 22.04+ |
 
-> GPU is **not required**. CPU-only mode handles low-to-medium traffic fine.
+### Providers (4 GB RAM)
 
-### VPS Provider Pricing (4 GB RAM)
-
-| Provider     | Spec                        | Price/month           |
-| ------------ | --------------------------- | --------------------- |
-| Vultr        | 4 GB RAM, 2 vCPU, 80 GB SSD | ~$20                  |
-| DigitalOcean | 4 GB RAM, 2 vCPU, 80 GB SSD | ~$24                  |
-| IDCloudHost  | 4 GB RAM, 2 vCPU            | ~Rp 200–250k          |
-| Biznet Gio   | 4 GB RAM, 2 vCPU            | ~Rp 250–300k          |
-| Railway      | 4 GB RAM, shared CPU        | ~$10–15 (pay per use) |
-
-> For demo/capstone: **Railway** atau **Render** (gratis tier ada). Production: **IDCloudHost** atau **Vultr**.
+| Provider     | Price/month  |
+| ------------ | ------------ |
+| IDCloudHost  | ~Rp 200–250k |
+| Vultr        | ~$20         |
+| DigitalOcean | ~$24         |
+| Railway      | ~$10–15      |
 
 ---
 
 ## Troubleshooting
 
-### `numpy._ARRAY_API not found` error
-
-NumPy 2.x tidak compatible dengan opencv-python pre-built. Fix:
+**`numpy._ARRAY_API not found` (Windows)**
 
 ```bash
 pip install "numpy<2.0" --force-reinstall
+# atau
+python setup.py
 ```
 
-Atau jalankan `python setup.py` (otomatis pasang versi yang benar).
-
-### `Could not find CUDA` / GPU not detected
-
-Aplikasi otomatis fallback ke CPU. Untuk GPU support: install PyTorch CUDA build:
+**GPU not detected**
 
 ```bash
+# App otomatis fallback ke CPU — tidak perlu action
+# Untuk aktifkan GPU:
 pip install torch==2.1.2 --index-url https://download.pytorch.org/whl/cu121
 ```
-
-### Port 5000 already in use
-
-```bash
-# Edit web/simple_app.py last line:
-app.run(host='0.0.0.0', port=8080)
-```
-
----
-
-## Dataset (not in repo)
-
-- **Classifier**: 44,101 labeled lines dari 967 struk Malaysia
-- **OCR Fine-tuning**: 33,513 crops dari 620 struk (Malaysia + Indonesia)
-
-Dataset disimpan terpisah oleh data scientist team.
 
 ---
 
