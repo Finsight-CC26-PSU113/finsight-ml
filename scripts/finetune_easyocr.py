@@ -50,7 +50,13 @@ from src.config import ROOT_DIR
 # ============================================================
 # Paths
 # ============================================================
-GROUNDTRUTH_DIR = ROOT_DIR / "data" / "ocr_groundtruth"
+# Default: new combined groundtruth (31K crops from Gemini labeling)
+# Fallback: old groundtruth path
+_DEFAULT_DATA_DIR = ROOT_DIR / "data" / "combined_groundtruth" / "ocr"
+if not _DEFAULT_DATA_DIR.exists():
+    _DEFAULT_DATA_DIR = ROOT_DIR / "data" / "ocr_groundtruth"
+
+GROUNDTRUTH_DIR = _DEFAULT_DATA_DIR
 LABELS_FILE = GROUNDTRUTH_DIR / "labels.txt"
 CROPS_DIR = GROUNDTRUTH_DIR / "images"
 OUTPUT_DIR = ROOT_DIR / "models" / "finetuned_easyocr"
@@ -459,7 +465,17 @@ def main():
     parser.add_argument('--val-split', type=float, default=0.1, help='Validation split (default: 0.1)')
     parser.add_argument('--freeze-cnn', action='store_true', help='Freeze CNN layers, only train RNN+FC')
     parser.add_argument('--num-workers', type=int, default=4, help='Data loader workers (default: 4)')
+    parser.add_argument('--data-dir', type=str, default=None,
+                        help='Path to OCR ground truth dir (contains images/ and labels.txt). '
+                             'Default: data/combined_groundtruth/ocr')
     args = parser.parse_args()
+    
+    # Override paths if --data-dir specified
+    global GROUNDTRUTH_DIR, LABELS_FILE, CROPS_DIR
+    if args.data_dir:
+        GROUNDTRUTH_DIR = Path(args.data_dir)
+        LABELS_FILE = GROUNDTRUTH_DIR / "labels.txt"
+        CROPS_DIR = GROUNDTRUTH_DIR / "images"
     
     print("=" * 65)
     print("🔧 EasyOCR Fine-tuning")
