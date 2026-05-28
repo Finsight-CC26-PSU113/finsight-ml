@@ -79,58 +79,171 @@ class ReceiptExtractor:
         return result
     
     def _extract_store(self, store_lines: list[dict]) -> str:
-        """Extract nama toko. Gabungkan beberapa baris STORE untuk nama lengkap."""
+        """Extract nama toko. Gabungkan beberapa baris STORE untuk nama lengkap.
+        
+        Filter:
+        - Skip baris yang murni angka/numerik (misclassified)
+        - Skip baris yang terlalu pendek (<3 alpha chars)
+        - Prioritize baris di paling atas (y_min terkecil)
+        """
+        import re
+        
         if not store_lines:
             return ""
         
-        # Sort by y_min (top to bottom) and confidence
-        sorted_lines = sorted(store_lines, key=lambda l: (l.get('y_min', 0), -l.get('class_confidence', 0)))
+        # Filter out invalid store name candidates
+        valid_lines = []
+        for line in store_lines:
+            text = line['text'].strip()
+            
+            # Skip empty or too short
+            if not text or len(text) < 3:
+                continue
+            
+            # Skip lines that are mostly numbers (price/total misclassified as store)
+            alpha_count = sum(c.isalpha() for c in text)
+            digit_count = sum(c.isdigit() for c in text)
+            if alpha_count < 3:
+                continue
+            if digit_count > alpha_count:
+                continue
+            
+            # Skip lines that look like dates
+            if re.search(r'\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4}', text):
+                continue
+            
+            # Skip pure currency/number patterns
+            if re.match(r'^[\d\s\.,\*\-]+$', text):
+                continue
+            
+            # Skip lines that look like phone/contact
+            if re.match(r'^(tel|phone|fax|hp)[\s:.]', text, re.IGNORECASE):
+                continue
+            
+            valid_lines.append(line)
         
-        # Ambil maksimal 3 baris pertama untuk nama toko lengkap
+        if not valid_lines:
+            return ""
+        
+        # Sort by y_min (top first) — store name is usually at top
+        sorted_lines = sorted(valid_lines, key=lambda l: l.get('y_min', 0))
+        
+        # Take first 3 lines for full store name (handles multi-line names)
         store_parts = []
         for line in sorted_lines[:3]:
             raw_text = line['text'].strip()
-            if raw_text and len(raw_text) > 2:  # Skip very short text
-                cleaned_text = self.cleaner.clean_store(raw_text)
+            cleaned_text = self.cleaner.clean_store(raw_text)
+            if cleaned_text and len(cleaned_text) > 2:
                 store_parts.append(cleaned_text)
         
-        # Gabungkan dengan spasi
-        full_store_name = " ".join(store_parts)
+        if not store_parts:
+            return ""
         
-        # Normalize case: Title Case untuk nama toko
+        # Join with space, normalize to Title Case
+        full_store_name = " ".join(store_parts)
         full_store_name = full_store_name.title()
         
         return full_store_name
     
     def _extract_date(self, date_lines: list[dict]) -> str:
-        """Extract tanggal. Gabungkan beberapa baris DATE untuk tanggal lengkap."""
-        if not date_lines:
-            return ""
+        """Extract tanggal. Support format Indonesia, Malaysia, English, dan word months.
         
-        # Gabungkan semua baris DATE untuk mendapatkan tanggal lengkap
-        all_date_text = " ".join([line['text'].strip() for line in date_lines])
-        
-        date_patterns = [
-            r'(\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4})',  # DD/MM/YYYY or DD-MM-YYYY
-            r'(\d{4}[/\-\.]\d{1,2}[/\-\.]\d{1,2})',      # YYYY-MM-DD
-            r'(\d{1,2}\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+\d{2,4})',  # DD Month YYYY
-            r'(\d{1,2}[/\-\.]\s*\d{1,2}[/\-\.]\s*\d{2,4})',  # DD/ MM/ YYYY (with spaces)
+        Supported formats:
+        - DD/MM/YYYY, DD-MM-YY, DD.MM.YY (numeric)
+        - YYYY-MM-DD (ISO)
+        - "Aug 19, 2024", "Mar 14 2025" (English word month)
+        - "19 Agu 2024", "14 Maret 2025" (Indonesian word month)
+        - With time: "Aug 19, 2024 6:32:54 PM", "DD/MM/YYYY HH:MM"
+        """
+        import re
+
+        # Numeric date patterns
+        numeric_date_patterns = [
+            r'(\d{4}[/\-\.]\d{1,2}[/\-\.]\d{1,2})',           # YYYY-MM-DD (first to avoid partial)
+            r'(\d{1,2}[/\-\.]\s*\d{1,2}[/\-\.]\s*\d{2,4})',  # DD/MM/YYYY (with spaces)
+            r'(\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4})',         # DD/MM/YYYY, DD-MM-YY
         ]
         
-        # Try to find date pattern in combined text
-        for pattern in date_patterns:
-            match = re.search(pattern, all_date_text, re.IGNORECASE)
-            if match:
-                date_str = match.group(1).strip()
-                # Clean up spaces in date
-                date_str = re.sub(r'\s+', '', date_str)
-                return date_str
+        # Word-month patterns (English & Indonesian)
+        word_month_patterns = [
+            # "Aug 19, 2024" or "Mar 14 2025"
+            (r'((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{1,2}[\s,]*\d{2,4})', 'en_word_first'),
+            # "19 Aug 2024" or "14 Mar 2025"
+            (r'(\d{1,2}\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{2,4})', 'en_word_middle'),
+            # Indonesian: "19 Agustus 2024", "14 Maret 2025"
+            (r'(\d{1,2}\s+(jan(uari)?|feb(ruari)?|mar(et)?|apr(il)?|mei|jun(i)?|jul(i)?|agu(stus)?|sep(tember)?|okt(ober)?|nov(ember)?|des(ember)?)\s+\d{2,4})', 'id_word'),
+        ]
         
-        # Fallback: return combined text (cleaned)
-        return all_date_text.strip()
+        # Time patterns (only valid AS DATE if accompanied by date — standalone time is rejected)
+        time_pattern = r'(\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?)'
+
+        def find_date_in_text(text: str) -> str:
+            """Find first match of any date pattern."""
+            # Try word-month first (more specific)
+            for pattern, _ in word_month_patterns:
+                match = re.search(pattern, text, re.IGNORECASE)
+                if match:
+                    date_str = match.group(1).strip()
+                    # Try to also capture time if it follows
+                    full_pattern = re.escape(date_str) + r'\s*' + time_pattern
+                    full_match = re.search(full_pattern, text, re.IGNORECASE)
+                    if full_match:
+                        return f"{date_str} {full_match.group(1)}".strip()
+                    return date_str
+            
+            # Then numeric
+            for pattern in numeric_date_patterns:
+                match = re.search(pattern, text, re.IGNORECASE)
+                if match:
+                    date_str = match.group(1).strip()
+                    date_str = re.sub(r'\s+', '', date_str)
+                    # Try to capture time
+                    time_match = re.search(time_pattern, text, re.IGNORECASE)
+                    if time_match:
+                        return f"{date_str} {time_match.group(1)}".strip()
+                    return date_str
+            return ""
+
+        # Primary: use labeled DATE lines
+        if date_lines:
+            # Sort by y_min — prefer earlier date (transaction date is usually before "Printed" footer)
+            sorted_lines = sorted(date_lines, key=lambda l: l.get('y_min', 0))
+            
+            # Try each line individually first (early lines = transaction date)
+            for line in sorted_lines:
+                line_text = line['text'].strip()
+                # Skip lines that are clearly time-only (no date pattern)
+                if re.match(r'^\s*\d{1,2}:\d{2}', line_text) and not re.search(r'\d{4}|\d{1,2}[/\-\.]', line_text):
+                    continue
+                # Skip lines starting with "Printed" or "Cetak" — that's footer date
+                if re.match(r'^\s*(printed|cetak|dicetak)', line_text, re.IGNORECASE):
+                    continue
+                result = find_date_in_text(line_text)
+                if result:
+                    return result
+            
+            # Fallback: combine all DATE-labeled lines and search
+            all_date_text = " ".join([line['text'].strip() for line in sorted_lines])
+            result = find_date_in_text(all_date_text)
+            if result:
+                return result
+            
+            # Last resort: return first non-empty raw text
+            for line in sorted_lines:
+                if line['text'].strip():
+                    return line['text'].strip()
+        
+        return ""
     
     def _extract_items(self, item_lines: list[dict]) -> list[dict]:
-        """Extract list item belanja dengan merging baris yang berdekatan."""
+        """Extract list item belanja dengan merging baris yang berdekatan.
+        
+        Strategi:
+        1. Filter zone — items biasanya di tengah struk (15%-75% dari atas)
+        2. Blacklist keywords yang bukan item
+        3. Filter pure number lines (price tanpa nama)
+        4. Merge multi-line item names
+        """
         if not item_lines:
             return []
         
@@ -161,61 +274,95 @@ class ReceiptExtractor:
             'thank', 'terima', 'kasih', 'welcome', 'selamat', 'datang',
             'please', 'silakan', 'come again', 'visit',
             # Categories & headers
-            'goods', 'barang', 'item', 'product', 'produk',
-            'food', 'makanan', 'drink', 'minuman', 'beverage',
-            # Misc
+            'goods', 'barang', 'product', 'produk',
+            # Misc receipt keywords
             'reg', 'register', 'void', 'cancel', 'refund', 'return',
             'open', 'close', 'shift', 'balance', 'saldo',
+            # Address/contact
+            'jl.', 'jalan', 'jl ', 'tel:', 'telp', 'phone', 'fax', 'email',
+            'www.', '.com', 'website',
+            # Date/time keywords
+            'date', 'tanggal', 'tgl', 'time', 'jam', 'tarikh',
+            # Store-related
+            'sdn bhd', 'sdn. bhd', 'pt.', 'cv.',
+            # Common footer text
+            'http', 'follow', 'instagram', 'facebook', 'whatsapp',
         ]
         
         # Sort by y_min (top to bottom)
         sorted_lines = sorted(item_lines, key=lambda l: l.get('y_min', 0))
+        
+        # Filter zone: items biasanya di tengah (15% - 75%)
+        # Use y_min to detect items not at very top or very bottom
+        filtered = []
+        for line in sorted_lines:
+            y = line.get('y_min', 0)
+            text = line['text'].strip()
+            text_lower = text.lower()
+            
+            # Skip if at top 10% (likely store/header) or bottom 10% (likely footer/total)
+            if y < 0.10 or y > 0.92:
+                continue
+            
+            # Skip very short
+            if len(text) < 3:
+                continue
+            
+            # Skip blacklisted
+            if any(keyword in text_lower for keyword in blacklist_keywords):
+                continue
+            
+            # Skip pure numeric (no item name)
+            if re.match(r'^[\d\s\.,\*\-\/x@xX]+$', text):
+                continue
+            
+            # Skip pure currency markers
+            if text.upper() in ['RM', 'RP', 'IDR', 'SR', '$', 'USD']:
+                continue
+            
+            # Must have at least 3 alpha chars (real item name has letters)
+            alpha_count = sum(c.isalpha() for c in text)
+            if alpha_count < 3:
+                continue
+            
+            filtered.append(line)
+        
+        if not filtered:
+            return []
         
         # Group lines that are close together (same item split across lines)
         merged_lines = []
         current_group = []
         last_y = None
         
-        for line in sorted_lines:
-            text = line['text'].strip()
-            text_lower = text.lower()
+        for line in filtered:
             y_pos = line.get('y_min', 0)
             
-            # Skip very short or blacklisted
-            if len(text) < 2:
-                continue
-            if any(keyword in text_lower for keyword in blacklist_keywords):
-                continue
-            
-            # Check if this line is close to previous (same item)
-            if last_y is not None and abs(y_pos - last_y) < 30:  # Within 30 pixels
+            # Within same row → group together
+            if last_y is not None and abs(y_pos - last_y) < 0.025:  # 2.5% of image height
                 current_group.append(line)
             else:
-                # Save previous group
                 if current_group:
                     merged_lines.append(current_group)
-                # Start new group
                 current_group = [line]
             
             last_y = y_pos
         
-        # Don't forget last group
         if current_group:
             merged_lines.append(current_group)
         
         # Parse each merged group as one item
         items = []
         for group in merged_lines:
-            # Combine text from group
-            combined_text = " ".join([l['text'].strip() for l in group])
-            
-            # Skip if just numbers
-            if re.match(r'^[\d\s\.,\*\-]+$', combined_text):
-                continue
+            # Sort by x_min (left to right) for correct reading order
+            group_sorted = sorted(group, key=lambda l: l.get('x_min', 0))
+            combined_text = " ".join([l['text'].strip() for l in group_sorted])
             
             item = self._parse_item_line(combined_text)
-            if item and item['name'] and len(item['name']) > 2:
-                items.append(item)
+            if item and item['name'] and len(item['name']) >= 3:
+                # Final check: name must have alphabetic content
+                if sum(c.isalpha() for c in item['name']) >= 3:
+                    items.append(item)
         
         return items
     
@@ -311,6 +458,12 @@ class ReceiptExtractor:
     def _extract_total(self, total_lines: list[dict]) -> dict:
         """Extract multiple totals dengan prioritas GRAND TOTAL (setelah pajak).
         
+        Strategi prioritas (tertinggi → terendah):
+        1. Eksplisit "grand total", "total bayar", "total akhir" → grand_total
+        2. "total" generic (tanpa "sub") → grand_total kandidat
+        3. "subtotal" / "sub total" → subtotal (BUKAN grand total)
+        4. Fallback: subtotal + tax - discount, atau cash - change
+        
         Returns:
             Dict dengan keys: grand_total, subtotal, discount, tax, cash, change
         """
@@ -331,7 +484,10 @@ class ReceiptExtractor:
         cash_candidates = []
         change_candidates = []
         
-        for line in total_lines:
+        # Sort by y_min so later lines (typically grand total) win on tie
+        sorted_total_lines = sorted(total_lines, key=lambda l: l.get('y_min', 0))
+        
+        for line in sorted_total_lines:
             text = line['text']
             text_lower = text.lower()
             
@@ -348,32 +504,69 @@ class ReceiptExtractor:
             text_clean = text.replace('O', '0').replace('o', '0')
             numbers = re.findall(r'[\d]+[.,]?[\d]*', text_clean)
             
+            # IMPORTANT: Check 'subtotal' BEFORE 'total' (since "subtotal" contains "total")
+            is_subtotal = any(k in text_lower for k in ['subtotal', 'sub total', 'sub-total', 'jumlah'])
+            is_explicit_grand = any(k in text_lower for k in [
+                'grand total', 'total bayar', 'total amount', 'total pembayaran',
+                'total akhir', 'total belanja', 'total tagihan', 'nett total', 'net total'
+            ])
+            # Generic "total" (only if NOT subtotal AND NOT a sub-charge like service charge)
+            # Also exclude lines that have "service" or "charge" — these are sub-fees, not the main total
+            is_service_charge = any(k in text_lower for k in [
+                'service charge', 'service', 'charge', 'biaya layanan', 'biaya'
+            ])
+            is_tax_line = any(k in text_lower for k in [
+                'tax', 'pajak', 'ppn', 'gst', 'vat', 'pb1'
+            ])
+            is_discount_line = any(k in text_lower for k in [
+                'discount', 'diskon', 'potongan', 'disc', 'voucher', 'promo'
+            ])
+            is_cash_line = any(k in text_lower for k in ['cash', 'tunai', 'bayar', 'paid'])
+            is_change_line = any(k in text_lower for k in ['change', 'kembali', 'kembalian'])
+            
+            # Generic "total" wins ONLY if not in any other category
+            has_total_kw = (
+                'total' in text_lower 
+                and not is_subtotal 
+                and not is_service_charge 
+                and not is_tax_line
+                and not is_discount_line
+                and not is_cash_line
+                and not is_change_line
+            )
+            
             for num_str in numbers:
                 val = self._parse_number(num_str)
                 if val <= 0 or val > 100000000:  # Skip invalid or unrealistic values
                     continue
                 
-                # PRIORITAS 1: Grand Total (setelah pajak) - HIGHEST PRIORITY
-                if any(k in text_lower for k in ['grand total', 'total bayar', 'total amount', 'total pembayaran', 'total akhir']):
-                    grand_total_candidates.append((val, 10))  # Priority 10
-                # PRIORITAS 2: Total (generic) - bisa jadi grand total
-                elif 'total' in text_lower and 'sub' not in text_lower:
-                    grand_total_candidates.append((val, 5))  # Priority 5
-                # PRIORITAS 3: Subtotal (sebelum pajak) - LOWER PRIORITY
-                elif any(k in text_lower for k in ['subtotal', 'sub total', 'sub-total', 'jumlah']):
+                # PRIORITAS 1: Explicit Grand Total
+                if is_explicit_grand:
+                    grand_total_candidates.append((val, 10))
+                # PRIORITAS 2: Subtotal (cek SEBELUM total generic)
+                elif is_subtotal:
                     subtotal_candidates.append(val)
-                # Other categories
-                elif any(k in text_lower for k in ['discount', 'diskon', 'potongan', 'disc']):
-                    discount_candidates.append(val)
-                elif any(k in text_lower for k in ['tax', 'pajak', 'ppn', 'gst', 'vat']):
+                # PRIORITAS 3: Service charge → its own bucket (NOT grand total)
+                elif is_service_charge:
+                    pass  # tracked but not as grand_total candidate
+                # PRIORITAS 4: Tax line
+                elif is_tax_line:
                     tax_candidates.append(val)
-                elif any(k in text_lower for k in ['cash', 'tunai', 'bayar', 'paid']):
+                # PRIORITAS 5: Discount
+                elif is_discount_line:
+                    discount_candidates.append(val)
+                # PRIORITAS 6: Cash/payment
+                elif is_cash_line:
                     cash_candidates.append(val)
-                elif any(k in text_lower for k in ['change', 'kembali', 'kembalian']):
+                # PRIORITAS 7: Change
+                elif is_change_line:
                     change_candidates.append(val)
+                # PRIORITAS 8: Generic "total"
+                elif has_total_kw:
+                    grand_total_candidates.append((val, 5))
                 elif line.get('is_total_target'):
                     # From cascading logic
-                    grand_total_candidates.append((val, 3))  # Priority 3
+                    grand_total_candidates.append((val, 3))
         
         # Assign values
         if subtotal_candidates:
@@ -389,31 +582,28 @@ class ReceiptExtractor:
         
         # Grand Total Logic: Prioritize highest priority candidate
         if grand_total_candidates:
-            # Sort by priority (descending), then by value (descending)
+            # Sort by priority (desc), then by value (desc)
             grand_total_candidates.sort(key=lambda x: (x[1], x[0]), reverse=True)
             totals['grand_total'] = grand_total_candidates[0][0]
         
         # Fallback: Calculate grand total if not found
         if totals['grand_total'] == 0.0:
             if totals['subtotal'] > 0 and totals['tax'] > 0:
-                # grand_total = subtotal + tax - discount
                 calculated_total = totals['subtotal'] + totals['tax'] - totals['discount']
                 if calculated_total > 0:
                     totals['grand_total'] = calculated_total
             elif totals['subtotal'] > 0:
-                # If no tax, grand_total = subtotal - discount
                 calculated_total = totals['subtotal'] - totals['discount']
                 if calculated_total > 0:
                     totals['grand_total'] = calculated_total
             elif totals['cash'] > 0 and totals['change'] > 0:
-                # grand_total = cash - change
                 totals['grand_total'] = totals['cash'] - totals['change']
         
-        # Final check: If grand_total < subtotal, use subtotal + tax
+        # Final sanity check: grand_total should be >= subtotal
         if totals['grand_total'] > 0 and totals['subtotal'] > 0:
             if totals['grand_total'] < totals['subtotal']:
-                # Grand total should be >= subtotal
-                totals['grand_total'] = totals['subtotal'] + totals['tax']
+                # Misclassified — use subtotal+tax as grand total
+                totals['grand_total'] = totals['subtotal'] + totals['tax'] - totals['discount']
         
         return totals
     

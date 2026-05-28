@@ -1,0 +1,46 @@
+# Datasets — too large, not needed for inference
+fullDataset/
+clean_dataset/
+Dataset Baru/
+Dataset Transaction Classifier/
+Dataset_Premium/
+data/
+
+# Git
+.git/
+.gitignore
+
+# Editor
+.vscode/
+.kiro/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+
+# Logs
+logs/
+*.log
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Notebooks (not needed in container)
+*.ipynb
+
+# Test outputs
+models/test_results/
+
+# Heavy training models (we only need inference)
+models/finetuned_easyocr/training_log.json
+models/transaction_classifier/
+
+# Documentation
+*.md
+!README.md

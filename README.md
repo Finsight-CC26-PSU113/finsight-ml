@@ -1,6 +1,6 @@
 # OCR FinSight 2.0 — Receipt OCR & Information Extraction
 
-ML pipeline untuk membaca struk belanja (Malaysia & Indonesia) menggunakan fine-tuned EasyOCR + BiLSTM classifier dengan online learning.
+ML pipeline untuk membaca struk belanja (Malaysia & Indonesia) menggunakan fine-tuned EasyOCR + BiLSTM classifier.
 
 ---
 
@@ -34,130 +34,135 @@ Receipt Image
 
 ---
 
+## Quick Start (Cross-Platform)
+
+Bekerja di **Windows native, Linux, macOS, Docker** — tidak perlu WSL.
+
+### Option 1: Automated Setup (Recommended)
+
+```bash
+# Python 3.10–3.12 required
+python setup.py            # CPU mode (works everywhere)
+python setup.py --gpu      # GPU mode (NVIDIA + CUDA 12.1)
+python setup.py --check    # Verify existing installation
+```
+
+### Option 2: Manual Install
+
+```bash
+# Critical: install numpy<2.0 FIRST (compatibility)
+pip install "numpy>=1.26,<2.0"
+
+# Install rest
+pip install -r requirements.txt
+```
+
+### Run the App
+
+```bash
+python web/simple_app.py
+# → http://localhost:5000
+```
+
+---
+
+## Docker Deployment (Production)
+
+```bash
+# Build
+docker build -t ocr-finsight .
+
+# Run
+docker run -p 5000:5000 ocr-finsight
+
+# Or with docker-compose
+docker-compose up
+```
+
+The container uses CPU-only PyTorch and works on any Linux server (no GPU/CUDA needed).
+
+---
+
 ## Project Structure
 
 ```
 src/
 ├── config.py              # Centralized config
-├── ocr_engine.py          # EasyOCR wrapper
+├── ocr_engine.py          # EasyOCR wrapper (auto GPU/CPU detection)
 ├── model.py               # BiLSTM classifier architecture
 ├── extractor.py           # Regex-based value extraction
-├── preprocessing.py       # Image preprocessing (deskew, denoise)
+├── preprocessing.py       # Image preprocessing
 ├── text_cleaner.py        # OCR text normalization
-├── text_post_processor.py # Post-processing rules (O/0, I/1 fixes)
-├── online_learning.py     # Online learning + auto-evaluation
-└── auto_evaluation.py     # Automatic performance monitoring
+├── online_learning.py     # Inference + post-processing rules
+└── auto_evaluation.py     # Performance monitoring
 
 web/
-├── ocr_correction_ui.py   # Flask web server (main entry point)
+├── simple_app.py          # Flask app (main entry — recommended)
+├── app_v2.py              # Alternative Model V2 app
 └── templates/             # HTML templates
 
 scripts/
-├── train_model.py         # Train BiLSTM classifier
-├── generate_ocr_groundtruth.py  # Generate OCR training data via Gemini
-├── finetune_easyocr.py    # Fine-tune EasyOCR recognition model
-└── test_real_case.py      # End-to-end pipeline test
+├── generate_combined_groundtruth.py   # Gemini-based labeling (1 call → cls + ocr)
+├── generate_classification_groundtruth.py  # Classification-only labeling
+├── generate_ocr_groundtruth.py        # OCR-only labeling
+├── train_classifier_v2.py             # Train BiLSTM from new data
+├── finetune_easyocr.py                # Fine-tune EasyOCR
+└── test_real_case.py                  # End-to-end test
 
 models/
-├── best_weights.weights.h5        # BiLSTM base weights
-├── online_model.h5                # Online learning weights
-└── finetuned_easyocr/
-    ├── best_model.pth             # Fine-tuned EasyOCR (epoch 9)
-    └── training_log.json          # Training history
+├── best_weights.weights.h5            # BiLSTM base weights
+├── online_model.h5                    # Online learning weights
+└── finetuned_easyocr/best_model.pth   # Fine-tuned EasyOCR
 ```
 
 ---
 
-## Quick Start
+## Generating Training Data (Optional)
+
+Jika ingin label ulang dataset dengan kategori yang lebih akurat menggunakan Gemini Vision:
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Start web server
-wsl python3 web/ocr_correction_ui.py
-
-# Open browser
-http://localhost:5000
-```
-
----
-
-## Fine-tuning EasyOCR (Optional)
-
-```bash
-# Step 1: Generate ground truth via Gemini Vision API
-python3 scripts/generate_ocr_groundtruth.py \
+# Combined: classification + OCR ground truth in 1 API call (saves quota)
+python scripts/generate_combined_groundtruth.py \
     --api-key YOUR_GEMINI_KEY \
-    --model gemini-3.1-flash-lite \
     --max-images 500
 
-# Step 2: Fine-tune
-python3 scripts/finetune_easyocr.py \
-    --epochs 20 --batch-size 64 --lr 1e-4
+# Train BiLSTM with new labels
+python scripts/train_classifier_v2.py --epochs 50
+
+# Fine-tune EasyOCR with new OCR pairs
+python scripts/finetune_easyocr.py --epochs 20
 ```
+
+Free tier Gemini quota: ~500 requests/day per API key.
 
 ---
 
 ## Performance
 
-| Component           | Metric               | Value                               |
-| ------------------- | -------------------- | ----------------------------------- |
-| OCR (fine-tuned)    | Character Accuracy   | **81.1%**                           |
-| OCR (fine-tuned)    | Exact Match per line | **58.8%**                           |
-| Classifier          | Test Accuracy        | **92.95%**                          |
-| Online Learning     | Training Variance    | **4.17%** (stable)                  |
-| Fine-tuning Dataset | Samples              | 33,513 crops (Malaysia + Indonesia) |
-
----
-
-## API Endpoints
-
-| Endpoint                | Method | Description                             |
-| ----------------------- | ------ | --------------------------------------- |
-| `/`                     | GET    | Web UI                                  |
-| `/api/init`             | POST   | Initialize with image                   |
-| `/api/save_corrections` | POST   | Save user corrections + trigger retrain |
-| `/api/stats`            | GET    | Model performance stats                 |
-
----
-
-## Requirements
-
-- Python 3.10+
-- EasyOCR 1.7.x
-- TensorFlow 2.15+
-- PyTorch 2.x
-
-See `requirements.txt` for full list.
+| Component        | Metric               | Value        |
+| ---------------- | -------------------- | ------------ |
+| OCR (fine-tuned) | Character Accuracy   | **81.1%**    |
+| OCR (fine-tuned) | Exact Match per line | **58.8%**    |
+| Classifier       | Test Accuracy        | **92.95%**   |
+| Inference (CPU)  | Per image            | ~2–3 seconds |
+| RAM (inference)  | Total                | ~2 GB        |
 
 ---
 
 ## Deployment Specifications
 
-### Measured RAM Usage (Inference Only, CPU Mode)
+### Minimum VPS Spec (Production)
 
-| Component                    | RAM       |
-| ---------------------------- | --------- |
-| Python + TensorFlow baseline | ~300 MB   |
-| BiLSTM Classifier            | ~200 MB   |
-| EasyOCR (CPU mode)           | ~1,450 MB |
-| Inference overhead           | ~170 MB   |
-| **Total**                    | **~2 GB** |
+| Component   | Minimum       | Recommended                      |
+| ----------- | ------------- | -------------------------------- |
+| **RAM**     | **4 GB**      | 8 GB                             |
+| **CPU**     | 2 vCPU        | 4 vCPU                           |
+| **Storage** | 10 GB SSD     | 20 GB SSD                        |
+| **GPU**     | Not required  | NVIDIA T4 (for faster inference) |
+| **OS**      | Ubuntu 22.04+ | Ubuntu 22.04+ / Debian 12        |
 
-Inference time per image: **~2–3 seconds (CPU)**
-
-### Minimum VPS Spec
-
-| Component   | Minimum          | Recommended                      |
-| ----------- | ---------------- | -------------------------------- |
-| **RAM**     | **4 GB**         | 8 GB                             |
-| **CPU**     | 2 vCPU           | 4 vCPU                           |
-| **Storage** | 10 GB SSD        | 20 GB SSD                        |
-| **GPU**     | Not required     | NVIDIA T4 (for faster inference) |
-| **OS**      | Ubuntu 22.04 LTS | Ubuntu 22.04 LTS                 |
-
-> GPU is **not required** for inference. CPU-only mode works fine for low-to-medium traffic.
+> GPU is **not required**. CPU-only mode handles low-to-medium traffic fine.
 
 ### VPS Provider Pricing (4 GB RAM)
 
@@ -169,17 +174,45 @@ Inference time per image: **~2–3 seconds (CPU)**
 | Biznet Gio   | 4 GB RAM, 2 vCPU            | ~Rp 250–300k          |
 | Railway      | 4 GB RAM, shared CPU        | ~$10–15 (pay per use) |
 
-> For demo/capstone: **Railway** or **Render** (cheapest). For production: **IDCloudHost** or **Vultr**.
+> For demo/capstone: **Railway** atau **Render** (gratis tier ada). Production: **IDCloudHost** atau **Vultr**.
 
 ---
 
-## Dataset
+## Troubleshooting
 
-Training data tidak disertakan di repo ini (tersimpan di data scientist).
+### `numpy._ARRAY_API not found` error
+
+NumPy 2.x tidak compatible dengan opencv-python pre-built. Fix:
+
+```bash
+pip install "numpy<2.0" --force-reinstall
+```
+
+Atau jalankan `python setup.py` (otomatis pasang versi yang benar).
+
+### `Could not find CUDA` / GPU not detected
+
+Aplikasi otomatis fallback ke CPU. Untuk GPU support: install PyTorch CUDA build:
+
+```bash
+pip install torch==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+```
+
+### Port 5000 already in use
+
+```bash
+# Edit web/simple_app.py last line:
+app.run(host='0.0.0.0', port=8080)
+```
+
+---
+
+## Dataset (not in repo)
 
 - **Classifier**: 44,101 labeled lines dari 967 struk Malaysia
 - **OCR Fine-tuning**: 33,513 crops dari 620 struk (Malaysia + Indonesia)
-- **Online Learning**: 1,363+ user corrections
+
+Dataset disimpan terpisah oleh data scientist team.
 
 ---
 

@@ -211,19 +211,38 @@ class OnlineLearningModel:
             relative_pos = i / max(total_lines, 1)
             
             # === Rule 1: DATE patterns always win ===
+            # Strict date patterns (DD/MM/YY etc) — must match a real date format
             date_patterns = [
-                r'\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4}',
-                r'\d{4}[/\-\.]\d{1,2}[/\-\.]\d{1,2}',
+                r'\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4}',   # DD/MM/YYYY, DD-MM-YY
+                r'\d{4}[/\-\.]\d{1,2}[/\-\.]\d{1,2}',      # YYYY-MM-DD
+                r'\d{1,2}\s+\d{1,2}\s+\d{2,4}',             # DD MM YYYY (spasi)
             ]
-            date_keywords = ['date', 'tanggal', 'tgl', 'bill start', 'bill end', 'closed bill']
+            # Strong date keywords — these alone trigger DATE label
+            strong_date_keywords = [
+                'tanggal', 'tgl', 'tarikh',
+                'bill date', 'invoice date',
+                'bill start', 'bill end', 'closed bill',
+            ]
+            # Time-only keywords (jam, time) — only count as DATE if line ALSO has a date pattern
+            # Avoid false-positive on standalone time like "10:30:45" or "Jam: 10:30"
+            time_only_keywords = ['masa', 'waktu', 'time', 'jam']
             
-            has_date = any(re.search(p, text) for p in date_patterns)
-            has_date_kw = any(kw in text_lower for kw in date_keywords)
+            has_date_pattern = any(re.search(p, text) for p in date_patterns)
+            has_strong_kw = any(kw in text_lower for kw in strong_date_keywords)
+            has_time_kw = any(kw in text_lower for kw in time_only_keywords)
+            # 'date' keyword is treated as strong, but exclude false positives like "update", "candidate"
+            has_date_word = bool(re.search(r'\bdate\b', text_lower))
             
-            if has_date or has_date_kw:
-                if not re.match(r'^\d{7,}$', text_stripped):  # Not a transaction ID
+            if has_date_pattern or has_strong_kw or has_date_word:
+                # Exclude: pure transaction IDs (>7 digits no separator)
+                # Exclude: phone numbers (starts with 0 and >8 digits)
+                is_transaction_id = re.match(r'^\d{7,}$', text_stripped)
+                is_phone = re.match(r'^0\d{8,}$', text_stripped.replace(' ', '').replace('-', ''))
+                if not is_transaction_id and not is_phone:
                     corrected_labels[i] = 'DATE'
                     continue
+            # Time keyword alone (no date pattern) → leave as is (don't force DATE)
+            # This avoids misclassifying "Jam: 10:30" as DATE
             
             # === Rule 2: TOTAL keywords → TOTAL_PAYMENT ===
             total_keywords = [
@@ -248,6 +267,28 @@ class OnlineLearningModel:
             
             # === Rule 3: In total zone, numbers/RM → TOTAL_PAYMENT ===
             if i >= total_start_idx:
+                # DATE always wins even in total zone — check first
+                # Strict: only date patterns or strong keywords (not time-only)
+                date_patterns_total = [
+                    r'\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4}',
+                    r'\d{4}[/\-\.]\d{1,2}[/\-\.]\d{1,2}',
+                    r'\d{1,2}\s+\d{1,2}\s+\d{2,4}',
+                ]
+                strong_date_kw_total = [
+                    'tanggal', 'tgl', 'tarikh',
+                    'bill date', 'invoice date',
+                    'bill start', 'bill end', 'closed bill',
+                ]
+                has_date_in_total = any(re.search(p, text) for p in date_patterns_total)
+                has_strong_kw_total = any(kw in text_lower for kw in strong_date_kw_total)
+                has_date_word_total = bool(re.search(r'\bdate\b', text_lower))
+                if has_date_in_total or has_strong_kw_total or has_date_word_total:
+                    is_transaction_id = re.match(r'^\d{7,}$', text_stripped)
+                    is_phone = re.match(r'^0\d{8,}$', text_stripped.replace(' ', '').replace('-', ''))
+                    if not is_transaction_id and not is_phone:
+                        corrected_labels[i] = 'DATE'
+                        continue
+
                 # Standalone currency or number
                 if text_stripped.upper() in ['RM', 'RP', 'RI', 'RH', 'R']:
                     corrected_labels[i] = 'TOTAL_PAYMENT'

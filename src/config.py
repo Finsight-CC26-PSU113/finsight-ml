@@ -21,7 +21,7 @@ LOGS_DIR = ROOT_DIR / "logs"
 # OCR Settings (EasyOCR)
 # ==============================================================================
 OCR_LANGUAGES = ['en', 'id']  # English + Indonesian
-OCR_GPU = True                 # Use GPU (RTX 3050)
+OCR_GPU = True                 # Try GPU first, auto-fallback to CPU if unavailable
 
 # ==============================================================================
 # Image Preprocessing
