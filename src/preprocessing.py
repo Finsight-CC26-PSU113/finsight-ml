@@ -177,19 +177,101 @@ def preprocess_pipeline(image_path: str | Path) -> dict[str, np.ndarray]:
     return variants
 
 
-def preprocess_for_ocr(image_path: str | Path) -> np.ndarray:
-    """Preprocessing sederhana — satu output terbaik untuk OCR.
-    
-    Pipeline: load → deskew → denoise → enhance contrast
-    
+def upscale(img: np.ndarray, factor: float = 2.0) -> np.ndarray:
+    """Upscale gambar dengan interpolasi Lanczos (high quality).
+
+    EasyOCR detector lebih akurat pada teks yang lebih besar (>32px tinggi).
+    Struk yang difoto biasanya teks-nya kecil setelah resize ke 1080p.
+
     Args:
-        image_path: Path ke file gambar struk.
-        
-    Returns:
-        Single preprocessed grayscale image.
+        img: BGR atau grayscale image.
+        factor: Faktor pembesaran (default 2.0).
+    """
+    h, w = img.shape[:2]
+    new_w = int(w * factor)
+    new_h = int(h * factor)
+    return cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_LANCZOS4)
+
+
+def bilateral_smooth(img: np.ndarray) -> np.ndarray:
+    """Bilateral filter — kurangi noise tapi pertahankan tepi karakter.
+
+    Lebih baik dari Gaussian blur untuk OCR karena tidak melumerkan stroke huruf.
+    """
+    if len(img.shape) == 3:
+        return cv2.bilateralFilter(img, d=5, sigmaColor=50, sigmaSpace=50)
+    return cv2.bilateralFilter(img, d=5, sigmaColor=50, sigmaSpace=50)
+
+
+def enhance_contrast_color(img: np.ndarray) -> np.ndarray:
+    """CLAHE diterapkan pada channel L dari LAB, lalu kembali ke BGR.
+
+    Menjaga warna asli (untuk EasyOCR), tapi tetap menaikkan kontras lokal.
+    """
+    if len(img.shape) == 2:
+        return enhance_contrast(img)
+    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    l_eq = clahe.apply(l)
+    lab_eq = cv2.merge([l_eq, a, b])
+    return cv2.cvtColor(lab_eq, cv2.COLOR_LAB2BGR)
+
+
+def preprocess_for_ocr(image_path: str | Path) -> np.ndarray:
+    """Preprocessing sederhana untuk OCR berbasis path file (legacy).
+
+    Pipeline: load → deskew → denoise → enhance contrast.
+    Output: grayscale image. Untuk EasyOCR, gunakan `preprocess_for_easyocr` saja.
     """
     img = load_image(image_path)
     img = deskew(img)
     img = denoise(img)
     img = enhance_contrast(img)
     return img
+
+
+def preprocess_for_easyocr(img: np.ndarray, *, upscale_factor: float = 2.0) -> np.ndarray:
+    """Pipeline preprocessing yang dioptimalkan untuk EasyOCR.
+
+    Berbeda dari `preprocess_for_ocr` (binary threshold), EasyOCR bekerja paling
+    baik pada gambar BGR/grayscale dengan kontras yang baik. Threshold binary
+    bisa membuat detector salah mengelompokkan box.
+
+    Pipeline:
+        1. Deskew (koreksi kemiringan)
+        2. Bilateral smoothing (kurangi noise, pertahankan tepi)
+        3. CLAHE pada channel L dari LAB (naikan kontras lokal tanpa rusak warna)
+        4. Light sharpening (unsharp masking yang dilembutkan)
+        5. Upscale 2× dengan Lanczos (teks kecil jadi lebih besar)
+
+    Args:
+        img: BGR image (numpy array) — input dari API.
+        upscale_factor: Faktor pembesaran (default 2.0).
+    """
+    if img is None:
+        raise ValueError("Image is None")
+
+    # 1. Deskew
+    img = deskew(img)
+
+    # 2. Bilateral smoothing — preserve edges
+    img = bilateral_smooth(img)
+
+    # 3. CLAHE pada L channel (color preserving)
+    img = enhance_contrast_color(img)
+
+    # 4. Light sharpening pada channel grayscale lalu blend kembali ke BGR
+    if len(img.shape) == 3:
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(gray, (0, 0), sigmaX=2)
+        sharp_gray = cv2.addWeighted(gray, 1.4, blurred, -0.4, 0)
+        # Blend sharpened grayscale ke BGR (jaga warna)
+        sharp_bgr = cv2.cvtColor(sharp_gray, cv2.COLOR_GRAY2BGR)
+        img = cv2.addWeighted(img, 0.6, sharp_bgr, 0.4, 0)
+
+    # 5. Upscale untuk detector
+    img = upscale(img, factor=upscale_factor)
+
+    return img
+

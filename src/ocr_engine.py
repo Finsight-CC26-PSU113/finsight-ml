@@ -92,7 +92,8 @@ class OCREngine:
             - height: float, tinggi bbox
             - line_index: int, urutan baris (0 = paling atas)
         """
-        # EasyOCR accepts both BGR and grayscale
+        # EasyOCR detector params: gunakan default supaya tidak merusak character recognition.
+        # Kustomisasi ada di post-OCR _merge_horizontal yang bekerja di level layout, bukan karakter.
         raw_results = self._reader.readtext(image)
         
         if not raw_results:
@@ -125,6 +126,11 @@ class OCREngine:
         
         # Sort dari atas ke bawah
         lines = self._sort_lines(lines)
+
+        # Post-OCR row merging: gabungkan box di baris-y yang sama jadi satu logical line.
+        # Ini mengatasi kasus EasyOCR mecah "Beef Teriyaki Ramen" jadi 3 box terpisah,
+        # atau "23,415" + "257,565" yang sebenarnya 1 baris harga.
+        lines = self._merge_horizontal(lines)
         
         # Tambahkan line_index
         for i, line in enumerate(lines):
@@ -171,6 +177,115 @@ class OCREngine:
         grouped.extend(current_group)
         
         return grouped
+
+    def _merge_horizontal(self, lines: list[dict]) -> list[dict]:
+        """Gabungkan box yang ada di baris-y yang sama dan **berdekatan secara horizontal**
+        menjadi satu logical line.
+
+        Strategi konservatif (hindari merge antar-kolom):
+        - 2 box dianggap 1 baris vertikal jika selisih y_center < avg_height * 0.6
+        - Dalam baris yang sama, 2 box di-merge HANYA bila gap horizontal < avg_height * 0.6
+          (≈ 1 spasi). Gap antar-kolom struk biasanya 5-15× height, jadi aman tidak ke-merge.
+        - Concat tanpa spasi bila gap sangat kecil (< 0.2 * height) ATAU salah satu fragment
+          adalah pure tanda baca/digit pendek (handle "35 ," + "000" → "35,000").
+        """
+        if not lines:
+            return lines
+
+        avg_height = float(np.mean([l['height'] for l in lines]))
+        y_thresh = avg_height * 0.6
+        # Threshold konservatif: hanya merge box yang benar-benar berdekatan horizontal.
+        gap_thresh = avg_height * 0.6
+
+        # Group ke dalam baris vertikal terlebih dahulu (lines sudah ter-sort by y_center)
+        rows: list[list[dict]] = []
+        for ln in lines:
+            placed = False
+            for row in rows:
+                if abs(ln['y_center'] - row[0]['y_center']) < y_thresh:
+                    row.append(ln)
+                    placed = True
+                    break
+            if not placed:
+                rows.append([ln])
+
+        merged_output: list[dict] = []
+        for row in rows:
+            row.sort(key=lambda l: l['x_min'])
+            cluster: list[dict] = [row[0]]
+            for nxt in row[1:]:
+                last = cluster[-1]
+                horiz_gap = nxt['x_min'] - last['x_max']
+                if horiz_gap <= gap_thresh:
+                    cluster.append(nxt)
+                else:
+                    merged_output.append(self._combine_cluster(cluster, avg_height))
+                    cluster = [nxt]
+            merged_output.append(self._combine_cluster(cluster, avg_height))
+
+        # Re-sort hasil akhir top-to-bottom, left-to-right
+        merged_output.sort(key=lambda l: (round(l['y_center'] / max(avg_height, 1e-6)), l['x_min']))
+        return merged_output
+
+    @staticmethod
+    def _is_punct_or_short_digit(text: str) -> bool:
+        """True jika fragment adalah tanda baca atau digit pendek (mis. "," "." "00" "000")."""
+        t = text.strip()
+        if not t:
+            return True
+        if all(c in '.,;:- ' for c in t):
+            return True
+        if len(t) <= 4 and all(c.isdigit() or c in '.,' for c in t):
+            return True
+        return False
+
+    def _combine_cluster(self, cluster: list[dict], avg_height: float) -> dict:
+        """Gabungkan beberapa box yang sudah dipastikan satu logical text fragment."""
+        if len(cluster) == 1:
+            return cluster[0]
+
+        parts = [cluster[0]['text']]
+        for i in range(1, len(cluster)):
+            gap = cluster[i]['x_min'] - cluster[i - 1]['x_max']
+            # Concat tanpa spasi jika:
+            # - gap sangat kecil (< 0.2 * height) — kata yang ke-pecah saat OCR
+            # - ATAU salah satu fragment hanya tanda baca / digit pendek (e.g. "35," + "000")
+            close_gap = gap < avg_height * 0.2
+            punct_glue = (
+                OCREngine._is_punct_or_short_digit(cluster[i - 1]['text'])
+                or OCREngine._is_punct_or_short_digit(cluster[i]['text'])
+            )
+            sep = '' if (close_gap or punct_glue) else ' '
+            parts.append(sep + cluster[i]['text'])
+        combined_text = ''.join(parts).strip()
+        # Bersihkan spasi sebelum tanda baca
+        combined_text = combined_text.replace(' ,', ',').replace(' .', '.').replace(' :', ':')
+
+        all_xs = [c['x_min'] for c in cluster] + [c['x_max'] for c in cluster]
+        all_ys = [c['y_min'] for c in cluster] + [c['y_max'] for c in cluster]
+        x_min, x_max = min(all_xs), max(all_xs)
+        y_min, y_max = min(all_ys), max(all_ys)
+        merged_bbox = [
+            [x_min, y_min],
+            [x_max, y_min],
+            [x_max, y_max],
+            [x_min, y_max],
+        ]
+        merged_conf = min(c['confidence'] for c in cluster)
+
+        return {
+            'text': combined_text,
+            'bbox': merged_bbox,
+            'confidence': merged_conf,
+            'y_center': (y_min + y_max) / 2,
+            'x_center': (x_min + x_max) / 2,
+            'width': x_max - x_min,
+            'height': y_max - y_min,
+            'x_min': x_min,
+            'y_min': y_min,
+            'x_max': x_max,
+            'y_max': y_max,
+        }
     
     def read_receipt_with_image_info(self, image: np.ndarray) -> tuple[list[dict], dict]:
         """Baca teks + return metadata gambar untuk fitur posisi.
