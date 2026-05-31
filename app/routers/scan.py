@@ -11,7 +11,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 
 from app.schemas.receipt import ScanResult, ItemResult, TotalsResult
 from app.dependencies import get_ocr, get_classifier, get_extractor
-from app.services.preprocessor import deskew
+from app.services.preprocessor import preprocess_for_easyocr
 from app.services.classifier import predict_lines
 
 router = APIRouter()
@@ -57,7 +57,7 @@ async def scan_receipt(
         if img is None:
             raise HTTPException(status_code=400, detail="Cannot decode image.")
 
-        img = deskew(img)
+        img = preprocess_for_easyocr(img)
         lines, _ = ocr.read_receipt_with_image_info(img)
 
         if not lines:
