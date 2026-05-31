@@ -1,0 +1,20 @@
+{
+  "label2idx": {
+    "makanan": 0,
+    "belanja": 1,
+    "hiburan": 2,
+    "transportasi": 3,
+    "tagihan": 4,
+    "kesehatan": 5,
+    "lainnya": 6
+  },
+  "idx2label": {
+    "0": "makanan",
+    "1": "belanja",
+    "2": "hiburan",
+    "3": "transportasi",
+    "4": "tagihan",
+    "5": "kesehatan",
+    "6": "lainnya"
+  }
+}

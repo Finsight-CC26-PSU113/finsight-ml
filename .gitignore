@@ -1,0 +1,140 @@
+# ============================================================
+# OCR FinSight - .gitignore
+# ============================================================
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.env
+.venv
+venv/
+env/
+
+# ── Jupyter ──────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── All old MD docs (keep only README.md) ────────────────────
+ANNOTATION_GUIDELINES.md
+AUTO_EVALUATION_IMPLEMENTED.md
+AUTO_EVALUATION_STATUS.md
+BBOX_VISUALIZATION.md
+CAPSTONE_FINAL_RECOMMENDATION.md
+CAPSTONE_IMPLEMENTATION_SUMMARY.md
+CLEANUP_PLAN.md
+CLEANUP_SUMMARY.md
+COMPLETE_SUMMARY.md
+CRITICAL_BUG_FIX.md
+CRITICAL_ISSUE_FOUND.md
+CURRENT_STATUS.md
+FINAL_CHECKLIST.md
+FINAL_SUMMARY.md
+IMAGE_LOAD_ERROR_FIX.md
+LABEL_CONFUSION_ANALYSIS.md
+LABELING_CHEAT_SHEET.md
+LEARNING_IMPROVEMENTS.md
+MASTER_DOCUMENTATION.md
+ONLINE_LEARNING_FIX.md
+PANDUAN_SINGKAT.md
+PERFORMANCE_DASHBOARD.md
+PHASE1_IMPROVEMENTS.md
+PROGRESS_LOSS_FIX.md
+QUICK_FIX_SUMMARY.md
+QUICK_STATUS.md
+RANGKUMAN_LENGKAP_SISTEM.md
+REBUILD_PLAN.md
+SAVE_ERROR_FIX.md
+STABILITY_FIX.md
+STABILITY_FIX_V2_IMPLEMENTED.md
+TESTING_GUIDE.md
+
+# ── All data (stay with data scientist) ──────────────────────
+data/
+!data/.gitkeep
+
+# ── Datasets (too large) ─────────────────────────────────────
+fullDataset/
+clean_dataset/
+Dataset Baru/
+Dataset_Premium/
+
+# ── Backup folders ───────────────────────────────────────────
+backup_*/
+backup_model_v1/
+backup_stability_fix_*/
+docs_archive/
+# logs/ is tracked — TensorBoard logs needed for checklist
+
+# ── Large / unused model files ───────────────────────────────
+models/mobilenetv2_receipt_detector_final.keras
+models/mobilenetv2_receipt_detector_best.keras
+models/finetuned_easyocr/last_model.pth
+models/v2/
+models/logs/
+models/evaluation_results/
+models/visualizations_with_boxes/
+models/test_results/*.png
+models/extracted_receipts/
+models/extracted_receipts_smart/
+
+# ── KEEP these model files ───────────────────────────────────
+# models/best_weights.weights.h5
+# models/online_model.h5
+# models/finetuned_easyocr/best_model.pth
+# models/finetuned_easyocr/training_log.json
+# models/test_results/test_results.json
+# models/test_results/view_results.html
+
+# ── Dataset Transaction Classifier (data only, not scripts) ──
+Dataset Transaction Classifier/
+
+# ── Unused scripts ───────────────────────────────────────────
+scripts/analyze_learning_performance.py
+scripts/analyze_model_learning.py
+scripts/analyze_ocr_text_quality.py
+scripts/analyze_recovery_options.py
+scripts/auto_label_gemini.py
+scripts/check_progress.py
+scripts/clean_ocr_dataset.py
+scripts/convert_manual_annotations.py
+scripts/debug_online_learning.py
+scripts/demo_pipeline.py
+scripts/demo_training.py
+scripts/diagnose_ocr_quality.py
+scripts/generate_labels.py
+scripts/inference_v2.py
+scripts/mix_labels.py
+scripts/select_receipts_for_annotation.py
+scripts/test_alternative_models.py
+scripts/test_bbox_visualization.py
+scripts/test_online_learning.py
+scripts/test_post_processing.py
+scripts/train_model_v2.py
+scripts/use_existing_bbox.py
+scripts/monitor_groundtruth.py
+
+# ── Kiro internal ────────────────────────────────────────────
+.kiro/
+
+# ── OS & IDE ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# ── Temp & cache ─────────────────────────────────────────────
+*.log
+*.tmp
+*.cache
+.pytest_cache/
+htmlcov/
+.coverage

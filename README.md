@@ -1,232 +1,214 @@
-<div align="center">
+# OCR FinSight 2.0 — Receipt OCR & Information Extraction
 
-# 🤖 Finsight — ML Service
+ML pipeline untuk membaca struk belanja (Malaysia & Indonesia) menggunakan fine-tuned EasyOCR + BiLSTM classifier.
 
-**OCR & Transaction Classification Microservice**
-
-[![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-latest-009688?logo=fastapi)](https://fastapi.tiangolo.com)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow)](https://tensorflow.org)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-5C3EE8?logo=opencv)](https://opencv.org)
-
-> Bagian dari Capstone Project **Coding Camp 2026 powered by DBS Foundation**
-> Team ID: **CC26-PSU113**
-
-</div>
+📖 **[API Documentation → docs/API.md](docs/API.md)**
 
 ---
 
-## 📖 Tentang
-
-Repo ini berisi **ML Service** Finsight — microservice FastAPI yang menangani seluruh pipeline AI:
+## Architecture
 
 ```
-Foto Struk (JPEG/PNG)
-       │
-       ▼
-┌─────────────────────┐
-│  Image Preprocessing │  ← OpenCV (grayscale, threshold, crop ROI, deskew)
-└─────────────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│  OCR (CRNN + CTC)   │  ← Text detection & recognition
-│  Tesseract fallback │  ← Jika akurasi CRNN rendah
-└─────────────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│  NER Parser         │  ← Ekstrak: tanggal, merchant, total, item
-│  (Rule-based)       │
-└─────────────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│  TF Transaction     │  ← TensorFlow classifier
-│  Classifier         │  ← Kategori: makanan, transportasi, hiburan, dst
-└─────────────────────┘
-       │
-       ▼
-  Structured JSON → Backend
+Image → EasyOCR (text + bbox) → BiLSTM Classifier (label per line) → Extractor → JSON
 ```
+
+**ML Pipeline:**
+
+- **EasyOCR** — deteksi teks + bounding box, fine-tuned pada 33K crops struk
+- **BiLSTM Classifier V2** — klasifikasi 7 label per baris (85% acc, DATE recall 96%)
+- **Extractor** — regex + rule-based untuk ekstrak store, date, items, total
 
 ---
 
-## 🗂️ Struktur Folder
+## Quick Start
 
-```
-finsight-ml-service/
-├── app/
-│   ├── main.py                # FastAPI entry point
-│   ├── routers/
-│   │   ├── ocr.py             # Endpoint /ocr/process
-│   │   ├── classify.py        # Endpoint /classify/transaction
-│   │   └── health.py          # Endpoint /model/health & /model/metrics
-│   ├── services/
-│   │   ├── preprocessing.py   # OpenCV pipeline
-│   │   ├── ocr_service.py     # CRNN + Tesseract
-│   │   ├── ner_parser.py      # Rule-based NER
-│   │   └── classifier.py      # TF Transaction Classifier
-│   ├── models/
-│   │   └── saved_model/       # TF SavedModel (gitignored)
-│   └── utils/
-│       └── helpers.py
-├── notebooks/                 # Eksperimen & training
-├── tests/
-├── requirements.txt
-├── .env.example
-└── Dockerfile
-```
-
----
-
-## ⚙️ Tech Stack
-
-| Teknologi | Kegunaan |
-|---|---|
-| FastAPI | REST API framework |
-| TensorFlow 2.x | Transaction Classifier (CRNN + Custom Training Loop) |
-| OpenCV | Image preprocessing |
-| Tesseract OCR | Fallback text recognition |
-| Pillow | Image handling |
-| tf.GradientTape | Custom training loop (gradient clipping + TensorBoard) |
-
----
-
-## 🚀 Cara Menjalankan
-
-### Prasyarat
-- Python >= 3.10
-- Tesseract OCR terinstall di sistem
+### Install
 
 ```bash
-# Ubuntu/Debian
-sudo apt install tesseract-ocr tesseract-ocr-ind
-
-# macOS
-brew install tesseract
+# Python 3.10–3.12, Windows/Linux/macOS (no WSL required)
+python setup.py            # CPU mode (works everywhere)
+python setup.py --gpu      # GPU mode (NVIDIA + CUDA 12.1)
 ```
 
-### Langkah-langkah
+### Run API (FastAPI)
 
 ```bash
-# 1. Clone repo
-git clone https://github.com/finsight-cc26/finsight-ml-service.git
-cd finsight-ml-service
-
-# 2. Buat virtual environment
-python -m venv venv
-source venv/bin/activate       # Linux/macOS
-# venv\Scripts\activate        # Windows
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Setup environment
-cp .env.example .env
-
-# 5. Jalankan service
-uvicorn app.main:app --reload --port 8000
+python web/api_v2.py
+# → http://localhost:8000/api/docs  (Swagger UI)
+# → POST /api/scan                  (scan receipt)
 ```
 
-Service akan berjalan di **http://localhost:8000**
+### Run Demo UI (Flask)
 
-Swagger docs: **http://localhost:8000/docs**
+```bash
+python web/simple_app.py
+# → http://localhost:5000
+```
 
----
+### Docker
 
-## 🌍 Environment Variables
-
-```env
-MODEL_PATH=app/models/saved_model
-TESSERACT_PATH=/usr/bin/tesseract
-OCR_CONFIDENCE_THRESHOLD=0.75
-LOG_LEVEL=INFO
+```bash
+docker-compose up
+# → http://localhost:8000
 ```
 
 ---
 
-## 📋 API Endpoints
+## Project Structure
 
-| Method | Endpoint | Deskripsi |
-|---|---|---|
-| POST | `/ocr/process` | Upload gambar → ekstrak & klasifikasi transaksi |
-| POST | `/classify/transaction` | Klasifikasi teks transaksi (tanpa OCR) |
-| GET | `/model/health` | Status model & service |
-| GET | `/model/metrics` | Akurasi & performa model |
+```
+src/
+├── config.py           # Paths & hyperparameters
+├── ocr_engine.py       # EasyOCR wrapper (auto GPU/CPU)
+├── model.py            # BiLSTM classifier architecture
+├── extractor.py        # Structured data extraction
+├── preprocessing.py    # Image preprocessing (deskew, denoise)
+├── text_cleaner.py     # OCR text normalization
+├── text_post_processor.py  # Post-processing rules
+├── online_learning.py  # Post-processing label rules
+└── auto_evaluation.py  # Performance monitoring
 
-### Contoh Request — `/ocr/process`
+web/
+├── api_v2.py           # FastAPI production backend  ← MAIN API
+└── simple_app.py       # Flask demo UI
 
-```bash
-curl -X POST http://localhost:8000/ocr/process \
-  -F "file=@struk.jpg"
+scripts/
+├── generate_combined_groundtruth.py  # Gemini labeling (cls + OCR)
+├── finetune_easyocr.py               # Fine-tune EasyOCR CRNN
+├── train_classifier_v2.py            # Train BiLSTM classifier
+└── train_transaction_classifier.py   # Transaction category classifier
+
+models/
+├── classifier_v2/best_weights.weights.h5   # BiLSTM V2 (2.7MB)
+├── best_weights.weights.h5                 # BiLSTM V1 (online learning)
+├── online_model.h5                         # Online learning weights
+└── finetuned_easyocr/best_model.pth        # Fine-tuned EasyOCR
+
+docs/
+└── API.md              # Full API documentation
 ```
 
-### Contoh Response
+---
+
+## Models
+
+| Model                | File                                           | Accuracy           | Notes                       |
+| -------------------- | ---------------------------------------------- | ------------------ | --------------------------- |
+| BiLSTM Classifier V2 | `models/classifier_v2/best_weights.weights.h5` | **85%** (DATE 96%) | Trained on 44K lines, MY+ID |
+| Fine-tuned EasyOCR   | `models/finetuned_easyocr/best_model.pth`      | **81.1% CER**      | 33K crops                   |
+| BiLSTM V1 (fallback) | `models/best_weights.weights.h5`               | 92.95%             | Older dataset               |
+
+### Label Classes
+
+| Label             | Description                    |
+| ----------------- | ------------------------------ |
+| `STORE`           | Nama toko/bisnis               |
+| `ADDRESS_CONTACT` | Alamat, telp, email, NPWP      |
+| `DATE`            | Tanggal & waktu (semua format) |
+| `ITEM_DESC`       | Nama barang/menu               |
+| `ITEM_PRICE/QTY`  | Harga & jumlah                 |
+| `TOTAL_PAYMENT`   | Total, subtotal, pajak, diskon |
+| `OTHER`           | Lainnya                        |
+
+---
+
+## API
+
+Full docs: **[docs/API.md](docs/API.md)**
+
+```bash
+# Scan receipt
+curl -X POST http://localhost:8000/api/scan \
+     -F "image=@receipt.jpg"
+
+# Health check
+curl http://localhost:8000/api/health
+```
+
+Response:
 
 ```json
 {
-  "success": true,
-  "merchant": "Indomaret Cipagalo",
-  "date": "2024-03-08",
-  "total": 63000,
-  "category": "makanan",
-  "items": [
-    { "name": "PIATTOS SAPI PNG 68G", "qty": 2, "price": 22400 },
-    { "name": "MR BREAD TAWAR KUPAS", "qty": 1, "price": 16500 }
-  ],
-  "ocr_confidence": 0.91
+  "store": "Ichiban Sushi",
+  "date": "Aug 19, 2024 6:32:54 PM",
+  "items": [{"name": "Beef Teriyaki Ramen", "qty": 1, "price": 42000}],
+  "total": 257565.0,
+  "totals": {"grand_total": 257565.0, "subtotal": 223000.0, "tax": 23415.0, ...}
 }
 ```
 
 ---
 
-## 🧠 Model
-
-### TF Transaction Classifier
-- Input: teks hasil parsing NER (merchant + items)
-- Output: kategori transaksi (makanan, transportasi, hiburan, kesehatan, dll)
-- Training: `tf.GradientTape` custom loop dengan gradient clipping
-- Target akurasi: **≥ 85%**
-- Monitoring: TensorBoard
-
-### CRNN OCR
-- Arsitektur: CNN + BiLSTM + CTC Decode
-- Tesseract sebagai fallback jika confidence < threshold
-
----
-
-## 📜 Scripts
-
-| Command | Deskripsi |
-|---|---|
-| `uvicorn app.main:app --reload` | Dev server |
-| `uvicorn app.main:app --port 8000` | Production |
-| `python -m pytest tests/` | Jalankan tests |
-
----
-
-## 🚢 Deployment
-
-ML Service di-deploy ke **VPS terpisah** dari backend.
+## Training New Data
 
 ```bash
-# Production dengan Gunicorn
-pip install gunicorn
-gunicorn app.main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
-```
+# 1. Label dataset dengan Gemini Vision (1 API call = classifier + OCR data)
+python scripts/generate_combined_groundtruth.py \
+    --api-keys KEY1 KEY2 KEY3 \
+    --model gemini-3.1-flash-lite \
+    --max-images 500
 
-Atau via **Docker**:
+# 2. Train BiLSTM classifier
+wsl python3 scripts/train_classifier_v2.py --epochs 50
 
-```bash
-docker build -t finsight-ml .
-docker run -p 8000:8000 finsight-ml
+# 3. Fine-tune EasyOCR
+wsl python3 scripts/finetune_easyocr.py --epochs 20
 ```
 
 ---
 
-## 👥 Maintainer
+## Performance
 
-**Aidil Baihaqi** & **Muhammad Thesar** — AI Engineer
-> Coding Camp 2026 | CC26-PSU113
+| Component            | Metric        | Value        |
+| -------------------- | ------------- | ------------ |
+| BiLSTM Classifier V2 | Test Accuracy | **85%**      |
+| BiLSTM Classifier V2 | DATE Recall   | **96.4%**    |
+| EasyOCR (fine-tuned) | Char Accuracy | **81.1%**    |
+| Inference (CPU)      | Per image     | ~2–3 seconds |
+| RAM (inference)      | Total         | ~2 GB        |
 
+---
+
+## Deployment
+
+### Minimum VPS Spec
+
+| Resource | Minimum       | Recommended   |
+| -------- | ------------- | ------------- |
+| RAM      | 4 GB          | 8 GB          |
+| CPU      | 2 vCPU        | 4 vCPU        |
+| Storage  | 10 GB SSD     | 20 GB SSD     |
+| OS       | Ubuntu 22.04+ | Ubuntu 22.04+ |
+
+### Providers (4 GB RAM)
+
+| Provider     | Price/month  |
+| ------------ | ------------ |
+| IDCloudHost  | ~Rp 200–250k |
+| Vultr        | ~$20         |
+| DigitalOcean | ~$24         |
+| Railway      | ~$10–15      |
+
+---
+
+## Troubleshooting
+
+**`numpy._ARRAY_API not found` (Windows)**
+
+```bash
+pip install "numpy<2.0" --force-reinstall
+# atau
+python setup.py
+```
+
+**GPU not detected**
+
+```bash
+# App otomatis fallback ke CPU — tidak perlu action
+# Untuk aktifkan GPU:
+pip install torch==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+```
+
+---
+
+_OCR FinSight 2.0 — Capstone Project CC26-PSU113_

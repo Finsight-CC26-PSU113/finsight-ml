@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MobileNetV2 Test Results</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 40px;
+        background: #f8f9fa;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .stat-card h3 {
+        color: #667eea;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .stat-value {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        padding: 40px;
+      }
+
+      .result-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .result-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .result-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .result-info {
+        padding: 20px;
+      }
+
+      .result-info h4 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+      }
+
+      .prediction-bar {
+        margin-bottom: 12px;
+      }
+
+      .prediction-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        font-size: 0.9em;
+      }
+
+      .prediction-label span:first-child {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .prediction-label span:last-child {
+        color: #666;
+      }
+
+      .bar-container {
+        width: 100%;
+        height: 8px;
+        background: #e9ecef;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.5s ease;
+      }
+
+      .bar-fill.high {
+        background: linear-gradient(90deg, #10b981, #059669);
+      }
+
+      .bar-fill.medium {
+        background: linear-gradient(90deg, #f59e0b, #d97706);
+      }
+
+      .bar-fill.low {
+        background: linear-gradient(90deg, #ef4444, #dc2626);
+      }
+
+      .footer {
+        background: #2d3748;
+        color: white;
+        text-align: center;
+        padding: 30px;
+      }
+
+      .footer p {
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        .results-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+          font-size: 1.8em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎯 MobileNetV2 Receipt Detector</h1>
+        <p>Test Results - Object Detection Performance</p>
+      </div>
+
+      <div class="summary">
+        <div class="stat-card">
+          <h3>TOTAL</h3>
+          <div class="stat-value">86.1%</div>
+          <div class="stat-label">Average Confidence</div>
+          <div
+            class="stat-label"
+            style="margin-top: 10px; color: #10b981; font-weight: bold"
+          >
+            ✅ 10/10 Detected
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h3>TANGGAL</h3>
+          <div class="stat-value">31.1%</div>
+          <div class="stat-label">Average Confidence</div>
+          <div
+            class="stat-label"
+            style="margin-top: 10px; color: #ef4444; font-weight: bold"
+          >
+            ⚠️ 2/10 Detected
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h3>LIST_ITEM</h3>
+          <div class="stat-value">63.2%</div>
+          <div class="stat-label">Average Confidence</div>
+          <div
+            class="stat-label"
+            style="margin-top: 10px; color: #f59e0b; font-weight: bold"
+          >
+            ⚠️ 7/10 Detected
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h3>Overall</h3>
+          <div class="stat-value">60.1%</div>
+          <div class="stat-label">Average Confidence</div>
+          <div class="stat-label" style="margin-top: 10px">
+            Across All Classes
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <img src="prediction_1.png" alt="Test 1" />
+          <div class="result-info">
+            <h4>📄 Test 1: 222.png</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>66.0%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 66%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>79.5%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 79.5%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>67.7%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 67.7%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_2.png" alt="Test 2" />
+          <div class="result-info">
+            <h4>📄 Test 2: 319.jpg</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>77.1%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 77.1%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>3.1%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 3.1%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>77.5%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 77.5%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_3.png" alt="Test 3" />
+          <div class="result-info">
+            <h4>📄 Test 3: 260.png</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>96.7%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 96.7%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>5.5%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 5.5%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>23.6%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 23.6%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_4.png" alt="Test 4" />
+          <div class="result-info">
+            <h4>📄 Test 4: 14.png</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>89.9%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 89.9%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>40.6%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 40.6%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>72.7%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 72.7%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_5.png" alt="Test 5" />
+          <div class="result-info">
+            <h4>📄 Test 5: 496.jpg</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>83.6%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 83.6%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>24.1%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 24.1%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>55.0%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 55%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_6.png" alt="Test 6" />
+          <div class="result-info">
+            <h4>📄 Test 6: 120.png</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>93.2%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 93.2%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>22.8%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 22.8%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>92.5%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 92.5%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_7.png" alt="Test 7" />
+          <div class="result-info">
+            <h4>📄 Test 7: 522.jpg</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>92.5%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 92.5%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>55.5%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 55.5%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>70.1%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 70.1%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_8.png" alt="Test 8" />
+          <div class="result-info">
+            <h4>📄 Test 8: 400.jpg</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>74.3%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 74.3%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>44.1%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 44.1%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>49.3%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 49.3%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_9.png" alt="Test 9" />
+          <div class="result-info">
+            <h4>📄 Test 9: 50.png</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>94.8%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 94.8%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>28.2%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 28.2%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>48.2%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 48.2%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <img src="prediction_10.png" alt="Test 10" />
+          <div class="result-info">
+            <h4>📄 Test 10: 310.jpg</h4>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TOTAL</span>
+                <span>92.6%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 92.6%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>TANGGAL</span>
+                <span>7.4%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill low" style="width: 7.4%"></div>
+              </div>
+            </div>
+            <div class="prediction-bar">
+              <div class="prediction-label">
+                <span>LIST_ITEM</span>
+                <span>75.3%</span>
+              </div>
+              <div class="bar-container">
+                <div class="bar-fill high" style="width: 75.3%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>🚀 MobileNetV2 Receipt Detector | Training Date: 2026-05-06</p>
+        <p style="margin-top: 10px">
+          GPU: NVIDIA GeForce RTX 3050 | Framework: TensorFlow 2.17.1 + CUDA
+          13.2
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

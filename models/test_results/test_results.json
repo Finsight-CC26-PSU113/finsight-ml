@@ -1,0 +1,97 @@
+{
+  "summary": {
+    "total_images": 10,
+    "average_confidence": {
+      "TOTAL": 0.8606222927570343,
+      "TANGGAL": 0.3107513742521405,
+      "LIST_ITEM": 0.632020577788353
+    },
+    "detection_count": {
+      "TOTAL": 10,
+      "TANGGAL": 2,
+      "LIST_ITEM": 7
+    }
+  },
+  "results": [
+    {
+      "image": "222.png",
+      "predictions": {
+        "TOTAL": 0.6604049205780029,
+        "TANGGAL": 0.7952756285667419,
+        "LIST_ITEM": 0.677345335483551
+      }
+    },
+    {
+      "image": "319.jpg",
+      "predictions": {
+        "TOTAL": 0.7711721062660217,
+        "TANGGAL": 0.03052079863846302,
+        "LIST_ITEM": 0.7745558023452759
+      }
+    },
+    {
+      "image": "260.png",
+      "predictions": {
+        "TOTAL": 0.9674113988876343,
+        "TANGGAL": 0.05496158450841904,
+        "LIST_ITEM": 0.23619914054870605
+      }
+    },
+    {
+      "image": "14.png",
+      "predictions": {
+        "TOTAL": 0.8987324833869934,
+        "TANGGAL": 0.40576136112213135,
+        "LIST_ITEM": 0.7270168662071228
+      }
+    },
+    {
+      "image": "496.jpg",
+      "predictions": {
+        "TOTAL": 0.8355150818824768,
+        "TANGGAL": 0.24066726863384247,
+        "LIST_ITEM": 0.5500556230545044
+      }
+    },
+    {
+      "image": "120.png",
+      "predictions": {
+        "TOTAL": 0.9317286014556885,
+        "TANGGAL": 0.22776414453983307,
+        "LIST_ITEM": 0.9251267313957214
+      }
+    },
+    {
+      "image": "522.jpg",
+      "predictions": {
+        "TOTAL": 0.9247735738754272,
+        "TANGGAL": 0.5548924207687378,
+        "LIST_ITEM": 0.7010787129402161
+      }
+    },
+    {
+      "image": "400.jpg",
+      "predictions": {
+        "TOTAL": 0.7426581978797913,
+        "TANGGAL": 0.44144871830940247,
+        "LIST_ITEM": 0.49333277344703674
+      }
+    },
+    {
+      "image": "50.png",
+      "predictions": {
+        "TOTAL": 0.9478989243507385,
+        "TANGGAL": 0.2820528745651245,
+        "LIST_ITEM": 0.4821949005126953
+      }
+    },
+    {
+      "image": "310.jpg",
+      "predictions": {
+        "TOTAL": 0.9259276390075684,
+        "TANGGAL": 0.07416894286870956,
+        "LIST_ITEM": 0.7532998919487
+      }
+    }
+  ]
+}
