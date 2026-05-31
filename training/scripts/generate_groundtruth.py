@@ -33,9 +33,9 @@ from PIL import Image
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.config import ROOT_DIR
-from src.preprocessing import load_image, deskew
-from src.ocr_engine import OCREngine
+from app.config import ROOT_DIR
+from app.services.preprocessor import load_image, deskew
+from app.services.ocr import OCREngine
 
 try:
     import google.generativeai as genai

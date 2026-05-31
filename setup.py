@@ -101,7 +101,6 @@ def install_core(use_gpu: bool):
     rest = [
         'pandas>=2.0.0,<2.3',
         'scikit-learn>=1.3.0,<1.6',
-        'flask>=3.0.0,<4.0',
         'fastapi>=0.104.0,<0.120',
         'uvicorn[standard]>=0.24.0,<0.35',
         'python-multipart>=0.0.6',
@@ -222,8 +221,8 @@ def main():
     print("✅ Setup complete!")
     print("=" * 60)
     print("\nNext steps:")
-    print("  1. Run app:  python web/simple_app.py")
-    print("  2. Open:     http://localhost:5000")
+    print("  1. Run API:  uvicorn app.main:app --host 0.0.0.0 --port 8000")
+    print("  2. Docs:     http://localhost:8000/api/docs")
     print()
 
 
