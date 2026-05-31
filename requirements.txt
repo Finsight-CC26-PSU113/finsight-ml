@@ -1,37 +1,16 @@
-# ============================================================
-# OCR FinSight — Dependencies (Production / Inference)
-# ============================================================
-# Python: 3.10, 3.11, 3.12
-# Default: CPU-only
-
-# --- Core ---
 numpy>=1.26.0,<2.0
-
-# --- Image processing ---
 opencv-python-headless==4.10.0.84
 Pillow>=10.0.0,<11.0
-
-# --- ML frameworks ---
 tensorflow==2.15.1
 torch==2.1.2
 torchvision==0.16.2
-
-# --- OCR ---
 easyocr==1.7.1
-
-# --- Data processing (training only) ---
 pandas>=2.0.0,<2.3
 scikit-learn>=1.3.0,<1.6
-
-# --- Web framework ---
 fastapi>=0.104.0,<0.120
 uvicorn[standard]>=0.24.0,<0.35
 python-multipart>=0.0.6
-
-# --- Utilities ---
 matplotlib>=3.7.0,<4.0
 tqdm>=4.65.0
 requests>=2.31.0
-
-# --- Dev / labeling (optional) ---
 google-generativeai>=0.7.0
