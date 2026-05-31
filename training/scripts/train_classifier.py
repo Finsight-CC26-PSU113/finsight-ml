@@ -28,15 +28,16 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.config import (
+from app.config import (
     LINE_CLASSES, NUM_CLASSES, MAX_TEXT_LENGTH,
     EMBEDDING_DIM, LSTM_UNITS, DENSE_UNITS, DROPOUT_RATE,
     LEARNING_RATE, BATCH_SIZE, EPOCHS, RANDOM_SEED, ROOT_DIR
 )
-from src.model import ReceiptLineClassifier, FocalLoss
+from app.services.classifier import ReceiptLineClassifier
+from training.model import FocalLoss
 
 
 # ============================================================

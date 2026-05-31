@@ -8,28 +8,24 @@ services:
     image: ocr-finsight:latest
     container_name: ocr-finsight
     ports:
-      - "5000:5000"
+      - "8000:8000"
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
       - TF_CPP_MIN_LOG_LEVEL=2
-      # Force CPU mode for portability
       - CUDA_VISIBLE_DEVICES=-1
     volumes:
-      # Mount models directory (read-only) so you can update without rebuilding
       - ./models:/app/models:ro
     healthcheck:
       test:
         [
-          "CMD",
-          "python",
-          "-c",
-          "import requests; requests.get('http://localhost:5000/api/health', timeout=5)",
+          "CMD", "python", "-c",
+          "import requests; requests.get('http://localhost:8000/api/health', timeout=5)",
         ]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 60s
+      start_period: 90s
     deploy:
       resources:
         limits:
