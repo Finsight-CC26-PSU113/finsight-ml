@@ -1,12 +1,12 @@
 # ============================================================
 # OCR FinSight - Production Dockerfile
 # Multi-stage build for smaller image size
+# Runs: FastAPI (api_v2.py) on port 8000
 # ============================================================
 
-# Use slim Python 3.11 (good balance between size and compatibility)
 FROM python:3.11-slim AS builder
 
-# Install system dependencies needed for opencv-headless, easyocr
+# System dependencies for opencv-headless and easyocr
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libgl1 \
@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Copy and install Python dependencies (in correct order)
 COPY requirements.txt .
 
 # Step 1: NumPy first (must be < 2.0)
@@ -53,25 +52,24 @@ WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin /usr/local/bin
 
-# Copy application code
+# Copy only production-needed code
 COPY src/ ./src/
 COPY web/ ./web/
-COPY scripts/ ./scripts/
-COPY models/ ./models/
+COPY models/classifier_v2/ ./models/classifier_v2/
+COPY models/finetuned_easyocr/best_model.pth ./models/finetuned_easyocr/best_model.pth
 
-# Pre-download EasyOCR model (so first request is fast)
+# Pre-download EasyOCR model weights (so first request is fast)
 RUN python -c "import easyocr; easyocr.Reader(['en', 'id'], gpu=False, verbose=False)"
 
 # Environment variables
 ENV PYTHONUNBUFFERED=1
 ENV TF_CPP_MIN_LOG_LEVEL=2
+ENV CUDA_VISIBLE_DEVICES=-1
 
-# Expose Flask port
-EXPOSE 5000
+EXPOSE 8000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:5000/api/health', timeout=5)" || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=90s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')" || exit 1
 
-# Run the app
-CMD ["python", "web/simple_app.py"]
+# Run FastAPI with uvicorn
+CMD ["uvicorn", "web.api_v2:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

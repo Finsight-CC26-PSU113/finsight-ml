@@ -1,20 +1,28 @@
+# ============================================================
+# Docker build context exclusions
+# Only production code + models needed for inference
+# ============================================================
+
 # Datasets — too large, not needed for inference
 fullDataset/
 clean_dataset/
 Dataset Baru/
 Dataset Transaction Classifier/
 Dataset_Premium/
+
+# Data directory (runtime data, not needed at build time)
 data/
 
-# Git
+# Training scripts — not needed in production image
+scripts/
+
+# Git & editor
 .git/
 .gitignore
-
-# Editor
 .vscode/
 .kiro/
 
-# Python
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
@@ -31,16 +39,15 @@ venv/
 env/
 .venv/
 
-# Notebooks (not needed in container)
+# Notebooks
 *.ipynb
 
-# Test outputs
+# Test outputs & training artifacts
 models/test_results/
-
-# Heavy training models (we only need inference)
 models/finetuned_easyocr/training_log.json
+models/finetuned_easyocr/last_model.pth
 models/transaction_classifier/
+models/online_model.h5
 
-# Documentation
-*.md
-!README.md
+# Documentation (keep README for context)
+docs/

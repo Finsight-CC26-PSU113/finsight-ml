@@ -468,11 +468,18 @@ def main():
     parser.add_argument('--data-dir', type=str, default=None,
                         help='Path to OCR ground truth dir (contains images/ and labels.txt). '
                              'Default: data/combined_groundtruth/ocr')
+    parser.add_argument('--labels', type=str, default=None,
+                        help='Path to labels file (e.g., labels_clean.txt). Overrides --data-dir.')
     args = parser.parse_args()
     
-    # Override paths if --data-dir specified
+    # Override paths if --data-dir or --labels specified
     global GROUNDTRUTH_DIR, LABELS_FILE, CROPS_DIR
-    if args.data_dir:
+    if args.labels:
+        # Use custom labels file
+        LABELS_FILE = Path(args.labels)
+        GROUNDTRUTH_DIR = LABELS_FILE.parent
+        CROPS_DIR = GROUNDTRUTH_DIR / "images"
+    elif args.data_dir:
         GROUNDTRUTH_DIR = Path(args.data_dir)
         LABELS_FILE = GROUNDTRUTH_DIR / "labels.txt"
         CROPS_DIR = GROUNDTRUTH_DIR / "images"

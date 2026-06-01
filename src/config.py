@@ -43,8 +43,13 @@ LINE_CLASSES = {
     2: 'DATE',
     3: 'ITEM_DESC',
     4: 'ITEM_PRICE/QTY',
-    5: 'TOTAL_PAYMENT',
-    6: 'OTHER',
+    5: 'SUBTOTAL',
+    6: 'TAX',
+    7: 'DISCOUNT',
+    8: 'SERVICE_CHARGE',
+    9: 'GRAND_TOTAL',
+    10: 'CASH_PAYMENT',
+    11: 'OTHER',
 }
 NUM_CLASSES = len(LINE_CLASSES)
 

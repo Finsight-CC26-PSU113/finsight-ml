@@ -77,18 +77,27 @@ async def startup():
     print("🧾 OCR FinSight API v2.1 — Starting up")
     print("=" * 55)
 
-    # 1. OCR Engine
+    # 1. OCR Engine (with fine-tuned model if available)
     print("📦 Loading EasyOCR...")
-    ocr_engine = OCREngine()
+    finetuned_path = ROOT_DIR / "models" / "finetuned_easyocr" / "best_model.pth"
+    if finetuned_path.exists():
+        print(f"   Found fine-tuned model: {finetuned_path}")
+        ocr_engine = OCREngine(model_path=str(finetuned_path))
+    else:
+        print("   Using default EasyOCR model")
+        ocr_engine = OCREngine()
     print("✅ EasyOCR ready")
 
-    # 2. Classifier V2
+    # 2. Classifier V2 (12 categories)
     print("📦 Loading Classifier V2...")
     try:
         import tensorflow as tf
         from src.model import ReceiptLineClassifier
 
         v2_weights = ROOT_DIR / "models" / "classifier_v2" / "best_weights.weights.h5"
+        if not v2_weights.exists():
+            raise FileNotFoundError(f"Classifier V2 weights not found: {v2_weights}")
+            
         model = ReceiptLineClassifier()
 
         dummy_chars = tf.zeros((1, MAX_TEXT_LENGTH), dtype=tf.int32)
@@ -99,7 +108,7 @@ async def startup():
         model.load_weights(str(v2_weights))
         model._is_v2 = True
         classifier = model
-        print("✅ Classifier V2 loaded (85% acc, DATE recall 96%)")
+        print("✅ Classifier V2 loaded (12 categories, 82.45% test accuracy)")
     except Exception as e:
         print(f"⚠️  Classifier V2 failed: {e}")
         try:
@@ -114,6 +123,12 @@ async def startup():
     # 3. Extractor
     extractor = ReceiptExtractor()
     print("✅ Extractor ready")
+    
+    print("\n📊 Model Summary:")
+    print(f"   OCR: {'Fine-tuned EasyOCR (62.89% exact match, 13.12% CER)' if finetuned_path.exists() else 'Default EasyOCR'}")
+    print(f"   Classifier: {'V2 (12 categories, 82.45% accuracy)' if (classifier and getattr(classifier, '_is_v2', False)) else 'V1 (fallback)'}")
+    print(f"   Extractor: Enhanced with smart validation")
+    
     print("\n🌐 Web UI    : http://localhost:8000/")
     print("📖 Swagger   : http://localhost:8000/api/docs")
     print("🩺 Health    : http://localhost:8000/api/health")
@@ -243,16 +258,41 @@ async def _run_pipeline(image_bytes: bytes) -> dict:
 
     # Items
     items_struct = extracted.get('items', [])
+    
+    # Totals breakdown
+    totals = extracted.get('totals', {})
 
+    # Calculate items total
+    items_total = sum(it['price'] * it['qty'] for it in items_struct)
+    
     return {
         "success": True,
-        "store": extracted.get('store', ''),
-        "date": extracted.get('date', ''),
+        "receipt": {
+            "store_name": extracted.get('store', ''),
+            "date": extracted.get('date', ''),
+            "address": extracted.get('address', ''),
+        },
         "items": [
-            {"name": it['name'], "qty": it['qty'], "price": it['price']}
+            {
+                "name": it['name'],
+                "quantity": it['qty'],
+                "unit_price": it['price'],
+                "total_price": round(it['price'] * it['qty'], 2)
+            }
             for it in items_struct
         ],
-        "total": extracted.get('total', 0.0),
+        "financial_summary": {
+            "items_total": round(items_total, 2),
+            "subtotal": round(totals.get('subtotal', 0.0), 2),
+            "tax": round(totals.get('tax', 0.0), 2),
+            "discount": round(totals.get('discount', 0.0), 2),
+            "service_charge": round(totals.get('service_charge', 0.0), 2),
+            "grand_total": round(totals.get('grand_total', 0.0), 2),
+            "payment": {
+                "cash_paid": round(totals.get('cash', 0.0), 2),
+                "change": round(totals.get('change', 0.0), 2),
+            }
+        }
     }
 
 
@@ -269,12 +309,22 @@ async def home(request: Request):
 @app.get("/api/health")
 async def health():
     """Health check — returns model status."""
+    finetuned_path = ROOT_DIR / "models" / "finetuned_easyocr" / "best_model.pth"
     return {
         "status": "ok",
         "models": {
             "ocr": ocr_engine is not None,
+            "ocr_version": "fine-tuned" if finetuned_path.exists() else "default",
+            "ocr_metrics": {
+                "exact_match_accuracy": 62.89,
+                "character_error_rate": 13.12
+            } if finetuned_path.exists() else None,
             "classifier": classifier is not None,
             "classifier_version": "v2" if (classifier and getattr(classifier, '_is_v2', False)) else "v1",
+            "classifier_metrics": {
+                "test_accuracy": 82.45,
+                "num_categories": 12
+            } if (classifier and getattr(classifier, '_is_v2', False)) else None,
             "extractor": extractor is not None,
         }
     }
@@ -283,14 +333,95 @@ async def health():
 @app.post("/api/predict")
 async def predict(image: UploadFile = File(..., description="Receipt image (JPG, PNG, WEBP)")):
     """
-    Pipeline lengkap dalam satu request:
-        decode -> deskew -> OCR -> classifier (V2) -> extractor
-
-    Output JSON:
-      - extracted: data terstruktur (store, date, items, totals, address)
-      - lines: setiap baris OCR + label hasil classifier (bukan per-kata)
-      - stats: ringkasan (jumlah baris, confidence rata-rata, waktu proses)
-      - annotated_image: gambar dengan bbox + label (base64 JPEG)
+    Complete OCR pipeline with clean structured output.
+    
+    **Pipeline**: Image → Preprocessing → OCR → Classification (12 categories) → Extraction
+    
+    **Returns**:
+    ```json
+    {
+      "success": true,
+      "receipt": {
+        "store_name": "INDOMARET",
+        "date": "2026-06-01 14:30",
+        "address": "Jl. Sudirman No. 123, Jakarta"
+      },
+      "items": [
+        {
+          "name": "Indomie Goreng",
+          "quantity": 2,
+          "unit_price": 3500.0,
+          "total_price": 7000.0
+        },
+        {
+          "name": "Aqua 600ml",
+          "quantity": 1,
+          "unit_price": 3000.0,
+          "total_price": 3000.0
+        }
+      ],
+      "financial_summary": {
+        "items_total": 10000.0,
+        "subtotal": 10000.0,
+        "tax": 1100.0,
+        "discount": 500.0,
+        "service_charge": 0.0,
+        "grand_total": 10600.0,
+        "payment": {
+          "cash_paid": 15000.0,
+          "change": 4400.0
+        }
+      },
+      "lines_by_category": {
+        "STORE": [
+          {"text": "INDOMARET", "confidence": 0.95, "ocr_confidence": 0.98}
+        ],
+        "DATE": [
+          {"text": "01/06/2026 14:30", "confidence": 0.99, "ocr_confidence": 0.97}
+        ],
+        "ITEM_DESC": [
+          {"text": "Indomie Goreng", "confidence": 0.91, "ocr_confidence": 0.96},
+          {"text": "Aqua 600ml", "confidence": 0.89, "ocr_confidence": 0.95}
+        ],
+        "TAX": [
+          {"text": "PPN 11%", "confidence": 0.84, "ocr_confidence": 0.92},
+          {"text": "Rp 1.100", "confidence": 0.82, "ocr_confidence": 0.99}
+        ],
+        "DISCOUNT": [
+          {"text": "Member Discount", "confidence": 0.87, "ocr_confidence": 0.94},
+          {"text": "Rp 500", "confidence": 0.85, "ocr_confidence": 0.98}
+        ],
+        "GRAND_TOTAL": [
+          {"text": "Total Bayar", "confidence": 0.93, "ocr_confidence": 0.96},
+          {"text": "Rp 10.600", "confidence": 0.91, "ocr_confidence": 0.99}
+        ]
+      },
+      "metadata": {
+        "total_lines": 45,
+        "total_items": 2,
+        "avg_classification_confidence": 85.2,
+        "avg_ocr_confidence": 96.5,
+        "classifier_version": "v2_12_categories",
+        "categories_detected": ["STORE", "ADDRESS_CONTACT", "DATE", "ITEM_DESC", "ITEM_PRICE/QTY", "SUBTOTAL", "TAX", "DISCOUNT", "GRAND_TOTAL", "CASH_PAYMENT", "OTHER"]
+      }
+    }
+    ```
+    
+    **12 Categories**:
+    - **STORE**: Store/business name
+    - **ADDRESS_CONTACT**: Address, phone, email, tax ID
+    - **DATE**: Date and/or time
+    - **ITEM_DESC**: Product/item names
+    - **ITEM_PRICE/QTY**: Item prices or quantities
+    - **SUBTOTAL**: Subtotal before tax/charges
+    - **TAX**: Tax, GST, VAT, PPN, SST
+    - **DISCOUNT**: Discounts, vouchers, promotions
+    - **SERVICE_CHARGE**: Service charges, tips
+    - **GRAND_TOTAL**: Final total amount
+    - **CASH_PAYMENT**: Cash paid, change given
+    - **OTHER**: Everything else (cashier, receipt number, footer, etc.)
+    
+    **Note**: Coordinate information (bbox) is not included in the response for cleaner output.
     """
     content_type = image.content_type or ""
     if "image/" not in content_type:

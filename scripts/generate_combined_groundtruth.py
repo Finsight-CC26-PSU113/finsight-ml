@@ -78,7 +78,9 @@ CROP_PAD_Y = 2
 
 VALID_LABELS = {
     'STORE', 'ADDRESS_CONTACT', 'DATE',
-    'ITEM_DESC', 'ITEM_PRICE/QTY', 'TOTAL_PAYMENT', 'OTHER'
+    'ITEM_DESC', 'ITEM_PRICE/QTY', 
+    'SUBTOTAL', 'TAX', 'DISCOUNT', 'SERVICE_CHARGE', 'GRAND_TOTAL',
+    'CASH_PAYMENT', 'OTHER'
 }
 
 CSV_FIELDS = [
@@ -96,20 +98,33 @@ CSV_FIELDS = [
 COMBINED_PROMPT = """You are an expert receipt analyzer with two tasks for EACH line:
 
 1. CORRECT the text (fix OCR errors by looking at the image)
-2. CLASSIFY the line into ONE of 7 categories
+2. CLASSIFY the line into ONE of 12 categories
 
 I will provide you:
 - A receipt image
 - EasyOCR-extracted lines (with line numbers and possibly errors)
 
-CATEGORIES:
+CATEGORIES (12 categories for better accuracy):
 - STORE: Store/business name (e.g., INDOMARET, WARUNG SARI, AEON)
 - ADDRESS_CONTACT: Address, phone, email, website, NPWP, GST/ROC number
 - DATE: Date AND/OR time in ANY format (e.g., 26-11-17, Mar 14 2025, 24/05/2026, 10:30:45, Tanggal 24 Mei 2026, Jam 14:30)
 - ITEM_DESC: Product/item name (e.g., Nasi Goreng, Indomie Goreng, Burger)
 - ITEM_PRICE/QTY: Item price OR quantity (e.g., Rp 25.000, 2 x 5000, @9.80, RM 8.50)
-- TOTAL_PAYMENT: Final/sub totals, tax, discount, cash, change (Total, Subtotal, Grand Total, PPN, Tax, Diskon, Tunai, Cash, Kembali)
+- SUBTOTAL: Subtotal before tax/service charge (Sub Total, Jumlah, Amount)
+- TAX: Tax, GST, VAT, PPN, SST (e.g., "GST 6%", "Tax RM 1.50", "PPN Rp 5.500")
+- DISCOUNT: Discounts, vouchers, promotions (e.g., "Member Discount", "Diskon Rp 10.000")
+- SERVICE_CHARGE: Service charges, tips (e.g., "Service Charge 10%", "Biaya Layanan")
+- GRAND_TOTAL: Final total amount after all adjustments (Total, Grand Total, Total Bayar, Total Amount)
+- CASH_PAYMENT: Cash paid, change given (Cash, Tunai, Change, Kembali, Kembalian)
 - OTHER: Anything else (cashier name, receipt number, transaction ID, table number, footer text, greetings)
+
+IMPORTANT DISTINCTIONS:
+- SUBTOTAL: Amount BEFORE tax/service charge (usually labeled "Sub Total", "Subtotal", "Jumlah")
+- TAX: Tax amount or percentage (GST, VAT, PPN, SST, Tax)
+- DISCOUNT: Any discount or promotion amount
+- SERVICE_CHARGE: Service fee or tip
+- GRAND_TOTAL: Final amount to pay AFTER all adjustments (usually labeled "Total", "Grand Total", "Total Amount")
+- CASH_PAYMENT: Payment-related (cash given, change returned)
 
 OCR ERROR FIXES (common):
 - O ↔ 0 (letter O vs digit 0)
@@ -130,19 +145,27 @@ EXAMPLE:
   {"line_num": 2, "text": "14 Mar 2025 10:30", "label": "DATE"},
   {"line_num": 3, "text": "Indomie Goreng", "label": "ITEM_DESC"},
   {"line_num": 4, "text": "Rp 3.500", "label": "ITEM_PRICE/QTY"},
-  {"line_num": 5, "text": "Total Rp 50.000", "label": "TOTAL_PAYMENT"}
+  {"line_num": 5, "text": "Sub Total", "label": "SUBTOTAL"},
+  {"line_num": 6, "text": "Rp 45.000", "label": "SUBTOTAL"},
+  {"line_num": 7, "text": "PPN 11%", "label": "TAX"},
+  {"line_num": 8, "text": "Rp 4.950", "label": "TAX"},
+  {"line_num": 9, "text": "Member Discount", "label": "DISCOUNT"},
+  {"line_num": 10, "text": "Rp 5.000", "label": "DISCOUNT"},
+  {"line_num": 11, "text": "Total Bayar", "label": "GRAND_TOTAL"},
+  {"line_num": 12, "text": "Rp 44.950", "label": "GRAND_TOTAL"}
 ]
 
 CRITICAL RULES:
 1. Output array MUST have EXACTLY same number of items as input
 2. Keep line order matching input
-3. Use ONLY the 7 categories listed (exact spelling, case-sensitive)
+3. Use ONLY the 12 categories listed (exact spelling, case-sensitive)
 4. If a line is unreadable noise, keep its original text and label as OTHER
 5. Do NOT merge or split lines
 6. In the "text" field, ESCAPE any double-quotes as \\" so JSON stays valid
 7. Do NOT include line breaks INSIDE a string value
 8. Replace any tab characters with a single space
 9. Return ONLY the JSON array, no markdown, no explanation, no surrounding text
+10. For lines with just numbers after a label, use the SAME category as the label (e.g., if "Sub Total" is SUBTOTAL, the next line with amount should also be SUBTOTAL)
 
 Here are the lines from EasyOCR (in reading order):
 """

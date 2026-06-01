@@ -36,12 +36,13 @@ class OCREngine:
             cls._instance = super().__new__(cls)
         return cls._instance
     
-    def __init__(self, languages: list[str] = None, gpu: bool = None):
+    def __init__(self, languages: list[str] = None, gpu: bool = None, model_path: str = None):
         """Initialize EasyOCR reader.
         
         Args:
             languages: List kode bahasa (default dari config).
             gpu: Gunakan GPU (default: auto-detect, fall back to CPU).
+            model_path: Path to fine-tuned model weights (optional).
         """
         if self._reader is not None:
             return  # Sudah diinisialisasi
@@ -66,13 +67,49 @@ class OCREngine:
         else:
             self._gpu = gpu
         
+        # Check for fine-tuned model
+        self._model_path = model_path
+        if model_path:
+            from pathlib import Path
+            if Path(model_path).exists():
+                print(f"[OCREngine] Loading fine-tuned EasyOCR model from {model_path}...")
+            else:
+                print(f"[OCREngine] Fine-tuned model not found at {model_path}, using default model")
+                self._model_path = None
+        
         print(f"[OCREngine] Loading EasyOCR model (languages={self._languages}, gpu={self._gpu})...")
         self._reader = easyocr.Reader(
             self._languages,
             gpu=self._gpu,
-            verbose=False
+            verbose=False,
+            model_storage_directory=None,  # Use default
+            download_enabled=True
         )
-        print("[OCREngine] Model loaded.")
+        
+        # Load fine-tuned weights if available
+        if self._model_path:
+            try:
+                import torch
+                print(f"[OCREngine] Loading fine-tuned weights...")
+                
+                # EasyOCR structure: reader.recognizer is a Model object
+                if hasattr(self._reader, 'recognizer'):
+                    recognizer_model = self._reader.recognizer
+                    
+                    # Load state dict
+                    state_dict = torch.load(self._model_path, map_location='cuda' if self._gpu else 'cpu')
+                    recognizer_model.load_state_dict(state_dict)
+                    recognizer_model.eval()
+                    
+                    print("[OCREngine] Fine-tuned model loaded successfully ✓")
+                else:
+                    print("[OCREngine] Could not access recognizer model")
+                    print("[OCREngine] Using default EasyOCR model")
+            except Exception as e:
+                print(f"[OCREngine] Failed to load fine-tuned model: {e}")
+                print("[OCREngine] Using default EasyOCR model")
+        else:
+            print("[OCREngine] Using default EasyOCR model")
     
     def read_receipt(self, image: np.ndarray, apply_post_processing: bool = True) -> list[dict]:
         """Baca teks dari gambar struk.

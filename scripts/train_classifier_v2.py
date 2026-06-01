@@ -186,15 +186,24 @@ def split_data(char_ids, text_features, pos_features, labels, df):
     return take(train_idx), take(val_idx), take(test_idx)
 
 
-def oversample_minorities(char_ids, text_features, pos_features, labels, target_ratio=0.5):
+def oversample_minorities(char_ids, text_features, pos_features, labels, target_ratio=0.8):
     """Duplicate minority classes to balance training data.
     
     target_ratio: minority class size = target_ratio * majority class size.
+    Default increased to 0.8 for better minority class performance.
     """
     label_idx = np.argmax(labels, axis=1)
     counts = np.bincount(label_idx, minlength=NUM_CLASSES)
     max_count = counts.max()
     target = int(max_count * target_ratio)
+    
+    # Extra boost for critical classes (GRAND_TOTAL, SUBTOTAL, SERVICE_CHARGE)
+    label_to_idx = {v: k for k, v in LINE_CLASSES.items()}
+    critical_classes = [
+        label_to_idx.get('GRAND_TOTAL', -1),
+        label_to_idx.get('SUBTOTAL', -1),
+        label_to_idx.get('SERVICE_CHARGE', -1),
+    ]
     
     new_idx = []
     for c in range(NUM_CLASSES):
@@ -202,8 +211,15 @@ def oversample_minorities(char_ids, text_features, pos_features, labels, target_
         if len(cls_idx) == 0:
             continue
         new_idx.append(cls_idx)
-        if len(cls_idx) < target:
-            need = target - len(cls_idx)
+        
+        # Calculate target for this class
+        class_target = target
+        # Extra boost for critical classes: 1.2x target
+        if c in critical_classes:
+            class_target = int(target * 1.2)
+        
+        if len(cls_idx) < class_target:
+            need = class_target - len(cls_idx)
             sampled = np.random.choice(cls_idx, size=need, replace=True)
             new_idx.append(sampled)
     
@@ -218,7 +234,7 @@ def oversample_minorities(char_ids, text_features, pos_features, labels, target_
 # ============================================================
 
 def train(train_data, val_data, epochs: int, batch_size: int, lr: float):
-    """Train the model with early stopping and class weights."""
+    """Train the model with early stopping and enhanced class weights for totals."""
     (train_chars, train_tf, train_pf), train_labels = train_data
     (val_chars, val_tf, val_pf), val_labels = val_data
     
@@ -228,9 +244,28 @@ def train(train_data, val_data, epochs: int, batch_size: int, lr: float):
     alpha = total / (NUM_CLASSES * (counts + 1))
     alpha = alpha / alpha.sum() * NUM_CLASSES
     
-    print("\n🎯 Class weights (focal alpha):")
+    # BOOST critical classes (GRAND_TOTAL, SUBTOTAL, SERVICE_CHARGE) by 2.5x
+    label_to_idx = {v: k for k, v in LINE_CLASSES.items()}
+    critical_boost = {
+        'GRAND_TOTAL': 2.5,
+        'SUBTOTAL': 2.5,
+        'SERVICE_CHARGE': 2.0,
+        'TAX': 1.5,
+        'DISCOUNT': 1.5,
+    }
+    
+    for class_name, boost_factor in critical_boost.items():
+        idx = label_to_idx.get(class_name, -1)
+        if idx >= 0:
+            alpha[idx] *= boost_factor
+    
+    # Renormalize
+    alpha = alpha / alpha.sum() * NUM_CLASSES
+    
+    print("\n🎯 Class weights (focal alpha with critical boost):")
     for i, w in enumerate(alpha):
-        print(f"   {LINE_CLASSES[i]:>16s}: {w:.4f}")
+        boost_marker = " ⭐" if LINE_CLASSES[i] in critical_boost else ""
+        print(f"   {LINE_CLASSES[i]:>16s}: {w:.4f}{boost_marker}")
     
     # Build model
     print("\n🧠 Building model...")
@@ -278,7 +313,7 @@ def train(train_data, val_data, epochs: int, batch_size: int, lr: float):
         ),
         tf.keras.callbacks.EarlyStopping(
             monitor='val_accuracy',
-            patience=10,
+            patience=15,  # Increased patience for more epochs
             mode='max',
             restore_best_weights=True,
             verbose=1
@@ -286,7 +321,7 @@ def train(train_data, val_data, epochs: int, batch_size: int, lr: float):
         tf.keras.callbacks.ReduceLROnPlateau(
             monitor='val_loss',
             factor=0.5,
-            patience=4,
+            patience=5,  # Increased patience
             min_lr=1e-6,
             verbose=1
         ),
@@ -294,6 +329,7 @@ def train(train_data, val_data, epochs: int, batch_size: int, lr: float):
     ]
     
     print(f"\n🚀 Training... ({epochs} epochs, batch {batch_size}, lr {lr})")
+    print(f"   Strategy: Oversampling 0.8 + Critical class boost (GRAND_TOTAL, SUBTOTAL)")
     print(f"   Logs: {log_dir}")
     print(f"   Best weights: {weights_path}\n")
     
@@ -354,7 +390,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--csv', type=str, default=None,
                         help='Path to labels CSV (default: data/classification_groundtruth/labels.csv)')
-    parser.add_argument('--epochs', type=int, default=EPOCHS)
+    parser.add_argument('--epochs', type=int, default=100,
+                        help='Number of training epochs (default: 100)')
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE)
     parser.add_argument('--lr', type=float, default=LEARNING_RATE)
     parser.add_argument('--no-oversample', action='store_true', help='Skip oversampling')
@@ -383,7 +420,14 @@ def main():
         sys.exit(1)
     
     print("=" * 65)
-    print("🏷️  Receipt Line Classifier V2 — Training")
+    print("🏷️  Receipt Line Classifier V2 — Training (Focus: GRAND_TOTAL)")
+    print("=" * 65)
+    print("📊 Strategy:")
+    print("   • Oversampling ratio: 0.8 (up from 0.5)")
+    print("   • Critical class boost: GRAND_TOTAL (2.5x), SUBTOTAL (2.5x)")
+    print("   • Extra boost: SERVICE_CHARGE (2.0x), TAX (1.5x), DISCOUNT (1.5x)")
+    print("   • Epochs: 100 (up from 80)")
+    print("   • Early stopping patience: 15")
     print("=" * 65)
     
     # Load data
