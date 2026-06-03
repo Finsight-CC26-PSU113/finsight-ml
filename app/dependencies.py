@@ -4,7 +4,7 @@ Singleton model instances loaded once at startup.
 """
 
 from typing import Optional
-from app.config import ROOT_DIR, MAX_TEXT_LENGTH
+from app.config import ROOT_DIR, MAX_TEXT_LENGTH, FINETUNED_EASYOCR_PATH
 
 _ocr_engine = None
 _classifier = None
@@ -17,15 +17,21 @@ async def startup_models():
 
     from app.services.ocr import OCREngine
     from app.services.extractor import ReceiptExtractor
-    from app.services.classifier import ReceiptLineClassifier
+    from app.services.classifier import ReceiptLineClassifier, load_v2_weights
 
     print("=" * 50)
     print("OCR FinSight API — Starting up")
     print("=" * 50)
 
     print("[1/3] Loading EasyOCR...")
-    _ocr_engine = OCREngine()
-    print("      EasyOCR ready")
+    if FINETUNED_EASYOCR_PATH.exists():
+        _ocr_engine = OCREngine(model_path=str(FINETUNED_EASYOCR_PATH))
+    else:
+        _ocr_engine = OCREngine()
+    if getattr(_ocr_engine, 'finetuned_loaded', False):
+        print("      EasyOCR ready (fine-tuned: 62.89% exact match, 13.12% CER)")
+    else:
+        print("      EasyOCR ready (default model)")
 
     print("[2/3] Loading Classifier V2...")
     try:
@@ -38,10 +44,10 @@ async def startup_models():
             tf.zeros((1, 5), dtype=tf.float32),
         )
         model(dummy, training=False)
-        model.load_weights(str(v2_weights))
+        load_v2_weights(model, str(v2_weights))
         model._is_v2 = True
         _classifier = model
-        print("      Classifier V2 ready (85% acc, DATE recall 96%)")
+        print("      Classifier V2 ready (12 categories, 82.31% accuracy)")
     except Exception as e:
         print(f"      V2 failed ({e}), trying V1 fallback...")
         try:
