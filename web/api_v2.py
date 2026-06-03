@@ -28,10 +28,12 @@ from fastapi.templating import Jinja2Templates
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.config import ROOT_DIR, LINE_CLASSES, MAX_TEXT_LENGTH
+from src.config import ROOT_DIR, LINE_CLASSES, MAX_TEXT_LENGTH, CONTEXT_WINDOW, OCR_GPU
 from src.preprocessing import preprocess_for_easyocr
-from src.ocr_engine import OCREngine
+from src.ocr_engine_paddle import PaddleOCREngine as OCREngine
+OCR_ENGINE_TYPE = "PaddleOCR"
 from src.extractor import ReceiptExtractor
+from src.model_v4_context import ContextAwareClassifier
 
 # ============================================================
 # App setup
@@ -77,44 +79,73 @@ async def startup():
     print("🧾 OCR FinSight API v2.1 — Starting up")
     print("=" * 55)
 
-    # 1. OCR Engine (with fine-tuned model if available)
-    print("📦 Loading EasyOCR...")
-    finetuned_path = ROOT_DIR / "models" / "finetuned_easyocr" / "best_model.pth"
-    if finetuned_path.exists():
-        print(f"   Found fine-tuned model: {finetuned_path}")
-        ocr_engine = OCREngine(model_path=str(finetuned_path))
-    else:
-        print("   Using default EasyOCR model")
-        ocr_engine = OCREngine()
-    print("✅ EasyOCR ready")
+    # 1. OCR Engine (PaddleOCR only)
+    print(f"📦 Loading PaddleOCR...")
+    ocr_engine = OCREngine(lang='en', gpu=OCR_GPU)  # 'en' works for Indonesia receipts too
+    print("✅ PaddleOCR ready")
 
-    # 2. Classifier V2 (12 categories)
-    print("📦 Loading Classifier V2...")
+    # 2. Classifier (try V4 context > V3 > V2, fallback to V1)
+    print("📦 Loading Classifier...")
     try:
         import tensorflow as tf
         from src.model import ReceiptLineClassifier
 
-        v2_weights = ROOT_DIR / "models" / "classifier_v2" / "best_weights.weights.h5"
-        if not v2_weights.exists():
-            raise FileNotFoundError(f"Classifier V2 weights not found: {v2_weights}")
+        # Try models in priority: V5 (Indonesia, ±4 context) > V4 (±2 context) > V3 > V2
+        model_versions = [
+            (ROOT_DIR / "models" / "classifier_v5_indonesia" / "best_weights.weights.h5", "V5", "Indonesia-only ±4 context (86.26% acc)", True, 4),
+            (ROOT_DIR / "models" / "classifier_v4_context" / "best_weights.weights.h5", "V4", "context-aware ±2", True, 2),
+            (ROOT_DIR / "models" / "classifier_v3" / "best_weights.weights.h5", "V3", "improved training config", False, None),
+            (ROOT_DIR / "models" / "classifier_v2" / "best_weights.weights.h5", "V2", "baseline 12 categories", False, None),
+        ]
+        
+        loaded = False
+        for weights_path, version, desc, is_context_model, context_window in model_versions:
+            if weights_path.exists():
+                try:
+                    print(f"   Trying Classifier {version} ({desc})...")
+                    
+                    if is_context_model:
+                        # V4/V5 use context-aware architecture (5 inputs)
+                        model = ContextAwareClassifier(context_window=context_window)
+                        
+                        dummy_chars = tf.zeros((1, MAX_TEXT_LENGTH), dtype=tf.int32)
+                        dummy_tf = tf.zeros((1, 10), dtype=tf.float32)
+                        dummy_pf = tf.zeros((1, 5), dtype=tf.float32)
+                        dummy_context_chars = tf.zeros((1, context_window * 2 * 20), dtype=tf.int32)
+                        dummy_context_text = tf.zeros((1, context_window * 2 * 5), dtype=tf.float32)
+                        _ = model((dummy_chars, dummy_tf, dummy_pf, dummy_context_chars, dummy_context_text), training=False)
+                    else:
+                        # V2/V3 use standard architecture (3 inputs)
+                        model = ReceiptLineClassifier()
+                        
+                        dummy_chars = tf.zeros((1, MAX_TEXT_LENGTH), dtype=tf.int32)
+                        dummy_tf = tf.zeros((1, 10), dtype=tf.float32)
+                        dummy_pf = tf.zeros((1, 5), dtype=tf.float32)
+                        _ = model((dummy_chars, dummy_tf, dummy_pf), training=False)
+
+                    model.load_weights(str(weights_path))
+                    model._is_v2 = True
+                    model._version = version
+                    model._is_context_model = is_context_model
+                    model._context_window = context_window if is_context_model else None
+                    classifier = model
+                    print(f"✅ Classifier {version} loaded - {desc}")
+                    loaded = True
+                    break
+                except Exception as e:
+                    print(f"   ⚠️ {version} failed: {e}")
+                    continue
+        
+        if not loaded:
+            raise Exception("No V2+ model available")
             
-        model = ReceiptLineClassifier()
-
-        dummy_chars = tf.zeros((1, MAX_TEXT_LENGTH), dtype=tf.int32)
-        dummy_tf = tf.zeros((1, 10), dtype=tf.float32)
-        dummy_pf = tf.zeros((1, 5), dtype=tf.float32)
-        _ = model((dummy_chars, dummy_tf, dummy_pf), training=False)
-
-        model.load_weights(str(v2_weights))
-        model._is_v2 = True
-        classifier = model
-        print("✅ Classifier V2 loaded (12 categories, 82.45% test accuracy)")
     except Exception as e:
-        print(f"⚠️  Classifier V2 failed: {e}")
+        print(f"⚠️  All V2+ models failed: {e}")
         try:
             from src.online_learning import OnlineLearningModel
             classifier = OnlineLearningModel()
             classifier._is_v2 = False
+            classifier._version = "V1"
             print("✅ Classifier V1 loaded (fallback)")
         except Exception as e2:
             print(f"❌ No classifier available: {e2}")
@@ -124,9 +155,24 @@ async def startup():
     extractor = ReceiptExtractor()
     print("✅ Extractor ready")
     
+    # Summary
     print("\n📊 Model Summary:")
-    print(f"   OCR: {'Fine-tuned EasyOCR (62.89% exact match, 13.12% CER)' if finetuned_path.exists() else 'Default EasyOCR'}")
-    print(f"   Classifier: {'V2 (12 categories, 82.45% accuracy)' if (classifier and getattr(classifier, '_is_v2', False)) else 'V1 (fallback)'}")
+    print(f"   OCR: PaddleOCR (2-3x faster, state-of-the-art accuracy)")
+    
+    # Classifier summary
+    classifier_version = getattr(classifier, '_version', 'V1') if classifier else 'None'
+    is_context = getattr(classifier, '_is_context_model', False)
+    context_window = getattr(classifier, '_context_window', None)
+    
+    if classifier_version == "V5":
+        print(f"   Classifier: V5 (Indonesia-only, ±{context_window} context, 86.26% acc)")
+    elif classifier_version == "V4":
+        print(f"   Classifier: V4 (±{context_window} context)")
+    elif classifier and getattr(classifier, '_is_v2', False):
+        print(f"   Classifier: {classifier_version} (12 categories)")
+    else:
+        print(f"   Classifier: {classifier_version} (fallback)")
+    
     print(f"   Extractor: Enhanced with smart validation")
     
     print("\n🌐 Web UI    : http://localhost:8000/")
@@ -176,8 +222,43 @@ def _char_ids(text: str, max_len: int = MAX_TEXT_LENGTH) -> list[int]:
     return ids + [0] * (max_len - len(ids))
 
 
+def _generate_context_features(lines: list[dict], context_window: int = CONTEXT_WINDOW) -> tuple[list, list]:
+    """Generate context features from neighboring lines for V4 context model.
+    
+    Returns:
+        (context_chars_list, context_text_list)
+    """
+    n_lines = len(lines)
+    context_chars_list = []
+    context_text_list = []
+    
+    for i in range(n_lines):
+        context_chars = []
+        context_text = []
+        
+        # Look at context_window lines before and after
+        for offset in range(-context_window, context_window + 1):
+            if offset == 0:
+                continue  # Skip current line
+            
+            ctx_idx = i + offset
+            if 0 <= ctx_idx < n_lines:
+                ctx_text = lines[ctx_idx].get('text', '')
+                context_chars.extend(_char_ids(ctx_text, max_len=20))  # First 20 chars
+                context_text.extend(_text_feats(ctx_text)[:5])  # First 5 features
+            else:
+                # Padding for out-of-bounds
+                context_chars.extend([0] * 20)
+                context_text.extend([0.0] * 5)
+        
+        context_chars_list.append(context_chars)
+        context_text_list.append(context_text)
+    
+    return context_chars_list, context_text_list
+
+
 def _predict_with_v2(model, lines: list[dict]) -> tuple[list[str], list[float]]:
-    """Predict labels using classifier V2 (batch inference)."""
+    """Predict labels using classifier V2/V3 (batch inference)."""
     n = len(lines)
     chars = np.array([_char_ids(l.get('text', '')) for l in lines], dtype=np.int32)
     tfeats = np.array([_text_feats(l.get('text', '')) for l in lines], dtype=np.float32)
@@ -189,6 +270,33 @@ def _predict_with_v2(model, lines: list[dict]) -> tuple[list[str], list[float]]:
     ], dtype=np.float32)
 
     preds = model((chars, tfeats, pfeats), training=False).numpy()
+    pred_idx = np.argmax(preds, axis=1)
+    confs = np.max(preds, axis=1)
+    labels = [LINE_CLASSES[int(idx)] for idx in pred_idx]
+    return labels, [float(c) for c in confs]
+
+
+def _predict_with_v4_context(model, lines: list[dict]) -> tuple[list[str], list[float]]:
+    """Predict labels using classifier V4/V5 context (batch inference with context)."""
+    # Get context window from model (V4=2, V5=4)
+    context_window = getattr(model, '_context_window', 2)
+    
+    n = len(lines)
+    chars = np.array([_char_ids(l.get('text', '')) for l in lines], dtype=np.int32)
+    tfeats = np.array([_text_feats(l.get('text', '')) for l in lines], dtype=np.float32)
+    pfeats = np.array([
+        [float(l.get('y_center', 0.5)), float(l.get('x_center', 0.5)),
+         float(l.get('width', 0.1)), float(l.get('height', 0.05)),
+         float(i) / max(n, 1)]
+        for i, l in enumerate(lines)
+    ], dtype=np.float32)
+    
+    # Generate context features with the correct window
+    context_chars_list, context_text_list = _generate_context_features(lines, context_window)
+    context_chars = np.array(context_chars_list, dtype=np.int32)
+    context_text = np.array(context_text_list, dtype=np.float32)
+
+    preds = model((chars, tfeats, pfeats, context_chars, context_text), training=False).numpy()
     pred_idx = np.argmax(preds, axis=1)
     confs = np.max(preds, axis=1)
     labels = [LINE_CLASSES[int(idx)] for idx in pred_idx]
@@ -234,10 +342,15 @@ async def _run_pipeline(image_bytes: bytes) -> dict:
     if classifier:
         try:
             is_v2 = getattr(classifier, '_is_v2', False)
-            if is_v2:
+            is_context_model = getattr(classifier, '_is_context_model', False)
+            
+            if is_context_model:
+                labels, confs = _predict_with_v4_context(classifier, lines)
+            elif is_v2:
                 labels, confs = _predict_with_v2(classifier, lines)
             else:
                 labels, confs = classifier.predict(lines)
+                
             for line, label, conf in zip(lines, labels, confs):
                 lc = dict(line)
                 lc['predicted_class'] = label
@@ -261,38 +374,28 @@ async def _run_pipeline(image_bytes: bytes) -> dict:
     
     # Totals breakdown
     totals = extracted.get('totals', {})
-
-    # Calculate items total
-    items_total = sum(it['price'] * it['qty'] for it in items_struct)
     
+    # DEBUG: Show what was classified as GRAND_TOTAL
+    grand_total_lines = [l for l in classified_lines if l.get('predicted_class') == 'GRAND_TOTAL']
+    if grand_total_lines:
+        print(f"[DEBUG] GRAND_TOTAL classified lines:")
+        for l in grand_total_lines:
+            print(f"  - '{l['text']}' (confidence: {l.get('class_confidence', 0):.2f})")
+    
+    # Simple format response
     return {
         "success": True,
-        "receipt": {
-            "store_name": extracted.get('store', ''),
-            "date": extracted.get('date', ''),
-            "address": extracted.get('address', ''),
-        },
+        "store": extracted.get('store', ''),
+        "date": extracted.get('date', ''),
         "items": [
             {
-                "name": it['name'],
-                "quantity": it['qty'],
-                "unit_price": it['price'],
-                "total_price": round(it['price'] * it['qty'], 2)
+                "name": item['name'],
+                "qty": item['qty'],
+                "price": float(item['price'])
             }
-            for it in items_struct
+            for item in items_struct
         ],
-        "financial_summary": {
-            "items_total": round(items_total, 2),
-            "subtotal": round(totals.get('subtotal', 0.0), 2),
-            "tax": round(totals.get('tax', 0.0), 2),
-            "discount": round(totals.get('discount', 0.0), 2),
-            "service_charge": round(totals.get('service_charge', 0.0), 2),
-            "grand_total": round(totals.get('grand_total', 0.0), 2),
-            "payment": {
-                "cash_paid": round(totals.get('cash', 0.0), 2),
-                "change": round(totals.get('change', 0.0), 2),
-            }
-        }
+        "total": float(totals.get('grand_total', 0.0) or extracted.get('total', 0.0))
     }
 
 
@@ -309,22 +412,36 @@ async def home(request: Request):
 @app.get("/api/health")
 async def health():
     """Health check — returns model status."""
-    finetuned_path = ROOT_DIR / "models" / "finetuned_easyocr" / "best_model.pth"
+    classifier_version = getattr(classifier, '_version', 'V1') if classifier else None
+    is_v2_plus = classifier and getattr(classifier, '_is_v2', False)
+    is_context = getattr(classifier, '_is_context_model', False)
+    context_window = getattr(classifier, '_context_window', None)
+    
+    classifier_metrics = None
+    if is_v2_plus:
+        classifier_metrics = {
+            "num_categories": 12,
+            "architecture": f"context-aware (±{context_window} lines)" if is_context else "standard"
+        }
+        if classifier_version == "V5":
+            classifier_metrics["accuracy"] = 86.26
+            classifier_metrics["grand_total_accuracy"] = 82.65
+            classifier_metrics["dataset"] = "Indonesia-only"
+    
     return {
         "status": "ok",
         "models": {
             "ocr": ocr_engine is not None,
-            "ocr_version": "fine-tuned" if finetuned_path.exists() else "default",
+            "ocr_version": "PaddleOCR",
             "ocr_metrics": {
-                "exact_match_accuracy": 62.89,
-                "character_error_rate": 13.12
-            } if finetuned_path.exists() else None,
+                "engine": "PaddleOCR",
+                "speed": "2-3x faster than EasyOCR",
+                "accuracy": "State-of-the-art for receipts",
+                "languages": "80+ supported"
+            },
             "classifier": classifier is not None,
-            "classifier_version": "v2" if (classifier and getattr(classifier, '_is_v2', False)) else "v1",
-            "classifier_metrics": {
-                "test_accuracy": 82.45,
-                "num_categories": 12
-            } if (classifier and getattr(classifier, '_is_v2', False)) else None,
+            "classifier_version": classifier_version,
+            "classifier_metrics": classifier_metrics,
             "extractor": extractor is not None,
         }
     }
@@ -333,95 +450,36 @@ async def health():
 @app.post("/api/predict")
 async def predict(image: UploadFile = File(..., description="Receipt image (JPG, PNG, WEBP)")):
     """
-    Complete OCR pipeline with clean structured output.
+    Complete OCR pipeline with simple structured output.
     
-    **Pipeline**: Image → Preprocessing → OCR → Classification (12 categories) → Extraction
+    **Pipeline**: Image → Preprocessing → OCR → Classification (V4 Context-Aware, 12 categories) → Extraction
     
     **Returns**:
     ```json
     {
       "success": true,
-      "receipt": {
-        "store_name": "INDOMARET",
-        "date": "2026-06-01 14:30",
-        "address": "Jl. Sudirman No. 123, Jakarta"
-      },
+      "store": "Kopi Nako Summarecon Bekasi",
+      "date": "Jun 18, 2023",
       "items": [
         {
-          "name": "Indomie Goreng",
-          "quantity": 2,
-          "unit_price": 3500.0,
-          "total_price": 7000.0
+          "name": "Iced Matcha Latte",
+          "qty": 1,
+          "price": 29000.0
         },
         {
-          "name": "Aqua 600ml",
-          "quantity": 1,
-          "unit_price": 3000.0,
-          "total_price": 3000.0
+          "name": "Kahlua Kopi",
+          "qty": 1,
+          "price": 27000.0
         }
       ],
-      "financial_summary": {
-        "items_total": 10000.0,
-        "subtotal": 10000.0,
-        "tax": 1100.0,
-        "discount": 500.0,
-        "service_charge": 0.0,
-        "grand_total": 10600.0,
-        "payment": {
-          "cash_paid": 15000.0,
-          "change": 4400.0
-        }
-      },
-      "lines_by_category": {
-        "STORE": [
-          {"text": "INDOMARET", "confidence": 0.95, "ocr_confidence": 0.98}
-        ],
-        "DATE": [
-          {"text": "01/06/2026 14:30", "confidence": 0.99, "ocr_confidence": 0.97}
-        ],
-        "ITEM_DESC": [
-          {"text": "Indomie Goreng", "confidence": 0.91, "ocr_confidence": 0.96},
-          {"text": "Aqua 600ml", "confidence": 0.89, "ocr_confidence": 0.95}
-        ],
-        "TAX": [
-          {"text": "PPN 11%", "confidence": 0.84, "ocr_confidence": 0.92},
-          {"text": "Rp 1.100", "confidence": 0.82, "ocr_confidence": 0.99}
-        ],
-        "DISCOUNT": [
-          {"text": "Member Discount", "confidence": 0.87, "ocr_confidence": 0.94},
-          {"text": "Rp 500", "confidence": 0.85, "ocr_confidence": 0.98}
-        ],
-        "GRAND_TOTAL": [
-          {"text": "Total Bayar", "confidence": 0.93, "ocr_confidence": 0.96},
-          {"text": "Rp 10.600", "confidence": 0.91, "ocr_confidence": 0.99}
-        ]
-      },
-      "metadata": {
-        "total_lines": 45,
-        "total_items": 2,
-        "avg_classification_confidence": 85.2,
-        "avg_ocr_confidence": 96.5,
-        "classifier_version": "v2_12_categories",
-        "categories_detected": ["STORE", "ADDRESS_CONTACT", "DATE", "ITEM_DESC", "ITEM_PRICE/QTY", "SUBTOTAL", "TAX", "DISCOUNT", "GRAND_TOTAL", "CASH_PAYMENT", "OTHER"]
-      }
+      "total": 169400.0
     }
     ```
     
-    **12 Categories**:
-    - **STORE**: Store/business name
-    - **ADDRESS_CONTACT**: Address, phone, email, tax ID
-    - **DATE**: Date and/or time
-    - **ITEM_DESC**: Product/item names
-    - **ITEM_PRICE/QTY**: Item prices or quantities
-    - **SUBTOTAL**: Subtotal before tax/charges
-    - **TAX**: Tax, GST, VAT, PPN, SST
-    - **DISCOUNT**: Discounts, vouchers, promotions
-    - **SERVICE_CHARGE**: Service charges, tips
-    - **GRAND_TOTAL**: Final total amount
-    - **CASH_PAYMENT**: Cash paid, change given
-    - **OTHER**: Everything else (cashier, receipt number, footer, etc.)
-    
-    **Note**: Coordinate information (bbox) is not included in the response for cleaner output.
+    **12 Categories** (used internally for better extraction):
+    - STORE, ADDRESS_CONTACT, DATE, ITEM_DESC, ITEM_PRICE/QTY
+    - SUBTOTAL, TAX, DISCOUNT, SERVICE_CHARGE, GRAND_TOTAL
+    - CASH_PAYMENT, OTHER
     """
     content_type = image.content_type or ""
     if "image/" not in content_type:
@@ -429,12 +487,6 @@ async def predict(image: UploadFile = File(..., description="Receipt image (JPG,
 
     image_bytes = await image.read()
     return await _run_pipeline(image_bytes)
-
-
-# Alias for backward compatibility
-@app.post("/api/scan")
-async def scan(image: UploadFile = File(..., description="Receipt image (alias of /api/predict)")):
-    return await predict(image)
 
 
 # ============================================================

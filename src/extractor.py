@@ -7,13 +7,15 @@ import re
 import numpy as np
 from typing import Optional
 from src.text_cleaner import OCRTextCleaner
+from src.classifier_corrector import ClassifierCorrector
 
 
 class ReceiptExtractor:
     """Extract structured data dari baris OCR yang sudah di-classify."""
     
-    def __init__(self):
+    def __init__(self, use_corrector: bool = True):
         self.cleaner = OCRTextCleaner()
+        self.corrector = ClassifierCorrector() if use_corrector else None
     
     def extract(self, classified_lines: list[dict]) -> dict:
         """Extract semua field dari classified lines.
@@ -24,6 +26,10 @@ class ReceiptExtractor:
         Returns:
             Dict berisi: store, date, items, total, raw_lines
         """
+        # Apply rule-based corrections FIRST to fix classifier errors
+        if self.corrector:
+            classified_lines = self.corrector.correct(classified_lines)
+        
         # Perform context-aware correction & cascading on classified lines
         # NOTE: 'cash' diganti dengan boundary regex agar tidak match "cashier",
         # 'change' juga di-boundary agar tidak match kata lain yang kebetulan mengandungnya.
@@ -309,15 +315,18 @@ class ReceiptExtractor:
             'receipt', 'struk', 'bill', 'invoice', 'transaction', 'transaksi', 'trx',
             'order', 'pesanan', 'no.', 'ref', 'reference',
             'tender', 'payment', 'pembayaran', 'cash', 'tunai', 'card', 'credit',
-            'debit', 'change', 'kembali', 'kembalian',
+            'debit', 'change', 'kembali', 'kembalian', 'bayar', 'dibayar', 'bayar dengan',
+            'tagihan', 'tagih', 'charged', 'due',  # Added: tagihan-related
             'discount', 'diskon', 'potongan', 'promo', 'voucher', 'coupon',
-            'service charge', 'tax', 'pajak', 'gst', 'vat', 'ppn',
-            'total', 'subtotal', 'grand total', 'amount', 'jumlah',
+            'service charge', 'tax', 'pajak', 'gst', 'vat', 'ppn', 'pb1',
+            'total', 'subtotal', 'grand total', 'amount', 'jumlah', 'jml',
+            'harga jual', 'harga', 'total item', 'total qty',
+            'rounding', 'pembulatan', 'adjust', 'penyesuaian',  # Added: rounding-related
             'point', 'points', 'reward', 'saving', 'hemat', 'earned',
             'thank', 'terima', 'kasih', 'welcome', 'selamat', 'datang',
             'please', 'silakan', 'come again', 'visit',
             'goods', 'barang', 'product', 'produk',
-            'reg', 'register', 'void', 'cancel', 'refund', 'return',
+            'reg', 'register', 'void', 'cancel', 'refund', 'return', 'retur',
             'open', 'close', 'shift', 'balance', 'saldo',
             'jl.', 'jalan', 'jl ', 'tel:', 'telp', 'phone', 'fax', 'email',
             'www.', '.com', 'website',
@@ -616,13 +625,28 @@ class ReceiptExtractor:
                 'subtotal', 'sub total', 'sub-total', 'jumlah', 'sub ttl', 'sub.total',
                 'amount', 'amt', 'jml'
             ])
+            
+            # CRITICAL: "Total Tagihan" (GRAND_TOTAL) vs "Total Bayar" (CASH_PAYMENT)
+            # "Tagihan" means "bill/charge" → GRAND_TOTAL
+            # "Bayar" with "Total" means "payment amount" → CASH_PAYMENT
+            # Priority keywords (most specific first):
             is_grand_total_kw = any(k in text_lower for k in [
-                'grand total', 'total bayar', 'total amount', 'total pembayaran',
-                'total akhir', 'total belanja', 'total tagihan', 'nett total', 'net total',
-                'total hrg', 'total harga', 'ttl bayar', 'ttl amount', 'ttl pembayaran',
-                'jumlah bayar', 'jml bayar', 'amount due', 'balance due',
-                'total due', 'total', 'ttl', 'tota1'  # OCR typo: l→1
+                'total tagihan', 'tagihan', 'grand total', 'nett total', 'net total',
+                'total akhir', 'total belanja', 'total amount', 'total hrg', 'total harga',
+                'amount due', 'balance due', 'total due', 
+                'ttl tagihan', 'jumlah tagihan'
             ])
+            
+            # Generic "total" keyword - ONLY if no "bayar"/"tunai" word nearby
+            # This prevents "Total Bayar" from being detected as GRAND_TOTAL
+            is_generic_total_kw = (
+                ('total' in text_lower or 'ttl' in text_lower or 'tota1' in text_lower)
+                and not any(pay_word in text_lower for pay_word in ['bayar', 'tunai', 'cash', 'paid', 'payment', 'tender'])
+            )
+            
+            # Combine both
+            is_grand_total_kw = is_grand_total_kw or is_generic_total_kw
+            
             is_tax_kw = any(k in text_lower for k in [
                 'tax', 'pajak', 'ppn', 'gst', 'vat', 'pb1', 'sst',
                 'add gst', 'add tax', 'gst/tax', 'tax/gst', 'cukai',
@@ -638,11 +662,12 @@ class ReceiptExtractor:
                 'svc charge', 'svc chg', 'srv charge'
             ])
             is_cash_kw = any(k in text_lower for k in [
-                'cash', 'tunai', 'paid', 'jumlah bayar', 'bayar', 'payment',
-                'tender', 'received', 'terima'
+                'total bayar', 'bayar', 'dibayar', 'dibayarkan',  # Added: total bayar is CASH
+                'cash', 'tunai', 'paid', 'jumlah bayar', 'payment',
+                'tender', 'received', 'terima', 'uang diterima'
             ])
             is_change_kw = any(k in text_lower for k in [
-                'change', 'kembali', 'kembalian', 'balance', 'return'
+                'change', 'kembali', 'kembalian', 'balance', 'return', 'uang kembali'
             ])
             
             for num_str in numbers:
@@ -694,20 +719,39 @@ class ReceiptExtractor:
         if discount_candidates:
             totals['discount'] = max(discount_candidates)
         if tax_candidates:
-            # Validate tax: should be reasonable (< 30% of subtotal if subtotal exists)
+            # Validate tax: should be reasonable
+            # Tax typically 5-20%, max 100% in extreme cases
+            # If tax > items_sum, it's likely misclassified (e.g., grand_total misclassified as tax)
             tax_val = max(tax_candidates)
-            if totals['subtotal'] > 0:
-                if tax_val > totals['subtotal'] * 0.3:
-                    # Tax too large, likely misclassified - skip it
-                    pass
+            items_sum_for_validation = sum(item_prices) if item_prices else 0
+            
+            if items_sum_for_validation > 0:
+                # Tax should be <= items_sum (100% tax is already extreme!)
+                if tax_val <= items_sum_for_validation:
+                    totals['tax'] = tax_val
                 else:
+                    print(f"[extractor] ⚠️  Ignoring tax={tax_val:.2f} (> items_sum {items_sum_for_validation:.2f}, likely misclassified)")
+            elif totals['subtotal'] > 0:
+                # Fallback: use subtotal if no items
+                if tax_val <= totals['subtotal']:
                     totals['tax'] = tax_val
             else:
-                # No subtotal yet, accept tax if < 100k (reasonable for most receipts)
+                # No validation possible, accept if reasonable
                 if tax_val < 100000:
                     totals['tax'] = tax_val
         if service_charge_candidates:
-            totals['service_charge'] = max(service_charge_candidates)
+            # Same validation for service charge
+            service_val = max(service_charge_candidates)
+            items_sum_for_validation = sum(item_prices) if item_prices else 0
+            
+            if items_sum_for_validation > 0:
+                if service_val <= items_sum_for_validation:
+                    totals['service_charge'] = service_val
+                else:
+                    print(f"[extractor] ⚠️  Ignoring service={service_val:.2f} (> items_sum {items_sum_for_validation:.2f}, likely misclassified)")
+            else:
+                totals['service_charge'] = service_val
+
         if cash_candidates:
             totals['cash'] = max(cash_candidates)
         if change_candidates:
@@ -816,6 +860,29 @@ class ReceiptExtractor:
                         totals['grand_total'] = largest
                 else:
                     totals['grand_total'] = largest
+        
+        # NO VALIDATION - FULL TRUST OCR + Classifier V4
+        # Return whatever was detected, no calculation fallback
+        
+        if item_prices:
+            items_sum = sum(item_prices)
+            print(f"[extractor] Items: {len(item_prices)} items, sum={items_sum:.2f}")
+            print(f"[extractor] OCR Result: grand_total={totals['grand_total']:.2f}, subtotal={totals['subtotal']:.2f}")
+            print(f"[extractor] OCR Result: tax={totals['tax']:.2f}, service={totals['service_charge']:.2f}, discount={totals['discount']:.2f}")
+        
+        # ONLY calculate if grand_total is completely missing (0.0)
+        if totals['grand_total'] == 0.0:
+            print(f"[extractor] ⚠️  No grand_total detected, calculating from components")
+            if totals['subtotal'] > 0:
+                totals['grand_total'] = totals['subtotal'] + totals['tax'] + totals['service_charge'] - totals['discount']
+            elif item_prices:
+                items_sum = sum(item_prices)
+                totals['grand_total'] = items_sum + totals['tax'] + totals['service_charge'] - totals['discount']
+                if totals['subtotal'] == 0:
+                    totals['subtotal'] = items_sum
+            print(f"[extractor] ✅ Calculated grand_total: {totals['grand_total']:.2f}")
+        else:
+            print(f"[extractor] ✅ Using OCR grand_total: {totals['grand_total']:.2f}")
         
         return totals
     

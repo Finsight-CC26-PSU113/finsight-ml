@@ -21,7 +21,7 @@ LOGS_DIR = ROOT_DIR / "logs"
 # OCR Settings (EasyOCR)
 # ==============================================================================
 OCR_LANGUAGES = ['en', 'id']  # English + Indonesian
-OCR_GPU = True                 # Try GPU first, auto-fallback to CPU if unavailable
+OCR_GPU = False                # Force CPU mode (set True for GPU)
 
 # ==============================================================================
 # Image Preprocessing
@@ -61,6 +61,9 @@ DROPOUT_RATE = 0.3
 LEARNING_RATE = 1e-3
 BATCH_SIZE = 32
 EPOCHS = 50
+
+# Context window for sequential classification
+CONTEXT_WINDOW = 2  # Look at 2 lines before and 2 lines after
 
 # Feature dimensions
 MAX_TEXT_LENGTH = 100          # Max characters per line

@@ -168,7 +168,7 @@ class ReceiptLineClassifier(tf.keras.Model):
         # Branch 1: Character-level text encoding
         self.char_embedding = tf.keras.layers.Embedding(
             self.VOCAB_SIZE, EMBEDDING_DIM,
-            mask_zero=True, name='char_embedding'
+            mask_zero=False, name='char_embedding'  # Disable masking for cuDNN compatibility
         )
         self.bi_lstm = tf.keras.layers.Bidirectional(
             tf.keras.layers.LSTM(LSTM_UNITS, return_sequences=False, name='lstm'),
