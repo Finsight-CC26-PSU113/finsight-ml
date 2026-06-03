@@ -284,106 +284,188 @@ class ReceiptExtractor:
         return items
 
     def _extract_total(self, all_lines: list[dict]) -> dict:
-        """Extract totals from TOTAL_PAYMENT-labeled lines using keyword priority."""
-        totals = {'grand_total': 0.0, 'subtotal': 0.0, 'discount': 0.0,
-                  'tax': 0.0, 'cash': 0.0, 'change': 0.0}
-        grand_cands, sub_cands, disc_cands, tax_cands, cash_cands, chg_cands = [], [], [], [], [], []
+        """Extract totals with a KEYWORD-FIRST strategy for robustness.
 
-        total_lines = [l for l in all_lines if l.get('predicted_class') == 'TOTAL_PAYMENT']
-        sorted_lines = sorted(total_lines, key=lambda l: l.get('y_min', 0))
+        Keywords are more reliable than the classifier for totals, so they win;
+        the classifier prediction is only used as a fallback. A 7-level fallback
+        chain recovers grand_total when keywords/classifier both miss.
+
+        Returns dict with: grand_total, subtotal, discount, tax, service_charge, cash, change.
+        """
+        totals = {'grand_total': 0.0, 'subtotal': 0.0, 'discount': 0.0,
+                  'tax': 0.0, 'service_charge': 0.0, 'cash': 0.0, 'change': 0.0}
+        grand_cands, sub_cands, disc_cands = [], [], []
+        tax_cands, svc_cands, cash_cands, chg_cands = [], [], [], []
+
+        # Sort by y_min so later lines (typically grand total) win on tie
+        sorted_lines = sorted(all_lines, key=lambda l: l.get('y_min', 0))
 
         money_re = re.compile(r'\d{1,3}(?:[,.]\d{3})+|\d+(?:[.,]\d{1,2})?')
+        item_money_re = re.compile(r'\d{1,3}(?:[,.]\d{3})+|\d+')
+
+        # Item prices — used to validate grand_total candidates
+        item_prices = []
+        for line in sorted_lines:
+            if line.get('predicted_class') == 'ITEM_PRICE/QTY':
+                nums = [self._parse_number(n) for n in item_money_re.findall(line['text'].replace(' ', ''))]
+                item_prices.extend(n for n in nums if 100 <= n <= 10_000_000)
 
         for line in sorted_lines:
             text = line['text']
             tl = text.lower()
+            predicted_class = line.get('predicted_class', 'OTHER')
 
-            has_kw = any(k in tl for k in [
-                'total', 'subtota', 'amount', 'service', 'charge', 'tax', 'pajak',
-                'discount', 'diskon', 'cash', 'tunai', 'bayar', 'change', 'kembali',
-                'rounding', 'ppn', 'gst', 'vat',
-            ])
-            is_pure_num = bool(re.match(r'^[\d\s,.\-]+$', text.strip()))
-            if not has_kw and not is_pure_num:
+            # Skip lines that clearly aren't totals
+            if predicted_class in ('STORE', 'ADDRESS_CONTACT', 'DATE', 'ITEM_DESC'):
                 continue
-            if any(k in tl for k in ['npwp', 'tel', 'fax', 'phone', 'roc', 'gst no', 'trxid', 'member']):
-                continue
-            if len(re.findall(r'\d', text)) >= 10 and (text.count('-') >= 1 or text.count('.') >= 2):
+            if any(k in tl for k in ['npwp', 'tel', 'fax', 'phone', 'call', 'roc', 'gst no', 'trxid', 'member']):
                 continue
 
             tc = re.sub(r'(\d)\s+([,.])', r'\1\2', text.replace('O', '0').replace('o', '0'))
             tc = re.sub(r'([,.])\s+(\d)', r'\1\2', tc)
             numbers = [n.replace(' ', '') for n in money_re.findall(tc)]
 
-            is_sub = any(k in tl for k in ['subtotal', 'sub total', 'sub-total', 'jumlah'])
+            is_sub = any(k in tl for k in [
+                'subtotal', 'sub total', 'sub-total', 'jumlah', 'sub ttl', 'sub.total',
+                'amount', 'amt', 'jml'])
             is_grand = any(k in tl for k in [
                 'grand total', 'total bayar', 'total amount', 'total pembayaran',
-                'total akhir', 'total belanja', 'total tagihan', 'nett total', 'net total', 'total hrg'])
-            is_service = any(k in tl for k in ['service charge', 'service', 'charge', 'biaya'])
-            is_tax = any(k in tl for k in ['tax', 'pajak', 'ppn', 'gst', 'vat', 'pb1'])
-            is_disc = any(k in tl for k in ['discount', 'diskon', 'potongan', 'disc', 'voucher', 'promo'])
-            is_cash = any(k in tl for k in ['cash', 'tunai', 'paid', 'jumlah bayar'])
-            if 'bayar' in tl and 'total' not in tl:
-                is_cash = True
-            is_chg = any(k in tl for k in ['change', 'kembali', 'kembalian'])
-            is_total = ('total' in tl and not is_sub and not is_service
-                        and not is_tax and not is_disc and not is_cash and not is_chg)
+                'total akhir', 'total belanja', 'total tagihan', 'nett total', 'net total',
+                'total hrg', 'total harga', 'ttl bayar', 'ttl amount', 'ttl pembayaran',
+                'jumlah bayar', 'jml bayar', 'amount due', 'balance due',
+                'total due', 'total', 'ttl', 'tota1'])  # tota1: OCR typo l→1
+            is_tax = any(k in tl for k in [
+                'tax', 'pajak', 'ppn', 'gst', 'vat', 'pb1', 'sst',
+                'add gst', 'add tax', 'gst/tax', 'tax/gst', 'cukai',
+                'sales tax', 'service tax', 'govt tax'])
+            is_disc = any(k in tl for k in [
+                'discount', 'diskon', 'potongan', 'disc', 'voucher', 'promo',
+                'member disc', 'item disc', 'cashback', 'rebate', 'kupon',
+                'disct', 'discnt', 'dscnt', 'pot.', 'less', 'saving', 'hemat'])
+            is_service = any(k in tl for k in [
+                'service charge', 'service', 'charge', 'biaya layanan', 'biaya',
+                'svc charge', 'svc chg', 'srv charge'])
+            is_cash = any(k in tl for k in [
+                'cash', 'tunai', 'paid', 'jumlah bayar', 'bayar', 'payment',
+                'tender', 'received', 'terima'])
+            is_chg = any(k in tl for k in ['change', 'kembali', 'kembalian', 'balance', 'return'])
+            # Explicit grand-total phrase (note: bare "total" also matches "subtotal",
+            # so subtotal routing must guard on the phrase, not on is_grand).
+            has_grand_phrase = any(k in tl for k in ['grand', 'bayar', 'akhir', 'nett', 'net', 'due'])
 
             for num_str in numbers:
                 val = self._parse_number(num_str)
                 if val <= 0 or val > 100_000_000:
                     continue
-                if is_grand:            grand_cands.append((val, 10))
-                elif is_sub:            sub_cands.append(val)
-                elif is_service:        pass
-                elif is_tax:
-                    if val >= 100:      tax_cands.append(val)
-                elif is_disc:           disc_cands.append(val)
-                elif is_cash:           cash_cands.append(val)
-                elif is_chg:            chg_cands.append(val)
-                elif is_total:          grand_cands.append((val, 5))
+
+                # KEYWORD-FIRST: trust specific keywords over the classifier
+                if is_sub and not has_grand_phrase:
+                    sub_cands.append(val)
+                elif is_tax and not (is_sub or is_grand or is_disc):
+                    if not (val < 50 and ('%' in text or 'persen' in tl)):
+                        tax_cands.append(val)
+                elif is_disc and not (is_sub or is_grand or is_tax):
+                    disc_cands.append(val)
+                elif is_service and not (is_sub or is_grand or is_tax or is_disc):
+                    svc_cands.append(val)
+                elif is_grand:
+                    priority = 10 if has_grand_phrase else 5
+                    grand_cands.append((val, priority))
+                elif is_chg:
+                    chg_cands.append(val)
+                elif is_cash:
+                    cash_cands.append(val)
+                # FALLBACK: use classifier prediction when no keyword matched
+                elif predicted_class == 'SUBTOTAL':
+                    sub_cands.append(val)
+                elif predicted_class == 'TAX':
+                    if not (val < 50 and ('%' in text or 'persen' in tl)):
+                        tax_cands.append(val)
+                elif predicted_class == 'DISCOUNT':
+                    disc_cands.append(val)
+                elif predicted_class == 'SERVICE_CHARGE':
+                    svc_cands.append(val)
+                elif predicted_class == 'GRAND_TOTAL':
+                    grand_cands.append((val, 3))  # lower priority than keyword match
+                elif predicted_class == 'CASH_PAYMENT':
+                    cash_cands.append(val)
 
         if sub_cands:   totals['subtotal'] = max(sub_cands)
         if disc_cands:  totals['discount'] = max(disc_cands)
-        if tax_cands:   totals['tax'] = max(tax_cands)
+        if svc_cands:   totals['service_charge'] = max(svc_cands)
         if cash_cands:  totals['cash'] = max(cash_cands)
         if chg_cands:   totals['change'] = max(chg_cands)
+        if tax_cands:
+            tax_val = max(tax_cands)
+            if totals['subtotal'] > 0:
+                if tax_val <= totals['subtotal'] * 0.3:  # tax > 30% of subtotal is likely misclassified
+                    totals['tax'] = tax_val
+            elif tax_val < 100_000:
+                totals['tax'] = tax_val
 
+        # Grand Total: pick highest-priority candidate, then validate
         if grand_cands:
             grand_cands.sort(key=lambda x: (x[1], x[0]), reverse=True)
-            totals['grand_total'] = grand_cands[0][0]
+            candidate = grand_cands[0][0]
+            is_valid = True
 
-        # Fallback: keyword scan across all total lines
-        if totals['grand_total'] == 0.0:
-            cash_kw = ['cash', 'tunai', 'jumlah bayar', 'kembali', 'kembalian', 'change']
-            cash_idx = set()
-            for i, line in enumerate(sorted_lines):
-                if any(k in line['text'].lower() for k in cash_kw):
-                    cash_idx.update([i, i + 1])
-
-            candidates = []
-            for i, line in enumerate(sorted_lines):
-                if i in cash_idx:
-                    continue
-                t = line['text'].lower()
-                if 'tota' in t and 'subtota' not in t and 'qty' not in t:
-                    tc2 = re.sub(r'\s+', '', line['text'])
-                    tc2 = re.sub(r'(\d)\s*([,.])', r'\1\2', tc2)
-                    nums2 = [self._parse_number(n) for n in money_re.findall(tc2)]
-                    candidates.extend(n for n in nums2 if 1_000 <= n <= 100_000_000)
-            if candidates:
-                totals['grand_total'] = max(candidates)
-
-        # Arithmetic fallback
-        if totals['grand_total'] == 0.0:
             if totals['subtotal'] > 0:
-                totals['grand_total'] = max(0.0, totals['subtotal'] + totals['tax'] - totals['discount'])
-            elif totals['cash'] > 0 and totals['change'] > 0:
-                totals['grand_total'] = totals['cash'] - totals['change']
+                if candidate < totals['subtotal'] * 0.5 or candidate > totals['subtotal'] * 2.5:
+                    is_valid = False
+            if item_prices:
+                items_sum = sum(item_prices)
+                if candidate < items_sum * 0.3 or candidate > items_sum * 3:
+                    is_valid = False
+            # Reject suspicious 7+ digit values when a shorter candidate exists
+            if len(str(int(candidate))) >= 7:
+                if any(len(str(int(v))) < len(str(int(candidate))) for v, _ in grand_cands[1:]):
+                    is_valid = False
 
-        if (totals['grand_total'] > 0 and totals['subtotal'] > 0
-                and totals['grand_total'] < totals['subtotal']):
-            totals['grand_total'] = totals['subtotal'] + totals['tax'] - totals['discount']
+            if is_valid:
+                totals['grand_total'] = candidate
+            else:
+                for val, _ in grand_cands[1:]:
+                    if totals['subtotal'] <= 0 or totals['subtotal'] * 0.5 <= val <= totals['subtotal'] * 2.5:
+                        totals['grand_total'] = val
+                        break
+
+        # Fallback 1: subtotal + tax + service - discount
+        if totals['grand_total'] == 0.0 and totals['subtotal'] > 0:
+            calc = totals['subtotal'] + totals['tax'] + totals['service_charge'] - totals['discount']
+            if calc > 0:
+                totals['grand_total'] = calc
+
+        # Fallback 2: use items_total as subtotal base
+        if totals['grand_total'] == 0.0 and totals['subtotal'] == 0.0 and item_prices:
+            items_sum = sum(item_prices)
+            totals['subtotal'] = items_sum
+            calc = items_sum + totals['tax'] + totals['service_charge'] - totals['discount']
+            if calc > 0:
+                totals['grand_total'] = calc
+
+        # Fallback 3: cash - change
+        if totals['grand_total'] == 0.0 and totals['cash'] > 0:
+            totals['grand_total'] = totals['cash'] - totals['change']
+
+        # Ultimate fallback: largest plausible number in bottom 30% of the receipt
+        if totals['grand_total'] == 0.0:
+            all_numbers = []
+            for line in sorted_lines:
+                if line.get('y_min', 0) < 0.7:
+                    continue
+                tl2 = line['text'].lower()
+                if any(k in tl2 for k in ['npwp', 'tel', 'phone', 'member', 'card', 'cashier', 'kasir']):
+                    continue
+                clean = line['text'].replace(' ', '').replace('O', '0').replace('o', '0')
+                nums = [self._parse_number(n) for n in item_money_re.findall(clean)]
+                all_numbers.extend(n for n in nums if 1_000 <= n <= 10_000_000)
+            if all_numbers:
+                largest = max(all_numbers)
+                if item_prices:
+                    if 0.5 <= largest / max(sum(item_prices), 1) <= 3.0:
+                        totals['grand_total'] = largest
+                else:
+                    totals['grand_total'] = largest
 
         return totals
 
@@ -393,16 +475,30 @@ class ReceiptExtractor:
         return ", ".join(self.cleaner.clean_address(l['text'].strip()) for l in address_lines)
 
     def _parse_number(self, num_str: str) -> float:
+        """Parse a numeric string (handles Indonesian formats: 10.000 and 10,00)."""
         num_str = num_str.strip()
         if not num_str:
             return 0.0
+
+        # Strip currency symbols (RM, Rp, IDR, SR, $, €, £, ¥, ₹)
+        num_str = re.sub(r'[RMrpRPIDRidrSRsr$€£¥₹]\s*', '', num_str).strip()
+
         if '.' in num_str and ',' in num_str:
+            # "10.000,00" → 10000.00
             num_str = num_str.replace('.', '').replace(',', '.')
         elif ',' in num_str:
             parts = num_str.split(',')
             num_str = num_str.replace(',', '.') if len(parts[-1]) == 2 else num_str.replace(',', '')
         elif '.' in num_str:
-            if len(num_str.split('.')[-1]) == 3:
+            parts = num_str.split('.')
+            # All groups after the first are 3 digits → thousands ("1.699.400")
+            if len(parts) > 1 and all(len(p) == 3 for p in parts[1:]):
+                num_str = num_str.replace('.', '')
+            # Single dot with 2-digit tail → decimal ("10.00"); keep as is
+            elif len(parts) == 2 and len(parts[-1]) == 2:
+                pass
+            # 3-digit tail → thousands
+            elif len(parts[-1]) == 3:
                 num_str = num_str.replace('.', '')
         try:
             return float(num_str)
