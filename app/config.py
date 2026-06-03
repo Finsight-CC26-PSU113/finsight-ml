@@ -12,19 +12,26 @@ LOGS_DIR = ROOT_DIR / "logs"
 # OCR
 OCR_LANGUAGES = ['en', 'id']
 OCR_GPU = True
+# Fine-tuned EasyOCR recognizer weights (optional; falls back to default model if missing)
+FINETUNED_EASYOCR_PATH = MODELS_DIR / "finetuned_easyocr" / "best_model.pth"
 
 # Image preprocessing
 MAX_IMAGE_SIZE = 1920
 
-# Line classifier classes
+# Line classifier classes (Classifier V2 — 12 categories)
 LINE_CLASSES = {
     0: 'STORE',
     1: 'ADDRESS_CONTACT',
     2: 'DATE',
     3: 'ITEM_DESC',
     4: 'ITEM_PRICE/QTY',
-    5: 'TOTAL_PAYMENT',
-    6: 'OTHER',
+    5: 'SUBTOTAL',
+    6: 'TAX',
+    7: 'DISCOUNT',
+    8: 'SERVICE_CHARGE',
+    9: 'GRAND_TOTAL',
+    10: 'CASH_PAYMENT',
+    11: 'OTHER',
 }
 NUM_CLASSES = len(LINE_CLASSES)
 

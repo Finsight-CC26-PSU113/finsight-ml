@@ -2,7 +2,6 @@
 OCR FinSight - Scan Router
 
 POST /api/predict  — main endpoint: upload receipt, get structured JSON
-POST /api/scan     — alias for /api/predict
 GET  /api/health   — model status
 """
 
@@ -87,14 +86,6 @@ async def predict(image: UploadFile = File(..., description="Receipt image (JPG,
 
     Returns: store name, date, items list with qty and price, grand total.
     """
-    if "image/" not in (image.content_type or ""):
-        raise HTTPException(status_code=400, detail=f"Invalid file type: {image.content_type}")
-    return await _run_pipeline(await image.read())
-
-
-@router.post("/scan", response_model=ScanResult)
-async def scan(image: UploadFile = File(..., description="Alias for /api/predict")):
-    """Alias for /api/predict — backward compatibility."""
     if "image/" not in (image.content_type or ""):
         raise HTTPException(status_code=400, detail=f"Invalid file type: {image.content_type}")
     return await _run_pipeline(await image.read())

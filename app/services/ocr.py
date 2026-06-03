@@ -21,7 +21,14 @@ class OCREngine:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, languages: list[str] = None, gpu: bool = None):
+    def __init__(self, languages: list[str] = None, gpu: bool = None, model_path: str = None):
+        """Initialize EasyOCR reader.
+
+        Args:
+            languages: Language codes (default from config).
+            gpu: Use GPU (default: auto-detect, fall back to CPU).
+            model_path: Path to fine-tuned recognizer weights (optional).
+        """
         if self._reader is not None:
             return
 
@@ -41,8 +48,38 @@ class OCREngine:
         else:
             self._gpu = gpu
 
+        # Resolve fine-tuned model path (ignore if it doesn't exist)
+        self._model_path = str(model_path) if model_path else None
+        if self._model_path:
+            from pathlib import Path
+            if Path(self._model_path).exists():
+                print(f"[OCREngine] Found fine-tuned model: {self._model_path}")
+            else:
+                print(f"[OCREngine] Fine-tuned model not found at {self._model_path}, using default model")
+                self._model_path = None
+
         print(f"[OCREngine] Loading EasyOCR (languages={self._languages}, gpu={self._gpu})...")
         self._reader = easyocr.Reader(self._languages, gpu=self._gpu, verbose=False)
+
+        # Load fine-tuned recognizer weights if available
+        self.finetuned_loaded = False
+        if self._model_path:
+            try:
+                import torch
+                if hasattr(self._reader, 'recognizer'):
+                    state_dict = torch.load(
+                        self._model_path,
+                        map_location='cuda' if self._gpu else 'cpu',
+                    )
+                    self._reader.recognizer.load_state_dict(state_dict)
+                    self._reader.recognizer.eval()
+                    self.finetuned_loaded = True
+                    print("[OCREngine] Fine-tuned recognizer loaded.")
+                else:
+                    print("[OCREngine] Could not access recognizer; using default model")
+            except Exception as e:
+                print(f"[OCREngine] Failed to load fine-tuned model ({e}); using default model")
+
         print("[OCREngine] Ready.")
 
     def read_receipt(self, image: np.ndarray, apply_post_processing: bool = True) -> list[dict]:
