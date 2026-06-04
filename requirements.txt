@@ -13,17 +13,19 @@ Pillow>=10.0.0,<11.0
 
 # --- ML frameworks ---
 tensorflow>=2.15.0,<2.17
-# Note: PyTorch optional (only needed if using EasyOCR instead of PaddleOCR)
-# torch==2.1.2
-# torchvision==0.16.2
+tensorboard>=2.15.0  # For training visualization
+
+# PyTorch (for TrOCR) - CPU version
+torch>=2.1.0
+torchvision>=0.16.0
 
 # --- OCR Engines ---
-# Option 1: PaddleOCR (recommended - faster, more accurate)
+# Option 1: TrOCR (recommended - Transformer-based, best accuracy)
+transformers>=4.36.0
+
+# Option 2: PaddleOCR (fallback - fast & reliable)
 paddlepaddle>=2.6.2  # CPU version
 paddleocr>=2.6.1.3
-
-# Option 2: EasyOCR (alternative - requires PyTorch)
-# easyocr==1.7.1
 
 # --- Data processing ---
 pandas>=2.0.0,<2.3

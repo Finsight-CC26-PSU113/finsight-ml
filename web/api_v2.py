@@ -30,8 +30,25 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import ROOT_DIR, LINE_CLASSES, MAX_TEXT_LENGTH, CONTEXT_WINDOW, OCR_GPU
 from src.preprocessing import preprocess_for_easyocr
-from src.ocr_engine_paddle import PaddleOCREngine as OCREngine
+
+# Import torch for GPU detection
+try:
+    import torch
+    TORCH_AVAILABLE = True
+except ImportError:
+    TORCH_AVAILABLE = False
+
+# OCR Engine: Use PaddleOCR (proven fast & reliable)
+# TrOCR is experimental and too slow for production
 OCR_ENGINE_TYPE = "PaddleOCR"
+try:
+    print("📦 Loading PaddleOCR (fast & reliable)...")
+    from src.ocr_engine_paddle import PaddleOCREngine as OCREngine
+    print("✅ PaddleOCR loaded successfully")
+except Exception as e:
+    print(f"❌ PaddleOCR failed to load: {e}")
+    raise
+
 from src.extractor import ReceiptExtractor
 from src.model_v4_context import ContextAwareClassifier
 
@@ -79,10 +96,10 @@ async def startup():
     print("🧾 OCR FinSight API v2.1 — Starting up")
     print("=" * 55)
 
-    # 1. OCR Engine (PaddleOCR only)
-    print(f"📦 Loading PaddleOCR...")
-    ocr_engine = OCREngine(lang='en', gpu=OCR_GPU)  # 'en' works for Indonesia receipts too
-    print("✅ PaddleOCR ready")
+    # 1. OCR Engine (TrOCR with PaddleOCR fallback)
+    print(f"📦 Loading {OCR_ENGINE_TYPE}...")
+    ocr_engine = OCREngine(gpu=OCR_GPU)
+    print(f"✅ {OCR_ENGINE_TYPE} ready")
 
     # 2. Classifier (try V4 context > V3 > V2, fallback to V1)
     print("📦 Loading Classifier...")
@@ -157,7 +174,15 @@ async def startup():
     
     # Summary
     print("\n📊 Model Summary:")
-    print(f"   OCR: PaddleOCR (2-3x faster, state-of-the-art accuracy)")
+    gpu_status = 'GPU' if (TORCH_AVAILABLE and OCR_GPU and torch.cuda.is_available()) else 'CPU'
+    print(f"   OCR: {OCR_ENGINE_TYPE} ({gpu_status})")
+    if OCR_ENGINE_TYPE == "TrOCR":
+        print(f"       - Transformer-based (state-of-the-art)")
+        print(f"       - Excellent for receipts & documents")
+        print(f"       - No aggressive merging")
+    else:
+        print(f"       - Fast & reliable (2-3x faster)")
+        print(f"       - Good accuracy for receipts")
     
     # Classifier summary
     classifier_version = getattr(classifier, '_version', 'V1') if classifier else 'None'

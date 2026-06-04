@@ -21,7 +21,7 @@ LOGS_DIR = ROOT_DIR / "logs"
 # OCR Settings (EasyOCR)
 # ==============================================================================
 OCR_LANGUAGES = ['en', 'id']  # English + Indonesian
-OCR_GPU = False                # Force CPU mode (set True for GPU)
+OCR_GPU = False                # CPU mode (stable and fast enough)
 
 # ==============================================================================
 # Image Preprocessing

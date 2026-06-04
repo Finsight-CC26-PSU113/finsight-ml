@@ -541,6 +541,56 @@ LEARNING_RATE = 0.001
 BATCH_SIZE = 32
 ```
 
+### 📊 Monitoring Training with TensorBoard
+
+The training script automatically logs all metrics to TensorBoard for visualization.
+
+**View training progress in real-time:**
+
+```bash
+# Option 1: Use the convenience script
+python scripts/view_tensorboard.py
+
+# Option 2: Direct command
+tensorboard --logdir=models/classifier_v5_indonesia/logs --port=6006
+```
+
+Then open browser to: **http://localhost:6006**
+
+**Available Visualizations:**
+
+1. **Scalars** - Track metrics over time:
+   - Training loss & accuracy
+   - Validation loss & accuracy
+   - Learning rate changes
+2. **Histograms** - Monitor weight distributions:
+   - Layer activations
+   - Weight updates per epoch
+   - Gradient flow
+3. **Graphs** - Visualize model architecture:
+   - Complete computation graph
+   - Layer connections
+   - Input/output shapes
+
+**TensorBoard Files:**
+
+```
+models/classifier_v5_indonesia/
+├── logs/
+│   └── train/
+│       ├── events.out.tfevents.*   # TensorBoard event files
+│       └── ...
+├── training_history.csv             # CSV backup of metrics
+└── best_weights.weights.h5          # Best model weights
+```
+
+**Tips:**
+
+- Training logs persist across runs - old runs remain visible
+- Compare multiple runs by changing log_dir in training script
+- Export plots as SVG/PNG from TensorBoard UI
+- Use "smoothing" slider to reduce noise in loss curves
+
 ### Testing Changes
 
 ```bash

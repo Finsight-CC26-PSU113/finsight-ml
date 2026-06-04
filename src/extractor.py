@@ -297,12 +297,8 @@ class ReceiptExtractor:
     def _extract_items(self, item_lines: list[dict]) -> list[dict]:
         """Extract list item belanja dengan column-aware pairing.
         
-        Strategi:
-        1. Filter zone — items biasanya di tengah struk (10%-92% dari atas)
-        2. Pisahkan baris jadi 2 kolom: NAME (kiri, x_min < 0.5) dan PRICE (kanan, x_min >= 0.5)
-        3. Untuk tiap baris harga, pair dengan baris nama yang y-nya overlap
-        4. Untuk tiap baris nama, gabungkan dengan baris berdekatan vertikal di kolom kiri
-        5. Skip blacklist & footer
+        Simple strategy: trust classifier untuk ITEM_DESC dan ITEM_PRICE/QTY,
+        lalu pair based on Y position.
         """
         if not item_lines:
             return []
@@ -316,12 +312,12 @@ class ReceiptExtractor:
             'order', 'pesanan', 'no.', 'ref', 'reference',
             'tender', 'payment', 'pembayaran', 'cash', 'tunai', 'card', 'credit',
             'debit', 'change', 'kembali', 'kembalian', 'bayar', 'dibayar', 'bayar dengan',
-            'tagihan', 'tagih', 'charged', 'due',  # Added: tagihan-related
+            'tagihan', 'tagih', 'charged', 'due',
             'discount', 'diskon', 'potongan', 'promo', 'voucher', 'coupon',
             'service charge', 'tax', 'pajak', 'gst', 'vat', 'ppn', 'pb1',
             'total', 'subtotal', 'grand total', 'amount', 'jumlah', 'jml',
             'harga jual', 'harga', 'total item', 'total qty',
-            'rounding', 'pembulatan', 'adjust', 'penyesuaian',  # Added: rounding-related
+            'rounding', 'pembulatan', 'adjust', 'penyesuaian',
             'point', 'points', 'reward', 'saving', 'hemat', 'earned',
             'thank', 'terima', 'kasih', 'welcome', 'selamat', 'datang',
             'please', 'silakan', 'come again', 'visit',
@@ -339,82 +335,73 @@ class ReceiptExtractor:
             text_lower = text.lower()
             return any(k in text_lower for k in blacklist_keywords)
 
-        # Filter zone: items biasanya di tengah struk
-        # Lebih ketat: 0.18 - 0.75 (di luar header & sebelum total area)
+        # Filter zone
         zone_filtered = [
             l for l in item_lines
-            if 0.18 <= l.get('y_min', 0) <= 0.75
+            if 0.15 <= l.get('y_min', 0) <= 0.75
             and not is_blacklisted(l['text'])
         ]
         if not zone_filtered:
             return []
 
-        # Bagi jadi 2 kolom berdasarkan x_min:
-        # - PRICE column: x_min >= 0.55 (sisi kanan struk) DAN text mengandung digit
-        # - NAME column: sisanya (sisi kiri/tengah)
+        # Bagi jadi 2 kolom berdasarkan x_min
         price_pattern = re.compile(r'\d')
+        money_pattern = re.compile(r'\d{1,3}(?:[,.]\d{3})+|\d+')
+        
         name_lines = []
         price_lines = []
+        
         for l in zone_filtered:
             text = l['text'].strip()
             if not text:
                 continue
+            
             x_min = l.get('x_min', 0)
             has_digit = bool(price_pattern.search(text))
-            # Kolom kanan + ada digit → kandidat harga
-            # TAPI skip baris yang hanya qty indicator ("PCS", "2 PCS @", "BKS @")
-            if x_min >= 0.55 and has_digit:
-                # Cek apakah ada angka >= 100 (harga valid) di text ini
-                money_check = re.compile(r'\d{1,3}(?:[,.]\d{3})+|\d+')
-                nums_in_text = money_check.findall(text.replace(' ', ''))
+            
+            # Right column: price (x_min >= 0.50)
+            if x_min >= 0.50 and has_digit:
+                nums_in_text = money_pattern.findall(text.replace(' ', ''))
                 has_valid_price = any(self._parse_number(n) >= 100 for n in nums_in_text)
                 if has_valid_price:
                     price_lines.append(l)
-                # else: skip — ini qty indicator seperti "PCS", "2 PCS @", "BKS @"
             else:
-                # Skip pure number / pure punctuation di kolom kiri (artifact OCR)
+                # Left column: name
                 if re.match(r'^[\d\s\.,\*\-\/x@xX]+$', text):
                     continue
                 if text.upper() in ['RM', 'RP', 'IDR', 'SR', '$', 'USD']:
                     continue
                 if sum(c.isalpha() for c in text) < 2:
                     continue
-                # Skip qty indicators yang bukan nama item
                 text_upper = text.strip().upper()
                 if text_upper in ['PCS', 'BTL', 'BKS', 'KG', 'GR', 'ML', 'LTR', 'DUS', 'BOX', 'SET', 'PACK', 'UNIT']:
                     continue
-                # Skip "2 PCS @", "1BTL @" patterns
                 if re.match(r'^\d*\s*(pcs|btl|bks|kg|gr|ml|ltr|dus|box|set|pack|unit)\s*@?\s*$', text.strip(), re.IGNORECASE):
                     continue
                 name_lines.append(l)
 
         # ============================================================
-        # PRICE-DRIVEN PAIRING (lebih robust daripada group-by-name)
-        # Ide: untuk tiap baris PRICE di kolom kanan, cari baris NAME yang
-        # y-nya paling overlap. Ini menghindari "monster line" yang merge
-        # banyak baris OTHER yang kebetulan ada di kolom kiri.
+        # PRICE-DRIVEN PAIRING - BALANCED TOLERANCE
         # ============================================================
         if not price_lines:
             return []
 
-        # Sort price lines by y for stable iteration
         price_lines_sorted = sorted(price_lines, key=lambda l: l.get('y_min', 0))
         items = []
-        used_name_lines = set()
+        used_name_indices = set()
 
-        # Toleransi y untuk pairing: 1.0x tinggi rata-rata baris
-        # Cukup untuk handle layout 2-kolom yang tidak perfectly aligned
-        # tapi tetap hanya ambil 1 name TERDEKAT per price
+        # Calculate average height for Y tolerance
         all_heights = [l.get('height', 0.02) for l in name_lines + price_lines]
         avg_h = (sum(all_heights) / len(all_heights)) if all_heights else 0.02
-        Y_PAIR_TOL = max(avg_h * 1.0, 0.012)
+        
+        # BALANCED: 1.2x tinggi rata-rata (tidak terlalu ketat, tidak terlalu loose)
+        Y_PAIR_TOL = max(avg_h * 1.2, 0.015)
 
         for pl in price_lines_sorted:
             p_y_center = (pl.get('y_min', 0) + pl.get('y_max', 0)) / 2
 
             # Parse harga dari price line
             price_text = pl['text'].strip().replace(' ', '')
-            money_pattern = re.compile(r'\d{1,3}(?:[,.]\d{3})+|\d+')
             candidates = money_pattern.findall(price_text)
             price_value = 0.0
             for c in candidates:
@@ -425,19 +412,23 @@ class ReceiptExtractor:
             if price_value <= 0:
                 continue
 
-            # Cari name line TERDEKAT (1 saja) di kolom kiri yang y-nya overlap
-            # PENTING: name harus di ATAS atau SEJAJAR dengan price (bukan di bawah)
-            # karena di struk, harga selalu sejajar/sedikit di bawah nama item
+            # Cari name line TERDEKAT di kolom kiri yang y-nya overlap
+            # Name harus di atas atau sejajar price (bukan di bawah)
             best_name = None
             best_dist = float('inf')
             best_idx = -1
+            
             for idx, nl in enumerate(name_lines):
-                if idx in used_name_lines:
+                if idx in used_name_indices:
                     continue
+                
                 n_y_center = (nl.get('y_min', 0) + nl.get('y_max', 0)) / 2
-                # Name harus di atas atau sejajar price (n_y_center <= p_y_center + tolerance kecil)
-                if n_y_center > p_y_center + Y_PAIR_TOL * 0.3:
+                
+                # Name harus di atas atau sejajar price
+                # Allow small offset untuk misalignment
+                if n_y_center > p_y_center + Y_PAIR_TOL * 0.4:
                     continue  # name di bawah price → skip
+                
                 dist = abs(n_y_center - p_y_center)
                 if dist <= Y_PAIR_TOL and dist < best_dist:
                     best_dist = dist
@@ -447,15 +438,17 @@ class ReceiptExtractor:
             if best_name is None:
                 continue
 
-            used_name_lines.add(best_idx)
+            used_name_indices.add(best_idx)
             raw_name = best_name['text'].strip()
             cleaned_name = self.cleaner.clean_item(raw_name).strip()
-            if not cleaned_name or sum(c.isalpha() for c in cleaned_name) < 3:
+            
+            # Validate name (minimal 2 huruf)
+            if not cleaned_name or sum(c.isalpha() for c in cleaned_name) < 2:
                 continue
 
-            # Skip jika name mengandung keyword total/subtotal (OCR typo "Tota]")
+            # Skip jika name mengandung keyword total/payment
             name_lower = cleaned_name.lower()
-            if any(k in name_lower for k in ['tota', 'subtota', 'service', 'printed', 'print']):
+            if any(k in name_lower for k in ['tota', 'subtota', 'service', 'printed', 'print', 'tagih', 'bayar', 'kembali']):
                 continue
 
             items.append({

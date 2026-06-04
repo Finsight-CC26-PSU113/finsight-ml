@@ -323,6 +323,12 @@ print(f"✅ Model built with {model.count_params():,} parameters")
 output_dir = PROJECT_ROOT / "models" / "classifier_v5_indonesia"
 output_dir.mkdir(exist_ok=True, parents=True)
 
+# TensorBoard log directory
+log_dir = output_dir / "logs"
+log_dir.mkdir(exist_ok=True)
+
+print(f"\n📊 TensorBoard logs will be saved to: {log_dir}")
+
 callbacks = [
     tf.keras.callbacks.ModelCheckpoint(
         str(output_dir / "best_weights.weights.h5"),
@@ -346,6 +352,16 @@ callbacks = [
     ),
     tf.keras.callbacks.CSVLogger(
         str(output_dir / "training_history.csv")
+    ),
+    # TensorBoard callback - monitors ALL metrics
+    tf.keras.callbacks.TensorBoard(
+        log_dir=str(log_dir),
+        histogram_freq=1,        # Log weight histograms every epoch
+        write_graph=True,         # Visualize model graph
+        write_images=False,       # Don't log images (no image data)
+        update_freq='epoch',      # Update per epoch
+        profile_batch=0,          # Disable profiling (can slow down)
+        embeddings_freq=0,        # Disable embeddings visualization
     )
 ]
 
@@ -421,5 +437,9 @@ print("TRAINING COMPLETE - V5 INDONESIA")
 print("=" * 80)
 print(f"\n📁 Best weights: {output_dir / 'best_weights.weights.h5'}")
 print(f"📊 Training log: {output_dir / 'training_history.csv'}")
+print(f"📊 TensorBoard logs: {log_dir}")
 print(f"\n💡 Model V5 trained on Indonesia data only for better accuracy!")
 print(f"   Expected: Significant improvement on GRAND_TOTAL detection")
+print(f"\n🔍 To view TensorBoard:")
+print(f"   tensorboard --logdir={log_dir}")
+print(f"   Then open: http://localhost:6006")

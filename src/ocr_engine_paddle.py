@@ -87,25 +87,33 @@ class PaddleOCREngine:
         print(f"[PaddleOCR] Loading PaddleOCR (lang={self._lang}, gpu={self._gpu})...")
         
         try:
-            # Initialize PaddleOCR with ONLY supported parameters
-            # Newer versions auto-enable det/rec/cls, no need to specify
+            # Initialize PaddleOCR with GPU support
             self._reader = PaddleOCR(
                 use_angle_cls=True,  # Text orientation detection
                 lang=self._lang,     # Language model
+                use_gpu=self._gpu,   # Enable GPU if available
+                gpu_mem=500,         # GPU memory limit in MB
+                show_log=True,       # Show detailed logs
             )
             print(f"[PaddleOCR] Ready ✓")
         except ValueError as e:
             # Parameter not supported in this version
             error_msg = str(e)
             if "Unknown argument" in error_msg:
-                print(f"[PaddleOCR] Parameter incompatibility, trying absolute minimal...")
+                print(f"[PaddleOCR] Parameter incompatibility, trying without gpu_mem...")
                 try:
+                    # Try without gpu_mem parameter
+                    self._reader = PaddleOCR(
+                        use_angle_cls=True,
+                        lang=self._lang,
+                        use_gpu=self._gpu,
+                    )
+                    print(f"[PaddleOCR] Ready ✓")
+                except Exception as e2:
+                    print(f"[PaddleOCR] Trying minimal mode...")
                     # Absolute minimal - just lang
                     self._reader = PaddleOCR(lang=self._lang)
-                    print(f"[PaddleOCR] Ready ✓ (minimal mode)")
-                except Exception as e2:
-                    print(f"[PaddleOCR] ❌ Initialization failed: {e2}")
-                    raise
+                    print(f"[PaddleOCR] Ready ✓ (minimal mode, GPU not configured)")
             else:
                 raise
         except Exception as e:
