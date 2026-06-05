@@ -2,7 +2,32 @@
 
 **AI-Powered Receipt OCR & Data Extraction System**
 
-Sistem OCR canggih untuk mengekstrak data terstruktur dari foto struk/receipt Indonesia. Menggunakan PaddleOCR, TensorFlow classifier, dan rule-based extraction untuk akurasi tinggi.
+Sistem OCR berbasis Deep Learning untuk mengekstrak data terstruktur dari foto struk belanja Indonesia. Menggunakan **PaddleOCR** untuk text detection, **BiLSTM Context-Aware Classifier** untuk line classification, dan **rule-based extraction** untuk parsing data.
+
+## 📌 Project Overview
+
+**OCR FinSight** adalah end-to-end solution untuk digitalisasi struk belanja dengan akurasi tinggi. Project ini mengimplementasikan:
+
+- 🧠 **Context-Aware BiLSTM Classifier** (86.26% accuracy) - Trained on 11K+ Indonesia receipts
+- 🔍 **PaddleOCR** - State-of-the-art text detection & recognition
+- 🎨 **Advanced Image Preprocessing** - Deskew, CLAHE, upscaling 2x
+- 💎 **Smart Keyword-First Extraction** - Robust total detection
+- ⚡ **FastAPI REST API** - Production-ready deployment
+- 🌐 **Web Interface** - Drag-and-drop testing UI
+
+**Use Cases:**
+
+- 💼 Expense tracking & reimbursement systems
+- 📊 Financial analytics & insights
+- 🏪 Retail analytics & inventory management
+- 📱 Mobile receipt scanning apps
+
+**Key Metrics:**
+
+- **Overall Accuracy**: 86.26% (12-class classification)
+- **Processing Speed**: ~1-2 seconds per receipt (CPU)
+- **Model Size**: 278K parameters (1.06 MB)
+- **Dataset**: 11,495 Indonesia-only receipts
 
 ---
 
@@ -219,14 +244,19 @@ models/
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation & Setup
 
-### Prerequisites
+### System Requirements
 
-- **Python**: 3.10, 3.11, or 3.12
-- **OS**: Windows, Linux, macOS
-- **RAM**: 4GB minimum, 8GB recommended
-- **Storage**: 2GB for models
+| Component   | Minimum                     | Recommended                        |
+| ----------- | --------------------------- | ---------------------------------- |
+| **Python**  | 3.10+                       | 3.11 or 3.12                       |
+| **RAM**     | 4GB                         | 8GB                                |
+| **Storage** | 2GB                         | 5GB (with datasets)                |
+| **OS**      | Windows 10+ / Linux / macOS | Any                                |
+| **GPU**     | Optional                    | NVIDIA CUDA (for faster inference) |
+
+---
 
 ### Step 1: Clone Repository
 
@@ -235,104 +265,367 @@ git clone https://github.com/yourusername/OCR-FinSight.git
 cd OCR-FinSight
 ```
 
-### Step 2: Create Virtual Environment
+---
+
+### Step 2: Setup Python Environment
+
+#### **Option A: Using venv (Recommended)**
 
 ```bash
+# Create virtual environment
 python -m venv venv
 
-# Windows
-venv\Scripts\activate
+# Activate environment
+# Windows CMD:
+venv\Scripts\activate.bat
 
-# Linux/Mac
+# Windows PowerShell:
+venv\Scripts\Activate.ps1
+
+# Linux/macOS:
 source venv/bin/activate
 ```
 
-### Step 3: Install Dependencies
+#### **Option B: Using conda**
 
 ```bash
-pip install -r requirements.txt
-```
-
-**Note**: This installs PaddleOCR (CPU version). For GPU support:
-
-```bash
-pip install paddlepaddle-gpu
-```
-
-### Step 4: Verify Installation
-
-```bash
-python -c "import paddle, paddleocr, tensorflow; print('✅ All modules loaded')"
+conda create -n ocr-finsight python=3.11
+conda activate ocr-finsight
 ```
 
 ---
 
-## 🎯 Quick Start
+### Step 3: Install Dependencies
 
-### Option 1: Web Interface (Easiest)
-
-1. **Start the server**:
+#### **Basic Installation (CPU only)**
 
 ```bash
-python -m uvicorn web.api_v2:app --host 0.0.0.0 --port 8000 --reload
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
-2. **Open browser**:
+**What gets installed:**
 
-```
-http://localhost:8000
-```
+- `tensorflow>=2.15.0` - Deep learning framework
+- `paddlepaddle>=2.6.0` - OCR engine (CPU)
+- `paddleocr>=2.6.1` - OCR toolkit
+- `fastapi>=0.104.0` - Web framework
+- `opencv-python>=4.8.0` - Image processing
+- `numpy`, `pandas`, `scikit-learn` - Data processing
 
-3. **Upload receipt photo** and see results instantly!
+#### **GPU Installation (Optional, for faster inference)**
 
-### Option 2: API Endpoint
+If you have NVIDIA GPU with CUDA:
 
-```python
-import requests
+```bash
+# Install GPU version of PaddlePaddle
+pip install paddlepaddle-gpu
 
-# Upload image
-with open("receipt.jpg", "rb") as f:
-    response = requests.post(
-        "http://localhost:8000/api/predict",
-        files={"image": f}
-    )
-
-result = response.json()
-print(result)
+# Verify GPU is detected
+python -c "import paddle; print('GPU:', paddle.device.is_compiled_with_cuda())"
 ```
 
-**Response**:
+---
+
+### Step 4: Download Pre-trained Models
+
+The classifier models are **NOT included** in the repository due to file size. Download them separately:
+
+#### **Option A: Automatic Download (Recommended)**
+
+```bash
+python scripts/download_models.py
+```
+
+This will download:
+
+- ✅ Classifier V5 Indonesia (`best_weights.weights.h5`) - 1.06 MB
+- ✅ Classifier V4 Context (backup) - 1.02 MB
+
+#### **Option B: Manual Download**
+
+**Download links:**
+
+| Model                          | Size    | Link                                                                                                  | Accuracy |
+| ------------------------------ | ------- | ----------------------------------------------------------------------------------------------------- | -------- |
+| **Classifier V5 Indonesia** ⭐ | 1.06 MB | [📥 Google Drive](https://drive.google.com/file/d/1ubTfq-frSFCrQtbbyhsF6e_Ehrzf1JAF/view?usp=sharing) | 86.26%   |
+
+**After download, place model here:**
+
+```
+models/
+└── classifier_v5_indonesia/
+    └── best_weights.weights.h5    ← Place downloaded file here
+```
+
+**Alternative direct download:**
+
+```
+https://drive.google.com/uc?export=download&id=1ubTfq-frSFCrQtbbyhsF6e_Ehrzf1JAF
+```
+
+**Note**: PaddleOCR models are auto-downloaded on first run (~10MB).
+
+---
+
+### Step 5: Verify Installation
+
+```bash
+# Test all dependencies
+python -c "import paddle, paddleocr, tensorflow, fastapi; print('✅ All modules loaded successfully!')"
+
+# Verify model files exist
+python -c "from pathlib import Path; print('V5:', Path('models/classifier_v5_indonesia/best_weights.weights.h5').exists())"
+```
+
+**Expected output:**
+
+```
+✅ All modules loaded successfully!
+V5: True
+```
+
+---
+
+### Step 6: Run Quick Test
+
+```bash
+# Test OCR + Classifier on sample image
+python scripts/test_pipeline.py --image test_receipts/sample1.jpg
+```
+
+If successful, you'll see:
 
 ```json
 {
   "success": true,
   "store": "Indomaret",
-  "date": "14 Jan 23",
-  "items": [
-    {
-      "name": "Ice Matcha",
-      "qty": 1,
-      "price": 10000.0
-    }
-  ],
-  "total": 37000.0
+  "date": "14 Jan 2023",
+  "items": [...],
+  "total": 63000.0
 }
 ```
 
-### Option 3: Python Script
+✅ **Installation complete!** Proceed to [Quick Start](#-quick-start) to run the app.
+
+---
+
+## 🎯 Quick Start
+
+### Method 1: Web Interface (Easiest ⭐)
+
+**Perfect for testing and demos!**
+
+1. **Start the FastAPI server:**
+
+```bash
+# Method A: Using uvicorn directly
+python -m uvicorn web.api_v2:app --host 0.0.0.0 --port 8000 --reload
+
+# Method B: Using start script (Windows)
+start_server.bat
+
+# Method C: Using Python script
+python web/api_v2.py
+```
+
+2. **Open browser:**
+
+```
+http://localhost:8000
+```
+
+3. **Upload receipt & see magic happen!** ✨
+
+**Screenshot:**
+
+```
+┌─────────────────────────────────────────────────┐
+│  OCR FinSight - Receipt Scanner                │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  📷 [Drag and Drop Image Here]                 │
+│      or click to upload                         │
+│                                                 │
+│  Supported: JPG, PNG, WEBP                     │
+│  Max size: 10MB                                │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+---
+
+### Method 2: API Request (Python)
+
+**For integration with other apps:**
 
 ```python
-from web.api_v2 import _run_pipeline
-import asyncio
+import requests
 
-# Load image bytes
+# Upload receipt image
 with open("receipt.jpg", "rb") as f:
-    image_bytes = f.read()
+    response = requests.post(
+        "http://localhost:8000/api/predict",
+        files={"image": ("receipt.jpg", f, "image/jpeg")}
+    )
 
-# Run pipeline
-result = asyncio.run(_run_pipeline(image_bytes))
-print(result)
+# Parse response
+result = response.json()
+
+print(f"Store: {result['store']}")
+print(f"Date: {result['date']}")
+print(f"Total: Rp {result['total']:,.0f}")
+
+for item in result['items']:
+    print(f"  - {item['name']}: Rp {item['price']:,.0f}")
 ```
+
+**Example Response:**
+
+```json
+{
+  "success": true,
+  "store": "Kopi Nako Summarecon Bekasi",
+  "date": "Jun 18, 2023",
+  "items": [
+    {
+      "name": "Iced Matcha Latte",
+      "qty": 1,
+      "price": 29000.0
+    },
+    {
+      "name": "Kahlua Kopi",
+      "qty": 1,
+      "price": 27000.0
+    },
+    {
+      "name": "Rosberi",
+      "qty": 1,
+      "price": 29000.0
+    },
+    {
+      "name": "Manggo Lassie",
+      "qty": 1,
+      "price": 29000.0
+    }
+  ],
+  "total": 116000.0
+}
+```
+
+---
+
+### Method 3: cURL (Command Line)
+
+**For testing from terminal:**
+
+```bash
+# Basic request
+curl -X POST "http://localhost:8000/api/predict" \
+  -F "image=@receipt.jpg"
+
+# Save response to file
+curl -X POST "http://localhost:8000/api/predict" \
+  -F "image=@receipt.jpg" \
+  -o result.json
+
+# Pretty print JSON (requires jq)
+curl -X POST "http://localhost:8000/api/predict" \
+  -F "image=@receipt.jpg" | jq .
+```
+
+---
+
+### Method 4: Direct Python Script
+
+**For batch processing or custom workflows:**
+
+```python
+import asyncio
+from pathlib import Path
+from web.api_v2 import _run_pipeline
+
+async def process_receipt(image_path):
+    # Load image
+    with open(image_path, "rb") as f:
+        image_bytes = f.read()
+
+    # Run OCR pipeline
+    result = await _run_pipeline(image_bytes)
+
+    return result
+
+# Process single receipt
+result = asyncio.run(process_receipt("receipt.jpg"))
+print(result)
+
+# Batch processing
+receipts = Path("receipts/").glob("*.jpg")
+for receipt in receipts:
+    result = asyncio.run(process_receipt(receipt))
+    print(f"{receipt.name}: Total Rp {result['total']:,.0f}")
+```
+
+---
+
+### Troubleshooting First Run
+
+#### Issue: "Address already in use"
+
+**Solution:** Port 8000 is occupied. Use different port:
+
+```bash
+python -m uvicorn web.api_v2:app --port 8001
+```
+
+#### Issue: "Model file not found"
+
+**Solution:** Download models first:
+
+```bash
+python scripts/download_models.py
+```
+
+Or check `models/classifier_v5_indonesia/best_weights.weights.h5` exists.
+
+#### Issue: Server starts but no response
+
+**Solution:** Check firewall settings:
+
+```bash
+# Allow port 8000
+# Windows:
+netsh advfirewall firewall add rule name="OCR FinSight" dir=in action=allow protocol=TCP localport=8000
+
+# Linux:
+sudo ufw allow 8000
+```
+
+#### Issue: "No text detected"
+
+**Possible causes:**
+
+- Image too blurry/dark
+- Receipt text too small (<10px height)
+- Wrong image format
+
+**Solution:** Try preprocessing manually:
+
+```bash
+python scripts/preprocess_image.py --input blurry.jpg --output clean.jpg
+```
+
+---
+
+### Next Steps
+
+✅ Server running? Great! Now try:
+
+1. **📖 Read [API Documentation](#-api-usage)** for detailed endpoint specs
+2. **🧪 Test with sample receipts** in `test_receipts/` folder
+3. **🔧 Customize extraction rules** in `src/extractor.py`
+4. **📊 Train custom classifier** with your own data (see [Development](#-development))
+5. **🌐 Deploy publicly** using ngrok/localtunnel (see [Public Access](#-public-access-tunneling))
 
 ---
 
