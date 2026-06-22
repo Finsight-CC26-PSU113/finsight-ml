@@ -1,0 +1,3579 @@
+deskripsi,category,source,deskripsi_clean,text_length
+susu,makanan,df1,susu,4
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+tagihan air,tagihan,df1,tagihan air,11
+kelas yoga,kesehatan,df1,kelas yoga,10
+bunga,belanja,df1,bunga,5
+bunga,belanja,df1,bunga,5
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+tiket pesawat,transportasi,df1,tiket pesawat,13
+permainan anak-anak,belanja,df1,permainan anakanak,18
+roti,makanan,df1,roti,4
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+pasta gigi,belanja,df1,pasta gigi,10
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+ruu gas,tagihan,df1,ruu gas,7
+perhiasan,belanja,df1,perhiasan,9
+sepatu,belanja,df1,sepatu,6
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+ayam,makanan,df1,ayam,4
+pakaian,belanja,df1,pakaian,7
+makanan ringan,makanan,df1,makanan ringan,14
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+makanan restoran,makanan,df1,makanan restoran,16
+susu,makanan,df1,susu,4
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+angkutan umum,transportasi,df1,angkutan umum,13
+obat,kesehatan,df1,obat,4
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+sepatu,belanja,df1,sepatu,6
+angkutan umum,transportasi,df1,angkutan umum,13
+sayuran,makanan,df1,sayuran,7
+permainan anak-anak,belanja,df1,permainan anakanak,18
+perhiasan,belanja,df1,perhiasan,9
+ruu gas,tagihan,df1,ruu gas,7
+kelas yoga,kesehatan,df1,kelas yoga,10
+gas,transportasi,df1,gas,3
+susu,makanan,df1,susu,4
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+gas,transportasi,df1,gas,3
+permainan anak-anak,belanja,df1,permainan anakanak,18
+tiket pesawat,transportasi,df1,tiket pesawat,13
+layanan streaming,hiburan,df1,layanan streaming,17
+tagihan air,tagihan,df1,tagihan air,11
+tiket pesawat,transportasi,df1,tiket pesawat,13
+sampo,belanja,df1,sampo,5
+perhiasan,belanja,df1,perhiasan,9
+angkutan umum,transportasi,df1,angkutan umum,13
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+tagihan listrik,tagihan,df1,tagihan listrik,15
+gas,transportasi,df1,gas,3
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+kopi,makanan,df1,kopi,4
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+pakaian,belanja,df1,pakaian,7
+makanan restoran,makanan,df1,makanan restoran,16
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+permainan anak-anak,belanja,df1,permainan anakanak,18
+perhiasan,belanja,df1,perhiasan,9
+ruu gas,tagihan,df1,ruu gas,7
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+sepatu,belanja,df1,sepatu,6
+sampo,belanja,df1,sampo,5
+kopi,makanan,df1,kopi,4
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+layanan streaming,hiburan,df1,layanan streaming,17
+bunga,belanja,df1,bunga,5
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+makanan restoran,makanan,df1,makanan restoran,16
+kopi,makanan,df1,kopi,4
+makanan ringan,makanan,df1,makanan ringan,14
+layanan streaming,hiburan,df1,layanan streaming,17
+majalah,hiburan,df1,majalah,7
+roti,makanan,df1,roti,4
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+tiket film,hiburan,df1,tiket film,10
+perhiasan,belanja,df1,perhiasan,9
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+kopi,makanan,df1,kopi,4
+makanan restoran,makanan,df1,makanan restoran,16
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+pasta gigi,belanja,df1,pasta gigi,10
+tiket film,hiburan,df1,tiket film,10
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+obat,kesehatan,df1,obat,4
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+layanan streaming,hiburan,df1,layanan streaming,17
+angkutan umum,transportasi,df1,angkutan umum,13
+daging,makanan,df1,daging,6
+makanan restoran,makanan,df1,makanan restoran,16
+pakaian,belanja,df1,pakaian,7
+angkutan umum,transportasi,df1,angkutan umum,13
+tiket pesawat,transportasi,df1,tiket pesawat,13
+menyewa,tagihan,df1,menyewa,7
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+tiket konser,hiburan,df1,tiket konser,12
+kartu hadiah,belanja,df1,kartu hadiah,12
+sampo,belanja,df1,sampo,5
+kopi,makanan,df1,kopi,4
+perhiasan,belanja,df1,perhiasan,9
+kopi,makanan,df1,kopi,4
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+ruu gas,tagihan,df1,ruu gas,7
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+kartu hadiah,belanja,df1,kartu hadiah,12
+kartu hadiah,belanja,df1,kartu hadiah,12
+susu,makanan,df1,susu,4
+menginap di hotel,transportasi,df1,menginap hotel,14
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+menginap di hotel,transportasi,df1,menginap hotel,14
+sepatu,belanja,df1,sepatu,6
+sabun,belanja,df1,sabun,5
+buku,hiburan,df1,buku,4
+elektronik,belanja,df1,elektronik,10
+kartu hadiah,belanja,df1,kartu hadiah,12
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+gas,transportasi,df1,gas,3
+gas,transportasi,df1,gas,3
+pakaian,belanja,df1,pakaian,7
+permainan anak-anak,belanja,df1,permainan anakanak,18
+sampo,belanja,df1,sampo,5
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+layanan streaming,hiburan,df1,layanan streaming,17
+menyewa,tagihan,df1,menyewa,7
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+majalah,hiburan,df1,majalah,7
+tiket film,hiburan,df1,tiket film,10
+makanan restoran,makanan,df1,makanan restoran,16
+ruu gas,tagihan,df1,ruu gas,7
+angkutan umum,transportasi,df1,angkutan umum,13
+bunga,belanja,df1,bunga,5
+sepatu,belanja,df1,sepatu,6
+tiket konser,hiburan,df1,tiket konser,12
+tiket pesawat,transportasi,df1,tiket pesawat,13
+pasta gigi,belanja,df1,pasta gigi,10
+layanan streaming,hiburan,df1,layanan streaming,17
+kartu hadiah,belanja,df1,kartu hadiah,12
+buah-buahan,makanan,df1,buahbuahan,10
+makanan restoran,makanan,df1,makanan restoran,16
+tagihan listrik,tagihan,df1,tagihan listrik,15
+angkutan umum,transportasi,df1,angkutan umum,13
+gas,transportasi,df1,gas,3
+elektronik,belanja,df1,elektronik,10
+bunga,belanja,df1,bunga,5
+sepatu,belanja,df1,sepatu,6
+pakaian,belanja,df1,pakaian,7
+tiket film,hiburan,df1,tiket film,10
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+majalah,hiburan,df1,majalah,7
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+sabun,belanja,df1,sabun,5
+pasta gigi,belanja,df1,pasta gigi,10
+menyewa,tagihan,df1,menyewa,7
+ayam,makanan,df1,ayam,4
+kartu hadiah,belanja,df1,kartu hadiah,12
+bunga,belanja,df1,bunga,5
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+sepatu,belanja,df1,sepatu,6
+sampo,belanja,df1,sampo,5
+bunga,belanja,df1,bunga,5
+roti,makanan,df1,roti,4
+menginap di hotel,transportasi,df1,menginap hotel,14
+permainan anak-anak,belanja,df1,permainan anakanak,18
+layanan streaming,hiburan,df1,layanan streaming,17
+buku,hiburan,df1,buku,4
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+video game,hiburan,df1,video game,10
+gas,transportasi,df1,gas,3
+tagihan air,tagihan,df1,tagihan air,11
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+makanan restoran,makanan,df1,makanan restoran,16
+kopi,makanan,df1,kopi,4
+tiket konser,hiburan,df1,tiket konser,12
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+makanan ringan,makanan,df1,makanan ringan,14
+majalah,hiburan,df1,majalah,7
+tiket pesawat,transportasi,df1,tiket pesawat,13
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+makanan restoran,makanan,df1,makanan restoran,16
+roti,makanan,df1,roti,4
+sepatu,belanja,df1,sepatu,6
+pakaian,belanja,df1,pakaian,7
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+makanan restoran,makanan,df1,makanan restoran,16
+menginap di hotel,transportasi,df1,menginap hotel,14
+tagihan listrik,tagihan,df1,tagihan listrik,15
+bunga,belanja,df1,bunga,5
+makanan ringan,makanan,df1,makanan ringan,14
+makanan restoran,makanan,df1,makanan restoran,16
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+sampo,belanja,df1,sampo,5
+roti,makanan,df1,roti,4
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+ayam,makanan,df1,ayam,4
+susu,makanan,df1,susu,4
+bunga,belanja,df1,bunga,5
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+daging,makanan,df1,daging,6
+sabun,belanja,df1,sabun,5
+elektronik,belanja,df1,elektronik,10
+sayuran,makanan,df1,sayuran,7
+pakaian,belanja,df1,pakaian,7
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+ayam,makanan,df1,ayam,4
+tagihan listrik,tagihan,df1,tagihan listrik,15
+elektronik,belanja,df1,elektronik,10
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+tiket pesawat,transportasi,df1,tiket pesawat,13
+ruu gas,tagihan,df1,ruu gas,7
+kopi,makanan,df1,kopi,4
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+bunga,belanja,df1,bunga,5
+video game,hiburan,df1,video game,10
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+video game,hiburan,df1,video game,10
+gas,transportasi,df1,gas,3
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+kelas yoga,kesehatan,df1,kelas yoga,10
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+sayuran,makanan,df1,sayuran,7
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+angkutan umum,transportasi,df1,angkutan umum,13
+buku,hiburan,df1,buku,4
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+menginap di hotel,transportasi,df1,menginap hotel,14
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+gas,transportasi,df1,gas,3
+kopi,makanan,df1,kopi,4
+kartu hadiah,belanja,df1,kartu hadiah,12
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+tagihan air,tagihan,df1,tagihan air,11
+obat,kesehatan,df1,obat,4
+tagihan air,tagihan,df1,tagihan air,11
+kopi,makanan,df1,kopi,4
+permainan anak-anak,belanja,df1,permainan anakanak,18
+obat,kesehatan,df1,obat,4
+menyewa,tagihan,df1,menyewa,7
+elektronik,belanja,df1,elektronik,10
+buah-buahan,makanan,df1,buahbuahan,10
+sampo,belanja,df1,sampo,5
+kelas yoga,kesehatan,df1,kelas yoga,10
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+pasta gigi,belanja,df1,pasta gigi,10
+tagihan listrik,tagihan,df1,tagihan listrik,15
+kelas yoga,kesehatan,df1,kelas yoga,10
+makanan restoran,makanan,df1,makanan restoran,16
+tagihan listrik,tagihan,df1,tagihan listrik,15
+pasta gigi,belanja,df1,pasta gigi,10
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+video game,hiburan,df1,video game,10
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+elektronik,belanja,df1,elektronik,10
+pasta gigi,belanja,df1,pasta gigi,10
+buku,hiburan,df1,buku,4
+tagihan air,tagihan,df1,tagihan air,11
+video game,hiburan,df1,video game,10
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+obat,kesehatan,df1,obat,4
+sabun,belanja,df1,sabun,5
+bunga,belanja,df1,bunga,5
+makanan restoran,makanan,df1,makanan restoran,16
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+pakaian,belanja,df1,pakaian,7
+kelas yoga,kesehatan,df1,kelas yoga,10
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+makanan restoran,makanan,df1,makanan restoran,16
+buku,hiburan,df1,buku,4
+menginap di hotel,transportasi,df1,menginap hotel,14
+tiket konser,hiburan,df1,tiket konser,12
+majalah,hiburan,df1,majalah,7
+angkutan umum,transportasi,df1,angkutan umum,13
+kelas yoga,kesehatan,df1,kelas yoga,10
+menyewa,tagihan,df1,menyewa,7
+sepatu,belanja,df1,sepatu,6
+tiket pesawat,transportasi,df1,tiket pesawat,13
+makanan restoran,makanan,df1,makanan restoran,16
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+majalah,hiburan,df1,majalah,7
+kopi,makanan,df1,kopi,4
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+pasta gigi,belanja,df1,pasta gigi,10
+kopi,makanan,df1,kopi,4
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+sabun,belanja,df1,sabun,5
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+ayam,makanan,df1,ayam,4
+roti,makanan,df1,roti,4
+majalah,hiburan,df1,majalah,7
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+sepatu,belanja,df1,sepatu,6
+makanan restoran,makanan,df1,makanan restoran,16
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+kelas yoga,kesehatan,df1,kelas yoga,10
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+pasta gigi,belanja,df1,pasta gigi,10
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+makanan restoran,makanan,df1,makanan restoran,16
+makanan restoran,makanan,df1,makanan restoran,16
+gas,transportasi,df1,gas,3
+tagihan listrik,tagihan,df1,tagihan listrik,15
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+majalah,hiburan,df1,majalah,7
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+angkutan umum,transportasi,df1,angkutan umum,13
+bunga,belanja,df1,bunga,5
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+tagihan listrik,tagihan,df1,tagihan listrik,15
+permainan anak-anak,belanja,df1,permainan anakanak,18
+gas,transportasi,df1,gas,3
+menginap di hotel,transportasi,df1,menginap hotel,14
+gas,transportasi,df1,gas,3
+kopi,makanan,df1,kopi,4
+daging,makanan,df1,daging,6
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+makanan restoran,makanan,df1,makanan restoran,16
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+majalah,hiburan,df1,majalah,7
+kelas yoga,kesehatan,df1,kelas yoga,10
+tiket pesawat,transportasi,df1,tiket pesawat,13
+kelas yoga,kesehatan,df1,kelas yoga,10
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+majalah,hiburan,df1,majalah,7
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+kopi,makanan,df1,kopi,4
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+ruu gas,tagihan,df1,ruu gas,7
+buku,hiburan,df1,buku,4
+ruu gas,tagihan,df1,ruu gas,7
+menginap di hotel,transportasi,df1,menginap hotel,14
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+permainan anak-anak,belanja,df1,permainan anakanak,18
+susu,makanan,df1,susu,4
+buku,hiburan,df1,buku,4
+tiket film,hiburan,df1,tiket film,10
+ayam,makanan,df1,ayam,4
+elektronik,belanja,df1,elektronik,10
+majalah,hiburan,df1,majalah,7
+permainan anak-anak,belanja,df1,permainan anakanak,18
+perhiasan,belanja,df1,perhiasan,9
+tagihan listrik,tagihan,df1,tagihan listrik,15
+tiket film,hiburan,df1,tiket film,10
+pasta gigi,belanja,df1,pasta gigi,10
+majalah,hiburan,df1,majalah,7
+buku,hiburan,df1,buku,4
+sayuran,makanan,df1,sayuran,7
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+kopi,makanan,df1,kopi,4
+kelas yoga,kesehatan,df1,kelas yoga,10
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+gas,transportasi,df1,gas,3
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+elektronik,belanja,df1,elektronik,10
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+elektronik,belanja,df1,elektronik,10
+tiket film,hiburan,df1,tiket film,10
+sayuran,makanan,df1,sayuran,7
+permainan anak-anak,belanja,df1,permainan anakanak,18
+menginap di hotel,transportasi,df1,menginap hotel,14
+kelas yoga,kesehatan,df1,kelas yoga,10
+tagihan listrik,tagihan,df1,tagihan listrik,15
+tagihan air,tagihan,df1,tagihan air,11
+buku,hiburan,df1,buku,4
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+obat,kesehatan,df1,obat,4
+tagihan air,tagihan,df1,tagihan air,11
+obat,kesehatan,df1,obat,4
+susu,makanan,df1,susu,4
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+tagihan air,tagihan,df1,tagihan air,11
+buku,hiburan,df1,buku,4
+buku,hiburan,df1,buku,4
+pakaian,belanja,df1,pakaian,7
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+buku,hiburan,df1,buku,4
+tiket pesawat,transportasi,df1,tiket pesawat,13
+perhiasan,belanja,df1,perhiasan,9
+perhiasan,belanja,df1,perhiasan,9
+sayuran,makanan,df1,sayuran,7
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+majalah,hiburan,df1,majalah,7
+tiket film,hiburan,df1,tiket film,10
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+elektronik,belanja,df1,elektronik,10
+angkutan umum,transportasi,df1,angkutan umum,13
+sepatu,belanja,df1,sepatu,6
+majalah,hiburan,df1,majalah,7
+menginap di hotel,transportasi,df1,menginap hotel,14
+pakaian,belanja,df1,pakaian,7
+kopi,makanan,df1,kopi,4
+pakaian,belanja,df1,pakaian,7
+layanan streaming,hiburan,df1,layanan streaming,17
+makanan ringan,makanan,df1,makanan ringan,14
+angkutan umum,transportasi,df1,angkutan umum,13
+ayam,makanan,df1,ayam,4
+sepatu,belanja,df1,sepatu,6
+video game,hiburan,df1,video game,10
+perhiasan,belanja,df1,perhiasan,9
+makanan restoran,makanan,df1,makanan restoran,16
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+sabun,belanja,df1,sabun,5
+kopi,makanan,df1,kopi,4
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+perhiasan,belanja,df1,perhiasan,9
+kartu hadiah,belanja,df1,kartu hadiah,12
+obat,kesehatan,df1,obat,4
+sepatu,belanja,df1,sepatu,6
+video game,hiburan,df1,video game,10
+tagihan listrik,tagihan,df1,tagihan listrik,15
+tiket konser,hiburan,df1,tiket konser,12
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+obat,kesehatan,df1,obat,4
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+majalah,hiburan,df1,majalah,7
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+tiket film,hiburan,df1,tiket film,10
+layanan streaming,hiburan,df1,layanan streaming,17
+sampo,belanja,df1,sampo,5
+tiket konser,hiburan,df1,tiket konser,12
+gas,transportasi,df1,gas,3
+tiket konser,hiburan,df1,tiket konser,12
+layanan streaming,hiburan,df1,layanan streaming,17
+majalah,hiburan,df1,majalah,7
+buah-buahan,makanan,df1,buahbuahan,10
+layanan streaming,hiburan,df1,layanan streaming,17
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+buah-buahan,makanan,df1,buahbuahan,10
+obat,kesehatan,df1,obat,4
+video game,hiburan,df1,video game,10
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+majalah,hiburan,df1,majalah,7
+roti,makanan,df1,roti,4
+buku,hiburan,df1,buku,4
+layanan streaming,hiburan,df1,layanan streaming,17
+menyewa,tagihan,df1,menyewa,7
+buah-buahan,makanan,df1,buahbuahan,10
+sayuran,makanan,df1,sayuran,7
+tiket film,hiburan,df1,tiket film,10
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+kopi,makanan,df1,kopi,4
+gas,transportasi,df1,gas,3
+tagihan listrik,tagihan,df1,tagihan listrik,15
+kopi,makanan,df1,kopi,4
+pakaian,belanja,df1,pakaian,7
+sampo,belanja,df1,sampo,5
+angkutan umum,transportasi,df1,angkutan umum,13
+tiket film,hiburan,df1,tiket film,10
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+angkutan umum,transportasi,df1,angkutan umum,13
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+tagihan listrik,tagihan,df1,tagihan listrik,15
+angkutan umum,transportasi,df1,angkutan umum,13
+tiket pesawat,transportasi,df1,tiket pesawat,13
+tiket pesawat,transportasi,df1,tiket pesawat,13
+angkutan umum,transportasi,df1,angkutan umum,13
+ruu gas,tagihan,df1,ruu gas,7
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+permainan anak-anak,belanja,df1,permainan anakanak,18
+permainan anak-anak,belanja,df1,permainan anakanak,18
+sayuran,makanan,df1,sayuran,7
+layanan streaming,hiburan,df1,layanan streaming,17
+pakaian,belanja,df1,pakaian,7
+angkutan umum,transportasi,df1,angkutan umum,13
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+gas,transportasi,df1,gas,3
+video game,hiburan,df1,video game,10
+menyewa,tagihan,df1,menyewa,7
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+menyewa,tagihan,df1,menyewa,7
+elektronik,belanja,df1,elektronik,10
+tiket pesawat,transportasi,df1,tiket pesawat,13
+menginap di hotel,transportasi,df1,menginap hotel,14
+sayuran,makanan,df1,sayuran,7
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+daging,makanan,df1,daging,6
+gas,transportasi,df1,gas,3
+layanan streaming,hiburan,df1,layanan streaming,17
+sampo,belanja,df1,sampo,5
+tiket film,hiburan,df1,tiket film,10
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+roti,makanan,df1,roti,4
+sayuran,makanan,df1,sayuran,7
+pasta gigi,belanja,df1,pasta gigi,10
+layanan streaming,hiburan,df1,layanan streaming,17
+tagihan air,tagihan,df1,tagihan air,11
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+kelas yoga,kesehatan,df1,kelas yoga,10
+tiket film,hiburan,df1,tiket film,10
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+majalah,hiburan,df1,majalah,7
+pakaian,belanja,df1,pakaian,7
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+permainan anak-anak,belanja,df1,permainan anakanak,18
+tiket film,hiburan,df1,tiket film,10
+kopi,makanan,df1,kopi,4
+roti,makanan,df1,roti,4
+sabun,belanja,df1,sabun,5
+tiket konser,hiburan,df1,tiket konser,12
+tiket konser,hiburan,df1,tiket konser,12
+tiket pesawat,transportasi,df1,tiket pesawat,13
+video game,hiburan,df1,video game,10
+kelas yoga,kesehatan,df1,kelas yoga,10
+obat,kesehatan,df1,obat,4
+menyewa,tagihan,df1,menyewa,7
+perhiasan,belanja,df1,perhiasan,9
+ruu gas,tagihan,df1,ruu gas,7
+bunga,belanja,df1,bunga,5
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+elektronik,belanja,df1,elektronik,10
+layanan streaming,hiburan,df1,layanan streaming,17
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+obat,kesehatan,df1,obat,4
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+pasta gigi,belanja,df1,pasta gigi,10
+sampo,belanja,df1,sampo,5
+sepatu,belanja,df1,sepatu,6
+kartu hadiah,belanja,df1,kartu hadiah,12
+tagihan listrik,tagihan,df1,tagihan listrik,15
+pasta gigi,belanja,df1,pasta gigi,10
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+kunjungan dokter gigi,kesehatan,df1,kunjungan dokter gigi,21
+tiket film,hiburan,df1,tiket film,10
+kartu hadiah,belanja,df1,kartu hadiah,12
+sampo,belanja,df1,sampo,5
+pakaian,belanja,df1,pakaian,7
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+sayuran,makanan,df1,sayuran,7
+sabun,belanja,df1,sabun,5
+gas,transportasi,df1,gas,3
+sayuran,makanan,df1,sayuran,7
+bunga,belanja,df1,bunga,5
+tiket pesawat,transportasi,df1,tiket pesawat,13
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+tagihan listrik,tagihan,df1,tagihan listrik,15
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+permainan anak-anak,belanja,df1,permainan anakanak,18
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+kartu hadiah,belanja,df1,kartu hadiah,12
+video game,hiburan,df1,video game,10
+permainan anak-anak,belanja,df1,permainan anakanak,18
+menginap di hotel,transportasi,df1,menginap hotel,14
+tagihan listrik,tagihan,df1,tagihan listrik,15
+tiket konser,hiburan,df1,tiket konser,12
+perhiasan,belanja,df1,perhiasan,9
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+pakaian,belanja,df1,pakaian,7
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+obat,kesehatan,df1,obat,4
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+susu,makanan,df1,susu,4
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+perbaikan mobil,transportasi,df1,perbaikan mobil,15
+tiket film,hiburan,df1,tiket film,10
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+roti,makanan,df1,roti,4
+ruu gas,tagihan,df1,ruu gas,7
+bunga,belanja,df1,bunga,5
+sepatu,belanja,df1,sepatu,6
+majalah,hiburan,df1,majalah,7
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+perhiasan,belanja,df1,perhiasan,9
+perhiasan,belanja,df1,perhiasan,9
+menginap di hotel,transportasi,df1,menginap hotel,14
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+video game,hiburan,df1,video game,10
+tagihan listrik,tagihan,df1,tagihan listrik,15
+tiket pesawat,transportasi,df1,tiket pesawat,13
+menginap di hotel,transportasi,df1,menginap hotel,14
+tiket pesawat,transportasi,df1,tiket pesawat,13
+tagihan listrik,tagihan,df1,tagihan listrik,15
+majalah,hiburan,df1,majalah,7
+layanan streaming,hiburan,df1,layanan streaming,17
+menginap di hotel,transportasi,df1,menginap hotel,14
+tiket film,hiburan,df1,tiket film,10
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+obat,kesehatan,df1,obat,4
+gas,transportasi,df1,gas,3
+angkutan umum,transportasi,df1,angkutan umum,13
+obat,kesehatan,df1,obat,4
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+kelas yoga,kesehatan,df1,kelas yoga,10
+bunga,belanja,df1,bunga,5
+elektronik,belanja,df1,elektronik,10
+pasta gigi,belanja,df1,pasta gigi,10
+tiket pesawat,transportasi,df1,tiket pesawat,13
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+permainan anak-anak,belanja,df1,permainan anakanak,18
+buah-buahan,makanan,df1,buahbuahan,10
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+pakaian,belanja,df1,pakaian,7
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+tagihan listrik,tagihan,df1,tagihan listrik,15
+perhiasan,belanja,df1,perhiasan,9
+tiket pesawat,transportasi,df1,tiket pesawat,13
+layanan streaming,hiburan,df1,layanan streaming,17
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+tiket pesawat,transportasi,df1,tiket pesawat,13
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+permainan anak-anak,belanja,df1,permainan anakanak,18
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+pasta gigi,belanja,df1,pasta gigi,10
+pasta gigi,belanja,df1,pasta gigi,10
+gas,transportasi,df1,gas,3
+tiket konser,hiburan,df1,tiket konser,12
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+tagihan air,tagihan,df1,tagihan air,11
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+video game,hiburan,df1,video game,10
+menginap di hotel,transportasi,df1,menginap hotel,14
+tagihan listrik,tagihan,df1,tagihan listrik,15
+pakaian,belanja,df1,pakaian,7
+obat,kesehatan,df1,obat,4
+obat,kesehatan,df1,obat,4
+permainan anak-anak,belanja,df1,permainan anakanak,18
+kelas yoga,kesehatan,df1,kelas yoga,10
+permainan anak-anak,belanja,df1,permainan anakanak,18
+pasta gigi,belanja,df1,pasta gigi,10
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+menginap di hotel,transportasi,df1,menginap hotel,14
+kelas yoga,kesehatan,df1,kelas yoga,10
+sampo,belanja,df1,sampo,5
+angkutan umum,transportasi,df1,angkutan umum,13
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+layanan streaming,hiburan,df1,layanan streaming,17
+tiket film,hiburan,df1,tiket film,10
+makan malam bersama teman,hiburan,df1,makan malam teman,17
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+roti,makanan,df1,roti,4
+kelas yoga,kesehatan,df1,kelas yoga,10
+makanan ringan,makanan,df1,makanan ringan,14
+kartu hadiah,belanja,df1,kartu hadiah,12
+menginap di hotel,transportasi,df1,menginap hotel,14
+susu,makanan,df1,susu,4
+video game,hiburan,df1,video game,10
+bunga,belanja,df1,bunga,5
+kelas yoga,kesehatan,df1,kelas yoga,10
+perhiasan,belanja,df1,perhiasan,9
+pasta gigi,belanja,df1,pasta gigi,10
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+buah-buahan,makanan,df1,buahbuahan,10
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+tiket konser,hiburan,df1,tiket konser,12
+obat,kesehatan,df1,obat,4
+roti,makanan,df1,roti,4
+buku,hiburan,df1,buku,4
+peralatan latihan,kesehatan,df1,peralatan latihan,17
+buku,hiburan,df1,buku,4
+tagihan air,tagihan,df1,tagihan air,11
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+daging,makanan,df1,daging,6
+bunga,belanja,df1,bunga,5
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+tiket film,hiburan,df1,tiket film,10
+buah-buahan,makanan,df1,buahbuahan,10
+perhiasan,belanja,df1,perhiasan,9
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+obat,kesehatan,df1,obat,4
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+sabun,belanja,df1,sabun,5
+ruu gas,tagihan,df1,ruu gas,7
+sepatu,belanja,df1,sepatu,6
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+sepatu,belanja,df1,sepatu,6
+pasta gigi,belanja,df1,pasta gigi,10
+sampo,belanja,df1,sampo,5
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+obat,kesehatan,df1,obat,4
+layanan streaming,hiburan,df1,layanan streaming,17
+buku,hiburan,df1,buku,4
+sampo,belanja,df1,sampo,5
+tiket film,hiburan,df1,tiket film,10
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+tagihan air,tagihan,df1,tagihan air,11
+tagihan air,tagihan,df1,tagihan air,11
+makanan ringan,makanan,df1,makanan ringan,14
+tagihan air,tagihan,df1,tagihan air,11
+menyewa,tagihan,df1,menyewa,7
+sampo,belanja,df1,sampo,5
+buah-buahan,makanan,df1,buahbuahan,10
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+susu,makanan,df1,susu,4
+ruu gas,tagihan,df1,ruu gas,7
+kartu hadiah,belanja,df1,kartu hadiah,12
+kelas yoga,kesehatan,df1,kelas yoga,10
+pakaian,belanja,df1,pakaian,7
+ayam,makanan,df1,ayam,4
+menyewa,tagihan,df1,menyewa,7
+tiket konser,hiburan,df1,tiket konser,12
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+susu,makanan,df1,susu,4
+kartu hadiah,belanja,df1,kartu hadiah,12
+buku,hiburan,df1,buku,4
+menginap di hotel,transportasi,df1,menginap hotel,14
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+pasta gigi,belanja,df1,pasta gigi,10
+buku,hiburan,df1,buku,4
+makanan ringan,makanan,df1,makanan ringan,14
+makanan ringan,makanan,df1,makanan ringan,14
+buku,hiburan,df1,buku,4
+daging,makanan,df1,daging,6
+sabun,belanja,df1,sabun,5
+menyewa,tagihan,df1,menyewa,7
+sabun,belanja,df1,sabun,5
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+buku,hiburan,df1,buku,4
+menginap di hotel,transportasi,df1,menginap hotel,14
+sampo,belanja,df1,sampo,5
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+menyewa,tagihan,df1,menyewa,7
+tiket konser,hiburan,df1,tiket konser,12
+ruu gas,tagihan,df1,ruu gas,7
+makanan ringan,makanan,df1,makanan ringan,14
+makanan ringan,makanan,df1,makanan ringan,14
+sabun,belanja,df1,sabun,5
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+tiket konser,hiburan,df1,tiket konser,12
+angkutan umum,transportasi,df1,angkutan umum,13
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+video game,hiburan,df1,video game,10
+elektronik,belanja,df1,elektronik,10
+sampo,belanja,df1,sampo,5
+video game,hiburan,df1,video game,10
+elektronik,belanja,df1,elektronik,10
+sepatu,belanja,df1,sepatu,6
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+perhiasan,belanja,df1,perhiasan,9
+tiket konser,hiburan,df1,tiket konser,12
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+tiket konser,hiburan,df1,tiket konser,12
+tiket konser,hiburan,df1,tiket konser,12
+tagihan air,tagihan,df1,tagihan air,11
+daging,makanan,df1,daging,6
+video game,hiburan,df1,video game,10
+buah-buahan,makanan,df1,buahbuahan,10
+tagihan air,tagihan,df1,tagihan air,11
+kartu hadiah,belanja,df1,kartu hadiah,12
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+ruu gas,tagihan,df1,ruu gas,7
+pakaian,belanja,df1,pakaian,7
+bunga,belanja,df1,bunga,5
+ayam,makanan,df1,ayam,4
+kartu hadiah,belanja,df1,kartu hadiah,12
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+tiket konser,hiburan,df1,tiket konser,12
+ayam,makanan,df1,ayam,4
+makanan ringan,makanan,df1,makanan ringan,14
+video game,hiburan,df1,video game,10
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+sabun,belanja,df1,sabun,5
+sampo,belanja,df1,sampo,5
+makanan cepat saji,makanan,df1,makanan cepat saji,18
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+menyewa,tagihan,df1,menyewa,7
+sampo,belanja,df1,sampo,5
+ruu gas,tagihan,df1,ruu gas,7
+kunjungan dokter,kesehatan,df1,kunjungan dokter,16
+pelatih pribadi,kesehatan,df1,pelatih pribadi,15
+ruu gas,tagihan,df1,ruu gas,7
+bunga,belanja,df1,bunga,5
+susu,makanan,df1,susu,4
+kartu hadiah,belanja,df1,kartu hadiah,12
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+sepatu,belanja,df1,sepatu,6
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+video game,hiburan,df1,video game,10
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+kartu hadiah,belanja,df1,kartu hadiah,12
+makanan ringan,makanan,df1,makanan ringan,14
+susu,makanan,df1,susu,4
+tagihan air,tagihan,df1,tagihan air,11
+sabun,belanja,df1,sabun,5
+sepatu,belanja,df1,sepatu,6
+perhiasan,belanja,df1,perhiasan,9
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+daging,makanan,df1,daging,6
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+ayam,makanan,df1,ayam,4
+makanan ringan,makanan,df1,makanan ringan,14
+menyewa,tagihan,df1,menyewa,7
+menyewa,tagihan,df1,menyewa,7
+tagihan air,tagihan,df1,tagihan air,11
+tagihan air,tagihan,df1,tagihan air,11
+roti,makanan,df1,roti,4
+daging,makanan,df1,daging,6
+sabun,belanja,df1,sabun,5
+video game,hiburan,df1,video game,10
+menyewa,tagihan,df1,menyewa,7
+makanan ringan,makanan,df1,makanan ringan,14
+kartu hadiah,belanja,df1,kartu hadiah,12
+tiket konser,hiburan,df1,tiket konser,12
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+roti,makanan,df1,roti,4
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+sayuran,makanan,df1,sayuran,7
+susu,makanan,df1,susu,4
+sabun,belanja,df1,sabun,5
+menyewa,tagihan,df1,menyewa,7
+makanan ringan,makanan,df1,makanan ringan,14
+buah-buahan,makanan,df1,buahbuahan,10
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+sayuran,makanan,df1,sayuran,7
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+roti,makanan,df1,roti,4
+roti,makanan,df1,roti,4
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+sabun,belanja,df1,sabun,5
+ayam,makanan,df1,ayam,4
+menyewa,tagihan,df1,menyewa,7
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+keanggotaan gimnasium,kesehatan,df1,keanggotaan gimnasium,21
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+ruu gas,tagihan,df1,ruu gas,7
+kartu hadiah,belanja,df1,kartu hadiah,12
+makanan ringan,makanan,df1,makanan ringan,14
+ruu gas,tagihan,df1,ruu gas,7
+susu,makanan,df1,susu,4
+sayuran,makanan,df1,sayuran,7
+sabun,belanja,df1,sabun,5
+menyewa,tagihan,df1,menyewa,7
+daging,makanan,df1,daging,6
+sabun,belanja,df1,sabun,5
+makanan ringan,makanan,df1,makanan ringan,14
+daging,makanan,df1,daging,6
+makanan ringan,makanan,df1,makanan ringan,14
+buah-buahan,makanan,df1,buahbuahan,10
+makanan ringan,makanan,df1,makanan ringan,14
+ayam,makanan,df1,ayam,4
+sabun,belanja,df1,sabun,5
+daging,makanan,df1,daging,6
+perlengkapan seni,hiburan,df1,perlengkapan seni,17
+perlengkapan rajutan,hiburan,df1,perlengkapan rajutan,20
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+produk perawatan kulit,belanja,df1,produk perawatan kulit,22
+buah-buahan,makanan,df1,buahbuahan,10
+ruu gas,tagihan,df1,ruu gas,7
+elektronik,belanja,df1,elektronik,10
+susu,makanan,df1,susu,4
+roti,makanan,df1,roti,4
+sayuran,makanan,df1,sayuran,7
+roti,makanan,df1,roti,4
+susu,makanan,df1,susu,4
+sayuran,makanan,df1,sayuran,7
+elektronik,belanja,df1,elektronik,10
+sayuran,makanan,df1,sayuran,7
+sayuran,makanan,df1,sayuran,7
+roti,makanan,df1,roti,4
+susu,makanan,df1,susu,4
+buah-buahan,makanan,df1,buahbuahan,10
+ayam,makanan,df1,ayam,4
+roti,makanan,df1,roti,4
+susu,makanan,df1,susu,4
+ayam,makanan,df1,ayam,4
+elektronik,belanja,df1,elektronik,10
+elektronik,belanja,df1,elektronik,10
+buah-buahan,makanan,df1,buahbuahan,10
+sayuran,makanan,df1,sayuran,7
+ayam,makanan,df1,ayam,4
+ayam,makanan,df1,ayam,4
+elektronik,belanja,df1,elektronik,10
+ayam,makanan,df1,ayam,4
+daging,makanan,df1,daging,6
+ayam,makanan,df1,ayam,4
+ayam,makanan,df1,ayam,4
+daging,makanan,df1,daging,6
+buah-buahan,makanan,df1,buahbuahan,10
+buah-buahan,makanan,df1,buahbuahan,10
+susu,makanan,df1,susu,4
+daging,makanan,df1,daging,6
+buah-buahan,makanan,df1,buahbuahan,10
+buah-buahan,makanan,df1,buahbuahan,10
+buah-buahan,makanan,df1,buahbuahan,10
+daging,makanan,df1,daging,6
+daging,makanan,df1,daging,6
+daging,makanan,df1,daging,6
+daging,makanan,df1,daging,6
+daging,makanan,df1,daging,6
+parkir,tagihan,df2,parkir,6
+iuran bulanan,tagihan,df2,iuran bulanan,13
+lain-lain,lainnya,df2,lainlain,8
+streaming,hiburan,df2,streaming,9
+warung nasi,makanan,df2,warung nasi,11
+internet,tagihan,df2,internet,8
+gofood,makanan,df2,gofood,6
+tissue,belanja,df2,tissue,6
+alfamart,belanja,df2,alfamart,8
+bioskop,hiburan,df2,bioskop,7
+iuran bulanan,tagihan,df2,iuran bulanan,13
+streaming,hiburan,df2,streaming,9
+makan siang,makanan,df2,makan siang,11
+tissue,belanja,df2,tissue,6
+belanja mingguan,belanja,df2,belanja mingguan,16
+lain-lain,lainnya,df2,lainlain,8
+parkir,tagihan,df2,parkir,6
+streaming,hiburan,df2,streaming,9
+cemilan,makanan,df2,cemilan,7
+belanja mingguan,belanja,df2,belanja mingguan,16
+biaya admin,tagihan,df2,biaya admin,11
+internet,tagihan,df2,internet,8
+jajan sore,makanan,df2,jajan sore,10
+top up game,hiburan,df2,top up game,11
+biaya admin,tagihan,df2,biaya admin,11
+lain-lain,lainnya,df2,lainlain,8
+cemilan,makanan,df2,cemilan,7
+cashback,tagihan,df2,cashback,8
+gofood,makanan,df2,gofood,6
+biaya admin,tagihan,df2,biaya admin,11
+air,tagihan,df2,air,3
+bpjs,tagihan,df2,bpjs,4
+tissue,belanja,df2,tissue,6
+streaming,hiburan,df2,streaming,9
+jajan sore,makanan,df2,jajan sore,10
+lain-lain,lainnya,df2,lainlain,8
+belanja mingguan,belanja,df2,belanja mingguan,16
+pulsa,tagihan,df2,pulsa,5
+lain-lain,lainnya,df2,lainlain,8
+kopi pagi,makanan,df2,kopi pagi,9
+pulsa,tagihan,df2,pulsa,5
+biaya admin,tagihan,df2,biaya admin,11
+main ke mall,hiburan,df2,main mall,9
+cashback,tagihan,df2,cashback,8
+top up game,hiburan,df2,top up game,11
+indomaret,belanja,df2,indomaret,9
+makan malam,makanan,df2,makan malam,11
+lain-lain,lainnya,df2,lainlain,8
+main ke mall,hiburan,df2,main mall,9
+bioskop,hiburan,df2,bioskop,7
+kopi pagi,makanan,df2,kopi pagi,9
+top up game,hiburan,df2,top up game,11
+alfamart,belanja,df2,alfamart,8
+makan siang,makanan,df2,makan siang,11
+biaya admin,tagihan,df2,biaya admin,11
+listrik,tagihan,df2,listrik,7
+makan siang,makanan,df2,makan siang,11
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+makan siang,makanan,df2,makan siang,11
+bioskop,hiburan,df2,bioskop,7
+cemilan,makanan,df2,cemilan,7
+parkir,tagihan,df2,parkir,6
+makan malam,makanan,df2,makan malam,11
+cemilan,makanan,df2,cemilan,7
+kopi pagi,makanan,df2,kopi pagi,9
+jajan sore,makanan,df2,jajan sore,10
+iuran bulanan,tagihan,df2,iuran bulanan,13
+main ke mall,hiburan,df2,main mall,9
+lain-lain,lainnya,df2,lainlain,8
+cemilan,makanan,df2,cemilan,7
+indomaret,belanja,df2,indomaret,9
+lain-lain,lainnya,df2,lainlain,8
+biaya admin,tagihan,df2,biaya admin,11
+lain-lain,lainnya,df2,lainlain,8
+makan siang,makanan,df2,makan siang,11
+biaya admin,tagihan,df2,biaya admin,11
+internet,tagihan,df2,internet,8
+lain-lain,lainnya,df2,lainlain,8
+kopi pagi,makanan,df2,kopi pagi,9
+lain-lain,lainnya,df2,lainlain,8
+top up game,hiburan,df2,top up game,11
+top up game,hiburan,df2,top up game,11
+biaya admin,tagihan,df2,biaya admin,11
+biaya admin,tagihan,df2,biaya admin,11
+cemilan,makanan,df2,cemilan,7
+streaming,hiburan,df2,streaming,9
+streaming,hiburan,df2,streaming,9
+internet,tagihan,df2,internet,8
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+lain-lain,lainnya,df2,lainlain,8
+makan siang,makanan,df2,makan siang,11
+internet,tagihan,df2,internet,8
+lain-lain,lainnya,df2,lainlain,8
+alfamart,belanja,df2,alfamart,8
+top up game,hiburan,df2,top up game,11
+indomaret,belanja,df2,indomaret,9
+iuran bulanan,tagihan,df2,iuran bulanan,13
+lain-lain,lainnya,df2,lainlain,8
+cemilan,makanan,df2,cemilan,7
+listrik,tagihan,df2,listrik,7
+jajan sore,makanan,df2,jajan sore,10
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+lain-lain,lainnya,df2,lainlain,8
+bioskop,hiburan,df2,bioskop,7
+biaya admin,tagihan,df2,biaya admin,11
+bioskop,hiburan,df2,bioskop,7
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+makan siang,makanan,df2,makan siang,11
+biaya admin,tagihan,df2,biaya admin,11
+gofood,makanan,df2,gofood,6
+lain-lain,lainnya,df2,lainlain,8
+top up game,hiburan,df2,top up game,11
+kopi pagi,makanan,df2,kopi pagi,9
+streaming,hiburan,df2,streaming,9
+bpjs,tagihan,df2,bpjs,4
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+jajan sore,makanan,df2,jajan sore,10
+kopi pagi,makanan,df2,kopi pagi,9
+parkir,tagihan,df2,parkir,6
+kopi pagi,makanan,df2,kopi pagi,9
+lain-lain,lainnya,df2,lainlain,8
+gofood,makanan,df2,gofood,6
+listrik,tagihan,df2,listrik,7
+gofood,makanan,df2,gofood,6
+jajan sore,makanan,df2,jajan sore,10
+streaming,hiburan,df2,streaming,9
+makan malam,makanan,df2,makan malam,11
+top up game,hiburan,df2,top up game,11
+lain-lain,lainnya,df2,lainlain,8
+tissue,belanja,df2,tissue,6
+lain-lain,lainnya,df2,lainlain,8
+tissue,belanja,df2,tissue,6
+warung nasi,makanan,df2,warung nasi,11
+listrik,tagihan,df2,listrik,7
+kopi pagi,makanan,df2,kopi pagi,9
+tissue,belanja,df2,tissue,6
+makan siang,makanan,df2,makan siang,11
+main ke mall,hiburan,df2,main mall,9
+cemilan,makanan,df2,cemilan,7
+indomaret,belanja,df2,indomaret,9
+biaya admin,tagihan,df2,biaya admin,11
+cemilan,makanan,df2,cemilan,7
+pulsa,tagihan,df2,pulsa,5
+warung nasi,makanan,df2,warung nasi,11
+lain-lain,lainnya,df2,lainlain,8
+warung nasi,makanan,df2,warung nasi,11
+bioskop,hiburan,df2,bioskop,7
+alfamart,belanja,df2,alfamart,8
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+belanja mingguan,belanja,df2,belanja mingguan,16
+jajan sore,makanan,df2,jajan sore,10
+iuran bulanan,tagihan,df2,iuran bulanan,13
+biaya admin,tagihan,df2,biaya admin,11
+makan malam,makanan,df2,makan malam,11
+makan siang,makanan,df2,makan siang,11
+indomaret,belanja,df2,indomaret,9
+top up game,hiburan,df2,top up game,11
+biaya admin,tagihan,df2,biaya admin,11
+jajan sore,makanan,df2,jajan sore,10
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+top up game,hiburan,df2,top up game,11
+biaya admin,tagihan,df2,biaya admin,11
+alfamart,belanja,df2,alfamart,8
+belanja mingguan,belanja,df2,belanja mingguan,16
+streaming,hiburan,df2,streaming,9
+kopi pagi,makanan,df2,kopi pagi,9
+jajan sore,makanan,df2,jajan sore,10
+listrik,tagihan,df2,listrik,7
+makan malam,makanan,df2,makan malam,11
+main ke mall,hiburan,df2,main mall,9
+bpjs,tagihan,df2,bpjs,4
+biaya admin,tagihan,df2,biaya admin,11
+belanja mingguan,belanja,df2,belanja mingguan,16
+belanja mingguan,belanja,df2,belanja mingguan,16
+bioskop,hiburan,df2,bioskop,7
+cemilan,makanan,df2,cemilan,7
+alfamart,belanja,df2,alfamart,8
+top up game,hiburan,df2,top up game,11
+cashback,tagihan,df2,cashback,8
+biaya admin,tagihan,df2,biaya admin,11
+bpjs,tagihan,df2,bpjs,4
+jajan sore,makanan,df2,jajan sore,10
+pulsa,tagihan,df2,pulsa,5
+gofood,makanan,df2,gofood,6
+alfamart,belanja,df2,alfamart,8
+gofood,makanan,df2,gofood,6
+parkir,tagihan,df2,parkir,6
+bioskop,hiburan,df2,bioskop,7
+alfamart,belanja,df2,alfamart,8
+internet,tagihan,df2,internet,8
+alfamart,belanja,df2,alfamart,8
+makan malam,makanan,df2,makan malam,11
+internet,tagihan,df2,internet,8
+main ke mall,hiburan,df2,main mall,9
+main ke mall,hiburan,df2,main mall,9
+parkir,tagihan,df2,parkir,6
+internet,tagihan,df2,internet,8
+biaya admin,tagihan,df2,biaya admin,11
+top up game,hiburan,df2,top up game,11
+top up game,hiburan,df2,top up game,11
+cemilan,makanan,df2,cemilan,7
+indomaret,belanja,df2,indomaret,9
+bioskop,hiburan,df2,bioskop,7
+air,tagihan,df2,air,3
+bpjs,tagihan,df2,bpjs,4
+tissue,belanja,df2,tissue,6
+main ke mall,hiburan,df2,main mall,9
+iuran bulanan,tagihan,df2,iuran bulanan,13
+jajan sore,makanan,df2,jajan sore,10
+listrik,tagihan,df2,listrik,7
+pulsa,tagihan,df2,pulsa,5
+iuran bulanan,tagihan,df2,iuran bulanan,13
+kopi pagi,makanan,df2,kopi pagi,9
+iuran bulanan,tagihan,df2,iuran bulanan,13
+iuran bulanan,tagihan,df2,iuran bulanan,13
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+biaya admin,tagihan,df2,biaya admin,11
+biaya admin,tagihan,df2,biaya admin,11
+streaming,hiburan,df2,streaming,9
+tissue,belanja,df2,tissue,6
+listrik,tagihan,df2,listrik,7
+iuran bulanan,tagihan,df2,iuran bulanan,13
+parkir,tagihan,df2,parkir,6
+warung nasi,makanan,df2,warung nasi,11
+bioskop,hiburan,df2,bioskop,7
+bioskop,hiburan,df2,bioskop,7
+pulsa,tagihan,df2,pulsa,5
+tissue,belanja,df2,tissue,6
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+main ke mall,hiburan,df2,main mall,9
+cemilan,makanan,df2,cemilan,7
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+air,tagihan,df2,air,3
+streaming,hiburan,df2,streaming,9
+makan siang,makanan,df2,makan siang,11
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+warung nasi,makanan,df2,warung nasi,11
+main ke mall,hiburan,df2,main mall,9
+top up game,hiburan,df2,top up game,11
+pulsa,tagihan,df2,pulsa,5
+iuran bulanan,tagihan,df2,iuran bulanan,13
+makan malam,makanan,df2,makan malam,11
+indomaret,belanja,df2,indomaret,9
+bpjs,tagihan,df2,bpjs,4
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+jajan sore,makanan,df2,jajan sore,10
+main ke mall,hiburan,df2,main mall,9
+listrik,tagihan,df2,listrik,7
+listrik,tagihan,df2,listrik,7
+indomaret,belanja,df2,indomaret,9
+alfamart,belanja,df2,alfamart,8
+parkir,tagihan,df2,parkir,6
+top up game,hiburan,df2,top up game,11
+bioskop,hiburan,df2,bioskop,7
+alfamart,belanja,df2,alfamart,8
+cemilan,makanan,df2,cemilan,7
+iuran bulanan,tagihan,df2,iuran bulanan,13
+pulsa,tagihan,df2,pulsa,5
+makan malam,makanan,df2,makan malam,11
+top up game,hiburan,df2,top up game,11
+streaming,hiburan,df2,streaming,9
+parkir,tagihan,df2,parkir,6
+bioskop,hiburan,df2,bioskop,7
+gofood,makanan,df2,gofood,6
+makan siang,makanan,df2,makan siang,11
+makan siang,makanan,df2,makan siang,11
+top up game,hiburan,df2,top up game,11
+bioskop,hiburan,df2,bioskop,7
+pulsa,tagihan,df2,pulsa,5
+belanja mingguan,belanja,df2,belanja mingguan,16
+tissue,belanja,df2,tissue,6
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+makan siang,makanan,df2,makan siang,11
+tissue,belanja,df2,tissue,6
+indomaret,belanja,df2,indomaret,9
+parkir,tagihan,df2,parkir,6
+streaming,hiburan,df2,streaming,9
+alfamart,belanja,df2,alfamart,8
+tissue,belanja,df2,tissue,6
+parkir,tagihan,df2,parkir,6
+top up game,hiburan,df2,top up game,11
+cashback,tagihan,df2,cashback,8
+main ke mall,hiburan,df2,main mall,9
+gofood,makanan,df2,gofood,6
+gofood,makanan,df2,gofood,6
+kopi pagi,makanan,df2,kopi pagi,9
+belanja mingguan,belanja,df2,belanja mingguan,16
+bioskop,hiburan,df2,bioskop,7
+air,tagihan,df2,air,3
+alfamart,belanja,df2,alfamart,8
+makan siang,makanan,df2,makan siang,11
+parkir,tagihan,df2,parkir,6
+main ke mall,hiburan,df2,main mall,9
+air,tagihan,df2,air,3
+pulsa,tagihan,df2,pulsa,5
+belanja mingguan,belanja,df2,belanja mingguan,16
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+main ke mall,hiburan,df2,main mall,9
+bioskop,hiburan,df2,bioskop,7
+listrik,tagihan,df2,listrik,7
+iuran bulanan,tagihan,df2,iuran bulanan,13
+kopi pagi,makanan,df2,kopi pagi,9
+top up game,hiburan,df2,top up game,11
+indomaret,belanja,df2,indomaret,9
+internet,tagihan,df2,internet,8
+alfamart,belanja,df2,alfamart,8
+parkir,tagihan,df2,parkir,6
+pulsa,tagihan,df2,pulsa,5
+air,tagihan,df2,air,3
+alfamart,belanja,df2,alfamart,8
+cemilan,makanan,df2,cemilan,7
+cemilan,makanan,df2,cemilan,7
+bioskop,hiburan,df2,bioskop,7
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+listrik,tagihan,df2,listrik,7
+bioskop,hiburan,df2,bioskop,7
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+top up game,hiburan,df2,top up game,11
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+parkir,tagihan,df2,parkir,6
+belanja mingguan,belanja,df2,belanja mingguan,16
+streaming,hiburan,df2,streaming,9
+main ke mall,hiburan,df2,main mall,9
+tissue,belanja,df2,tissue,6
+alfamart,belanja,df2,alfamart,8
+warung nasi,makanan,df2,warung nasi,11
+indomaret,belanja,df2,indomaret,9
+makan siang,makanan,df2,makan siang,11
+main ke mall,hiburan,df2,main mall,9
+streaming,hiburan,df2,streaming,9
+pulsa,tagihan,df2,pulsa,5
+makan malam,makanan,df2,makan malam,11
+alfamart,belanja,df2,alfamart,8
+indomaret,belanja,df2,indomaret,9
+main ke mall,hiburan,df2,main mall,9
+pulsa,tagihan,df2,pulsa,5
+warung nasi,makanan,df2,warung nasi,11
+listrik,tagihan,df2,listrik,7
+makan siang,makanan,df2,makan siang,11
+air,tagihan,df2,air,3
+main ke mall,hiburan,df2,main mall,9
+bioskop,hiburan,df2,bioskop,7
+main ke mall,hiburan,df2,main mall,9
+bioskop,hiburan,df2,bioskop,7
+cemilan,makanan,df2,cemilan,7
+streaming,hiburan,df2,streaming,9
+parkir,tagihan,df2,parkir,6
+parkir,tagihan,df2,parkir,6
+listrik,tagihan,df2,listrik,7
+streaming,hiburan,df2,streaming,9
+bpjs,tagihan,df2,bpjs,4
+makan malam,makanan,df2,makan malam,11
+air,tagihan,df2,air,3
+iuran bulanan,tagihan,df2,iuran bulanan,13
+air,tagihan,df2,air,3
+iuran bulanan,tagihan,df2,iuran bulanan,13
+streaming,hiburan,df2,streaming,9
+main ke mall,hiburan,df2,main mall,9
+parkir,tagihan,df2,parkir,6
+tissue,belanja,df2,tissue,6
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+kopi pagi,makanan,df2,kopi pagi,9
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+warung nasi,makanan,df2,warung nasi,11
+warung nasi,makanan,df2,warung nasi,11
+belanja mingguan,belanja,df2,belanja mingguan,16
+makan siang,makanan,df2,makan siang,11
+indomaret,belanja,df2,indomaret,9
+listrik,tagihan,df2,listrik,7
+internet,tagihan,df2,internet,8
+kopi pagi,makanan,df2,kopi pagi,9
+gofood,makanan,df2,gofood,6
+cemilan,makanan,df2,cemilan,7
+warung nasi,makanan,df2,warung nasi,11
+gofood,makanan,df2,gofood,6
+makan malam,makanan,df2,makan malam,11
+makan siang,makanan,df2,makan siang,11
+indomaret,belanja,df2,indomaret,9
+bpjs,tagihan,df2,bpjs,4
+internet,tagihan,df2,internet,8
+kopi pagi,makanan,df2,kopi pagi,9
+indomaret,belanja,df2,indomaret,9
+alfamart,belanja,df2,alfamart,8
+iuran bulanan,tagihan,df2,iuran bulanan,13
+cemilan,makanan,df2,cemilan,7
+pulsa,tagihan,df2,pulsa,5
+air,tagihan,df2,air,3
+tissue,belanja,df2,tissue,6
+bpjs,tagihan,df2,bpjs,4
+iuran bulanan,tagihan,df2,iuran bulanan,13
+internet,tagihan,df2,internet,8
+kebutuhan pokok,belanja,df2,kebutuhan pokok,15
+pulsa,tagihan,df2,pulsa,5
+parkir,tagihan,df2,parkir,6
+tissue,belanja,df2,tissue,6
+indomaret,belanja,df2,indomaret,9
+indomaret,belanja,df2,indomaret,9
+internet,tagihan,df2,internet,8
+streaming,hiburan,df2,streaming,9
+alfamart,belanja,df2,alfamart,8
+bpjs,tagihan,df2,bpjs,4
+jajan sore,makanan,df2,jajan sore,10
+parkir,tagihan,df2,parkir,6
+internet,tagihan,df2,internet,8
+alfamart,belanja,df2,alfamart,8
+iuran bulanan,tagihan,df2,iuran bulanan,13
+cemilan,makanan,df2,cemilan,7
+indomaret,belanja,df2,indomaret,9
+gofood,makanan,df2,gofood,6
+tissue,belanja,df2,tissue,6
+streaming,hiburan,df2,streaming,9
+tissue,belanja,df2,tissue,6
+pulsa,tagihan,df2,pulsa,5
+cemilan,makanan,df2,cemilan,7
+gofood,makanan,df2,gofood,6
+bpjs,tagihan,df2,bpjs,4
+air,tagihan,df2,air,3
+gofood,makanan,df2,gofood,6
+makan malam,makanan,df2,makan malam,11
+tissue,belanja,df2,tissue,6
+gofood,makanan,df2,gofood,6
+air,tagihan,df2,air,3
+makan malam,makanan,df2,makan malam,11
+iuran bulanan,tagihan,df2,iuran bulanan,13
+iuran bulanan,tagihan,df2,iuran bulanan,13
+tissue,belanja,df2,tissue,6
+jajan sore,makanan,df2,jajan sore,10
+internet,tagihan,df2,internet,8
+parkir,tagihan,df2,parkir,6
+gofood,makanan,df2,gofood,6
+cashback,tagihan,df2,cashback,8
+jajan sore,makanan,df2,jajan sore,10
+jajan sore,makanan,df2,jajan sore,10
+belanja mingguan,belanja,df2,belanja mingguan,16
+pulsa,tagihan,df2,pulsa,5
+pulsa,tagihan,df2,pulsa,5
+pulsa,tagihan,df2,pulsa,5
+makan siang,makanan,df2,makan siang,11
+gofood,makanan,df2,gofood,6
+bpjs,tagihan,df2,bpjs,4
+makan malam,makanan,df2,makan malam,11
+listrik,tagihan,df2,listrik,7
+warung nasi,makanan,df2,warung nasi,11
+jajan sore,makanan,df2,jajan sore,10
+kopi pagi,makanan,df2,kopi pagi,9
+kopi pagi,makanan,df2,kopi pagi,9
+cashback,tagihan,df2,cashback,8
+air,tagihan,df2,air,3
+indomaret,belanja,df2,indomaret,9
+warung nasi,makanan,df2,warung nasi,11
+bpjs,tagihan,df2,bpjs,4
+internet,tagihan,df2,internet,8
+warung nasi,makanan,df2,warung nasi,11
+pulsa,tagihan,df2,pulsa,5
+warung nasi,makanan,df2,warung nasi,11
+kopi pagi,makanan,df2,kopi pagi,9
+makan siang,makanan,df2,makan siang,11
+listrik,tagihan,df2,listrik,7
+air,tagihan,df2,air,3
+jajan sore,makanan,df2,jajan sore,10
+kopi pagi,makanan,df2,kopi pagi,9
+kopi pagi,makanan,df2,kopi pagi,9
+cashback,tagihan,df2,cashback,8
+indomaret,belanja,df2,indomaret,9
+belanja mingguan,belanja,df2,belanja mingguan,16
+makan malam,makanan,df2,makan malam,11
+cashback,tagihan,df2,cashback,8
+internet,tagihan,df2,internet,8
+bpjs,tagihan,df2,bpjs,4
+warung nasi,makanan,df2,warung nasi,11
+belanja mingguan,belanja,df2,belanja mingguan,16
+listrik,tagihan,df2,listrik,7
+warung nasi,makanan,df2,warung nasi,11
+warung nasi,makanan,df2,warung nasi,11
+belanja mingguan,belanja,df2,belanja mingguan,16
+jajan sore,makanan,df2,jajan sore,10
+listrik,tagihan,df2,listrik,7
+belanja mingguan,belanja,df2,belanja mingguan,16
+jajan sore,makanan,df2,jajan sore,10
+warung nasi,makanan,df2,warung nasi,11
+air,tagihan,df2,air,3
+cashback,tagihan,df2,cashback,8
+gofood,makanan,df2,gofood,6
+belanja mingguan,belanja,df2,belanja mingguan,16
+gofood,makanan,df2,gofood,6
+internet,tagihan,df2,internet,8
+cashback,tagihan,df2,cashback,8
+warung nasi,makanan,df2,warung nasi,11
+makan malam,makanan,df2,makan malam,11
+cashback,tagihan,df2,cashback,8
+belanja mingguan,belanja,df2,belanja mingguan,16
+makan malam,makanan,df2,makan malam,11
+listrik,tagihan,df2,listrik,7
+internet,tagihan,df2,internet,8
+makan malam,makanan,df2,makan malam,11
+air,tagihan,df2,air,3
+listrik,tagihan,df2,listrik,7
+air,tagihan,df2,air,3
+air,tagihan,df2,air,3
+makan malam,makanan,df2,makan malam,11
+makan malam,makanan,df2,makan malam,11
+belanja mingguan,belanja,df2,belanja mingguan,16
+air,tagihan,df2,air,3
+cashback,tagihan,df2,cashback,8
+cashback,tagihan,df2,cashback,8
+bpjs,tagihan,df2,bpjs,4
+air,tagihan,df2,air,3
+internet,tagihan,df2,internet,8
+cashback,tagihan,df2,cashback,8
+bpjs,tagihan,df2,bpjs,4
+cashback,tagihan,df2,cashback,8
+cashback,tagihan,df2,cashback,8
+bpjs,tagihan,df2,bpjs,4
+bpjs,tagihan,df2,bpjs,4
+cashback,tagihan,df2,cashback,8
+bpjs,tagihan,df2,bpjs,4
+bpjs,tagihan,df2,bpjs,4
+warung makan,makanan,synthetic,warung makan,12
+warteg,makanan,synthetic,warteg,6
+warung padang,makanan,synthetic,warung padang,13
+warung soto,makanan,synthetic,warung soto,11
+warung bu sari,makanan,synthetic,warung bu sari,14
+warung pak budi,makanan,synthetic,warung budi,11
+nasi uduk,makanan,synthetic,nasi uduk,9
+nasi kuning,makanan,synthetic,nasi kuning,11
+nasi padang,makanan,synthetic,nasi padang,11
+nasi goreng,makanan,synthetic,nasi goreng,11
+nasi campur,makanan,synthetic,nasi campur,11
+nasi pecel,makanan,synthetic,nasi pecel,10
+nasi liwet,makanan,synthetic,nasi liwet,10
+nasi bakar,makanan,synthetic,nasi bakar,10
+nasi box,makanan,synthetic,nasi box,8
+nasi bungkus,makanan,synthetic,nasi bungkus,12
+makan pagi,makanan,synthetic,makan pagi,10
+sarapan,makanan,synthetic,sarapan,7
+makan di warteg,makanan,synthetic,makan warteg,12
+makan di kantin,makanan,synthetic,makan kantin,12
+makan di warung,makanan,synthetic,makan warung,12
+kfc,makanan,synthetic,kfc,3
+mcdonalds,makanan,synthetic,mcdonalds,9
+burger king,makanan,synthetic,burger king,11
+pizza hut,makanan,synthetic,pizza hut,9
+dominos pizza,makanan,synthetic,dominos pizza,13
+ayam geprek,makanan,synthetic,ayam geprek,11
+ayam penyet,makanan,synthetic,ayam penyet,11
+ayam bakar,makanan,synthetic,ayam bakar,10
+ayam goreng,makanan,synthetic,ayam goreng,11
+ayam lalapan,makanan,synthetic,ayam lalapan,12
+bakso solo,makanan,synthetic,bakso solo,10
+bakso malang,makanan,synthetic,bakso malang,12
+bakso pak kumis,makanan,synthetic,bakso kumis,11
+mie ayam,makanan,synthetic,mie ayam,8
+mie bakso,makanan,synthetic,mie bakso,9
+soto ayam,makanan,synthetic,soto ayam,9
+soto betawi,makanan,synthetic,soto betawi,11
+soto lamongan,makanan,synthetic,soto lamongan,13
+rawon,makanan,synthetic,rawon,5
+opor ayam,makanan,synthetic,opor ayam,9
+rendang,makanan,synthetic,rendang,7
+gulai,makanan,synthetic,gulai,5
+sate ayam,makanan,synthetic,sate ayam,9
+sate kambing,makanan,synthetic,sate kambing,12
+sate padang,makanan,synthetic,sate padang,11
+kopi susu,makanan,synthetic,kopi susu,9
+kopi hitam,makanan,synthetic,kopi hitam,10
+kopi jahe,makanan,synthetic,kopi jahe,9
+kopi aren,makanan,synthetic,kopi aren,9
+kopi tubruk,makanan,synthetic,kopi tubruk,11
+es teh,makanan,synthetic,es teh,6
+es jeruk,makanan,synthetic,es jeruk,8
+es campur,makanan,synthetic,es campur,9
+es buah,makanan,synthetic,es buah,7
+es dawet,makanan,synthetic,es dawet,8
+teh tarik,makanan,synthetic,teh tarik,9
+thai tea,makanan,synthetic,thai tea,8
+boba,makanan,synthetic,boba,4
+matcha latte,makanan,synthetic,matcha latte,12
+susu segar,makanan,synthetic,susu segar,10
+jus alpukat,makanan,synthetic,jus alpukat,11
+jus mangga,makanan,synthetic,jus mangga,10
+jus jambu,makanan,synthetic,jus jambu,9
+jus semangka,makanan,synthetic,jus semangka,12
+jus jeruk,makanan,synthetic,jus jeruk,9
+air mineral aqua,makanan,synthetic,air mineral aqua,16
+pocari sweat,makanan,synthetic,pocari sweat,12
+mizone,makanan,synthetic,mizone,6
+sprite,makanan,synthetic,sprite,6
+coca cola,makanan,synthetic,coca cola,9
+indomie goreng,makanan,synthetic,indomie goreng,14
+indomie rebus,makanan,synthetic,indomie rebus,13
+indomie kuah,makanan,synthetic,indomie kuah,12
+mie sedaap,makanan,synthetic,mie sedaap,10
+supermi,makanan,synthetic,supermi,7
+pop mie,makanan,synthetic,pop mie,7
+sarimi,makanan,synthetic,sarimi,6
+mie telur,makanan,synthetic,mie telur,9
+bihun,makanan,synthetic,bihun,5
+kwetiau,makanan,synthetic,kwetiau,7
+khong guan,makanan,synthetic,khong guan,10
+roma marie,makanan,synthetic,roma marie,10
+oreo,makanan,synthetic,oreo,4
+biskuit,makanan,synthetic,biskuit,7
+wafer tango,makanan,synthetic,wafer tango,11
+chitato,makanan,synthetic,chitato,7
+lays,makanan,synthetic,lays,4
+cheetos,makanan,synthetic,cheetos,7
+qtela,makanan,synthetic,qtela,5
+piattos,makanan,synthetic,piattos,7
+richeese,makanan,synthetic,richeese,8
+nabati,makanan,synthetic,nabati,6
+beng beng,makanan,synthetic,beng beng,9
+silverqueen,makanan,synthetic,silverqueen,11
+cadbury,makanan,synthetic,cadbury,7
+sayur bayam,makanan,synthetic,sayur bayam,11
+sayur kangkung,makanan,synthetic,sayur kangkung,14
+sayur wortel,makanan,synthetic,sayur wortel,12
+sayur buncis,makanan,synthetic,sayur buncis,12
+sayur kol,makanan,synthetic,sayur kol,9
+beli sayuran,makanan,synthetic,beli sayuran,12
+sayuran segar,makanan,synthetic,sayuran segar,13
+brokoli,makanan,synthetic,brokoli,7
+tomat,makanan,synthetic,tomat,5
+cabai merah,makanan,synthetic,cabai merah,11
+bawang merah,makanan,synthetic,bawang merah,12
+bawang putih,makanan,synthetic,bawang putih,12
+bawang bombay,makanan,synthetic,bawang bombay,13
+kentang,makanan,synthetic,kentang,7
+singkong,makanan,synthetic,singkong,8
+tempe,makanan,synthetic,tempe,5
+tahu,makanan,synthetic,tahu,4
+tahu goreng,makanan,synthetic,goreng,6
+tempe goreng,makanan,synthetic,tempe goreng,12
+oncom,makanan,synthetic,oncom,5
+telur ayam,makanan,synthetic,telur ayam,10
+telur bebek,makanan,synthetic,telur bebek,11
+daging ayam,makanan,synthetic,daging ayam,11
+daging sapi,makanan,synthetic,daging sapi,11
+ikan lele,makanan,synthetic,ikan lele,9
+ikan mas,makanan,synthetic,ikan mas,8
+ikan tongkol,makanan,synthetic,ikan tongkol,12
+udang,makanan,synthetic,udang,5
+cumi,makanan,synthetic,cumi,4
+bakso mentah,makanan,synthetic,bakso mentah,12
+beras 5kg,makanan,synthetic,beras kg,8
+beras 10kg,makanan,synthetic,beras kg,8
+tepung terigu,makanan,synthetic,tepung terigu,13
+gula pasir,makanan,synthetic,gula pasir,10
+garam,makanan,synthetic,garam,5
+minyak goreng,makanan,synthetic,minyak goreng,13
+santan,makanan,synthetic,santan,6
+kecap manis,makanan,synthetic,kecap manis,11
+saus sambal,makanan,synthetic,saus sambal,11
+terasi,makanan,synthetic,terasi,6
+starbucks,makanan,synthetic,starbucks,9
+kopi kenangan,makanan,synthetic,kopi kenangan,13
+janji jiwa,makanan,synthetic,janji jiwa,10
+fore coffee,makanan,synthetic,fore coffee,11
+anomali coffee,makanan,synthetic,anomali coffee,14
+cerita kopi,makanan,synthetic,cerita kopi,11
+kopi tuku,makanan,synthetic,kopi tuku,9
+good day coffee,makanan,synthetic,good day coffee,15
+nescafe,makanan,synthetic,nescafe,7
+kapal api,makanan,synthetic,kapal api,9
+beli kopi,makanan,synthetic,beli kopi,9
+ngopi,makanan,synthetic,ngopi,5
+kafe,makanan,synthetic,kafe,4
+coffee shop,makanan,synthetic,coffee shop,11
+kedai kopi,makanan,synthetic,kedai kopi,10
+martabak manis,makanan,synthetic,martabak manis,14
+martabak telur,makanan,synthetic,martabak telur,14
+terang bulan,makanan,synthetic,terang,6
+pisang goreng,makanan,synthetic,pisang goreng,13
+ubi goreng,makanan,synthetic,ubi goreng,10
+gorengan,makanan,synthetic,gorengan,8
+cireng,makanan,synthetic,cireng,6
+batagor,makanan,synthetic,batagor,7
+siomay,makanan,synthetic,siomay,6
+bubur ayam,makanan,synthetic,bubur ayam,10
+bubur kacang ijo,makanan,synthetic,bubur kacang ijo,16
+kolak,makanan,synthetic,kolak,5
+klepon,makanan,synthetic,klepon,6
+onde onde,makanan,synthetic,onde onde,9
+getuk,makanan,synthetic,getuk,5
+es krim walls,makanan,synthetic,es krim walls,13
+es krim aice,makanan,synthetic,es krim aice,12
+gelato,makanan,synthetic,gelato,6
+pudding,makanan,synthetic,pudding,7
+donat,makanan,synthetic,donat,5
+roti bakar,makanan,synthetic,roti bakar,10
+roti buaya,makanan,synthetic,roti buaya,10
+croissant,makanan,synthetic,croissant,9
+sandwich,makanan,synthetic,sandwich,8
+pancake,makanan,synthetic,pancake,7
+grabfood,makanan,synthetic,grabfood,8
+shopeefood,makanan,synthetic,shopeefood,10
+delivery makanan,makanan,synthetic,delivery makanan,16
+pesan makanan online,makanan,synthetic,pesan makanan online,20
+order gofood,makanan,synthetic,order gofood,12
+ojek makanan,makanan,synthetic,ojek makanan,12
+makan delivery,makanan,synthetic,makan delivery,14
+beli makan online,makanan,synthetic,beli makan online,17
+warung makan,makanan,synthetic,warung makan,12
+warteg,makanan,synthetic,warteg,6
+warung padang,makanan,synthetic,warung padang,13
+warung soto,makanan,synthetic,warung soto,11
+warung bu sari,makanan,synthetic,warung bu sari,14
+warung pak budi,makanan,synthetic,warung budi,11
+nasi uduk,makanan,synthetic,nasi uduk,9
+nasi kuning,makanan,synthetic,nasi kuning,11
+nasi padang,makanan,synthetic,nasi padang,11
+nasi goreng,makanan,synthetic,nasi goreng,11
+nasi campur,makanan,synthetic,nasi campur,11
+nasi pecel,makanan,synthetic,nasi pecel,10
+nasi liwet,makanan,synthetic,nasi liwet,10
+nasi bakar,makanan,synthetic,nasi bakar,10
+nasi box,makanan,synthetic,nasi box,8
+nasi bungkus,makanan,synthetic,nasi bungkus,12
+makan pagi,makanan,synthetic,makan pagi,10
+sarapan,makanan,synthetic,sarapan,7
+makan di warteg,makanan,synthetic,makan warteg,12
+makan di kantin,makanan,synthetic,makan kantin,12
+makan di warung,makanan,synthetic,makan warung,12
+kfc,makanan,synthetic,kfc,3
+mcdonalds,makanan,synthetic,mcdonalds,9
+burger king,makanan,synthetic,burger king,11
+pizza hut,makanan,synthetic,pizza hut,9
+dominos pizza,makanan,synthetic,dominos pizza,13
+ayam geprek,makanan,synthetic,ayam geprek,11
+ayam penyet,makanan,synthetic,ayam penyet,11
+ayam bakar,makanan,synthetic,ayam bakar,10
+ayam goreng,makanan,synthetic,ayam goreng,11
+ayam lalapan,makanan,synthetic,ayam lalapan,12
+bakso solo,makanan,synthetic,bakso solo,10
+bakso malang,makanan,synthetic,bakso malang,12
+bakso pak kumis,makanan,synthetic,bakso kumis,11
+mie ayam,makanan,synthetic,mie ayam,8
+mie bakso,makanan,synthetic,mie bakso,9
+soto ayam,makanan,synthetic,soto ayam,9
+soto betawi,makanan,synthetic,soto betawi,11
+soto lamongan,makanan,synthetic,soto lamongan,13
+rawon,makanan,synthetic,rawon,5
+opor ayam,makanan,synthetic,opor ayam,9
+rendang,makanan,synthetic,rendang,7
+gulai,makanan,synthetic,gulai,5
+sate ayam,makanan,synthetic,sate ayam,9
+sate kambing,makanan,synthetic,sate kambing,12
+sate padang,makanan,synthetic,sate padang,11
+kopi susu,makanan,synthetic,kopi susu,9
+kopi hitam,makanan,synthetic,kopi hitam,10
+kopi jahe,makanan,synthetic,kopi jahe,9
+kopi aren,makanan,synthetic,kopi aren,9
+kopi tubruk,makanan,synthetic,kopi tubruk,11
+es teh,makanan,synthetic,es teh,6
+es jeruk,makanan,synthetic,es jeruk,8
+es campur,makanan,synthetic,es campur,9
+es buah,makanan,synthetic,es buah,7
+es dawet,makanan,synthetic,es dawet,8
+teh tarik,makanan,synthetic,teh tarik,9
+thai tea,makanan,synthetic,thai tea,8
+boba,makanan,synthetic,boba,4
+matcha latte,makanan,synthetic,matcha latte,12
+susu segar,makanan,synthetic,susu segar,10
+jus alpukat,makanan,synthetic,jus alpukat,11
+jus mangga,makanan,synthetic,jus mangga,10
+jus jambu,makanan,synthetic,jus jambu,9
+jus semangka,makanan,synthetic,jus semangka,12
+jus jeruk,makanan,synthetic,jus jeruk,9
+air mineral aqua,makanan,synthetic,air mineral aqua,16
+pocari sweat,makanan,synthetic,pocari sweat,12
+mizone,makanan,synthetic,mizone,6
+sprite,makanan,synthetic,sprite,6
+coca cola,makanan,synthetic,coca cola,9
+indomie goreng,makanan,synthetic,indomie goreng,14
+indomie rebus,makanan,synthetic,indomie rebus,13
+indomie kuah,makanan,synthetic,indomie kuah,12
+mie sedaap,makanan,synthetic,mie sedaap,10
+supermi,makanan,synthetic,supermi,7
+pop mie,makanan,synthetic,pop mie,7
+sarimi,makanan,synthetic,sarimi,6
+mie telur,makanan,synthetic,mie telur,9
+bihun,makanan,synthetic,bihun,5
+kwetiau,makanan,synthetic,kwetiau,7
+khong guan,makanan,synthetic,khong guan,10
+roma marie,makanan,synthetic,roma marie,10
+oreo,makanan,synthetic,oreo,4
+biskuit,makanan,synthetic,biskuit,7
+wafer tango,makanan,synthetic,wafer tango,11
+chitato,makanan,synthetic,chitato,7
+lays,makanan,synthetic,lays,4
+cheetos,makanan,synthetic,cheetos,7
+qtela,makanan,synthetic,qtela,5
+piattos,makanan,synthetic,piattos,7
+richeese,makanan,synthetic,richeese,8
+nabati,makanan,synthetic,nabati,6
+beng beng,makanan,synthetic,beng beng,9
+silverqueen,makanan,synthetic,silverqueen,11
+cadbury,makanan,synthetic,cadbury,7
+sayur bayam,makanan,synthetic,sayur bayam,11
+sayur kangkung,makanan,synthetic,sayur kangkung,14
+sayur wortel,makanan,synthetic,sayur wortel,12
+sayur buncis,makanan,synthetic,sayur buncis,12
+sayur kol,makanan,synthetic,sayur kol,9
+beli sayuran,makanan,synthetic,beli sayuran,12
+sayuran segar,makanan,synthetic,sayuran segar,13
+brokoli,makanan,synthetic,brokoli,7
+tomat,makanan,synthetic,tomat,5
+cabai merah,makanan,synthetic,cabai merah,11
+bawang merah,makanan,synthetic,bawang merah,12
+bawang putih,makanan,synthetic,bawang putih,12
+bawang bombay,makanan,synthetic,bawang bombay,13
+bensin,transportasi,synthetic,bensin,6
+isi bensin,transportasi,synthetic,isi bensin,10
+beli bensin,transportasi,synthetic,beli bensin,11
+bensin pertamax,transportasi,synthetic,bensin pertamax,15
+bensin pertalite,transportasi,synthetic,bensin pertalite,16
+bensin premium,transportasi,synthetic,bensin premium,14
+solar,transportasi,synthetic,solar,5
+isi solar,transportasi,synthetic,isi solar,9
+bbm,transportasi,synthetic,bbm,3
+isi bbm,transportasi,synthetic,isi bbm,7
+pertamina,transportasi,synthetic,pertamina,9
+shell,transportasi,synthetic,shell,5
+vivo bbm,transportasi,synthetic,vivo bbm,8
+isi full tank,transportasi,synthetic,isi full tank,13
+bensin motor,transportasi,synthetic,bensin motor,12
+bensin mobil,transportasi,synthetic,bensin mobil,12
+isi tangki,transportasi,synthetic,isi tangki,10
+beli solar,transportasi,synthetic,beli solar,10
+pertamax plus,transportasi,synthetic,pertamax plus,13
+dex pertamina,transportasi,synthetic,dex pertamina,13
+gojek,transportasi,synthetic,gojek,5
+grab motor,transportasi,synthetic,grab motor,10
+grab car,transportasi,synthetic,grab car,8
+gocar,transportasi,synthetic,gocar,5
+maxim,transportasi,synthetic,maxim,5
+indriver,transportasi,synthetic,indriver,8
+blu jek,transportasi,synthetic,blu jek,7
+ojek online,transportasi,synthetic,ojek online,11
+ojol,transportasi,synthetic,ojol,4
+naik grab,transportasi,synthetic,grab,4
+pesan gojek,transportasi,synthetic,pesan gojek,11
+order grab,transportasi,synthetic,order grab,10
+naik gojek,transportasi,synthetic,gojek,5
+ojek ke kantor,transportasi,synthetic,ojek kantor,11
+grab ke mall,transportasi,synthetic,grab mall,9
+taksi online,transportasi,synthetic,taksi online,12
+ride sharing,transportasi,synthetic,ride sharing,12
+naik ojek,transportasi,synthetic,ojek,4
+ongkos ojek,transportasi,synthetic,ongkos ojek,11
+bayar grab,transportasi,synthetic,bayar grab,10
+busway,transportasi,synthetic,busway,6
+transjakarta,transportasi,synthetic,transjakarta,12
+bis kota,transportasi,synthetic,bis kota,8
+angkot,transportasi,synthetic,angkot,6
+kereta commuter,transportasi,synthetic,kereta commuter,15
+commuterline,transportasi,synthetic,commuterline,12
+krl,transportasi,synthetic,krl,3
+mrt jakarta,transportasi,synthetic,mrt jakarta,11
+lrt,transportasi,synthetic,lrt,3
+kereta api,transportasi,synthetic,kereta api,10
+tiket kereta,transportasi,synthetic,tiket kereta,12
+kai,transportasi,synthetic,kai,3
+naik krl,transportasi,synthetic,krl,3
+naik mrt,transportasi,synthetic,mrt,3
+bus antar kota,transportasi,synthetic,bus kota,8
+bus damri,transportasi,synthetic,bus damri,9
+bus primajasa,transportasi,synthetic,bus primajasa,13
+travel bus,transportasi,synthetic,travel bus,10
+tiket bus,transportasi,synthetic,tiket bus,9
+bentor,transportasi,synthetic,bentor,6
+becak,transportasi,synthetic,becak,5
+bajaj,transportasi,synthetic,bajaj,5
+bemo,transportasi,synthetic,bemo,4
+mikrolet,transportasi,synthetic,mikrolet,8
+parkir motor,transportasi,synthetic,parkir motor,12
+parkir mobil,transportasi,synthetic,parkir mobil,12
+bayar parkir,transportasi,synthetic,bayar parkir,12
+karcis parkir,transportasi,synthetic,karcis parkir,13
+parkir mall,transportasi,synthetic,parkir mall,11
+tol,transportasi,synthetic,tol,3
+bayar tol,transportasi,synthetic,bayar tol,9
+etoll,transportasi,synthetic,etoll,5
+tol jagorawi,transportasi,synthetic,tol jagorawi,12
+tol cipularang,transportasi,synthetic,tol cipularang,14
+tol dalam kota,transportasi,synthetic,tol kota,8
+biaya tol,transportasi,synthetic,biaya tol,9
+masuk tol,transportasi,synthetic,tol,3
+tiket tol,transportasi,synthetic,tiket tol,9
+isi etoll,transportasi,synthetic,isi etoll,9
+servis motor,transportasi,synthetic,servis motor,12
+servis mobil,transportasi,synthetic,servis mobil,12
+ganti oli,transportasi,synthetic,ganti oli,9
+oli mesin,transportasi,synthetic,oli mesin,9
+oli gardan,transportasi,synthetic,oli gardan,10
+tambal ban,transportasi,synthetic,tambal ban,10
+ganti ban,transportasi,synthetic,ganti ban,9
+ban baru,transportasi,synthetic,ban,3
+ban motor,transportasi,synthetic,ban motor,9
+ban mobil,transportasi,synthetic,ban mobil,9
+aki motor,transportasi,synthetic,aki motor,9
+aki mobil,transportasi,synthetic,aki mobil,9
+ganti aki,transportasi,synthetic,ganti aki,9
+tune up motor,transportasi,synthetic,tune up motor,13
+tune up mobil,transportasi,synthetic,tune up mobil,13
+bengkel motor,transportasi,synthetic,bengkel motor,13
+bengkel mobil,transportasi,synthetic,bengkel mobil,13
+cuci motor,transportasi,synthetic,cuci motor,10
+cuci mobil,transportasi,synthetic,cuci mobil,10
+poles mobil,transportasi,synthetic,poles mobil,11
+ganti kampas rem,transportasi,synthetic,ganti kampas rem,16
+ganti busi,transportasi,synthetic,ganti busi,10
+filter udara,transportasi,synthetic,filter udara,12
+radiator,transportasi,synthetic,radiator,8
+rantai motor,transportasi,synthetic,rantai motor,12
+tiket pesawat,transportasi,synthetic,tiket pesawat,13
+lion air,transportasi,synthetic,lion air,8
+garuda indonesia,transportasi,synthetic,garuda indonesia,16
+citilink,transportasi,synthetic,citilink,8
+airasia,transportasi,synthetic,airasia,7
+batik air,transportasi,synthetic,batik air,9
+sriwijaya air,transportasi,synthetic,sriwijaya air,13
+tiket kereta api,transportasi,synthetic,tiket kereta api,16
+tiket kapal,transportasi,synthetic,tiket kapal,11
+tiket ferry,transportasi,synthetic,tiket ferry,11
+tiket travel,transportasi,synthetic,tiket travel,12
+ongkir travel,transportasi,synthetic,ongkir travel,13
+biaya perjalanan,transportasi,synthetic,biaya perjalanan,16
+tiket pp,transportasi,synthetic,tiket pp,8
+tiket pulang,transportasi,synthetic,tiket pulang,12
+sewa motor,transportasi,synthetic,sewa motor,10
+rental motor,transportasi,synthetic,rental motor,12
+sewa mobil,transportasi,synthetic,sewa mobil,10
+rental mobil,transportasi,synthetic,rental mobil,12
+sewa scooter,transportasi,synthetic,sewa scooter,12
+rent car,transportasi,synthetic,rent car,8
+grab rental,transportasi,synthetic,grab rental,11
+gocar sewa,transportasi,synthetic,gocar sewa,10
+sewa sepeda,transportasi,synthetic,sewa sepeda,11
+bike sharing,transportasi,synthetic,bike sharing,12
+isi saldo emoney,transportasi,synthetic,isi saldo emoney,16
+flazz,transportasi,synthetic,flazz,5
+emoney mandiri,transportasi,synthetic,emoney mandiri,14
+tapcash,transportasi,synthetic,tapcash,7
+brizzi,transportasi,synthetic,brizzi,6
+isi kartu krl,transportasi,synthetic,isi kartu krl,13
+isi kartu mrt,transportasi,synthetic,isi kartu mrt,13
+denda parkir,transportasi,synthetic,denda parkir,12
+tilang,transportasi,synthetic,tilang,6
+biaya sim,transportasi,synthetic,biaya sim,9
+bensin,transportasi,synthetic,bensin,6
+isi bensin,transportasi,synthetic,isi bensin,10
+beli bensin,transportasi,synthetic,beli bensin,11
+bensin pertamax,transportasi,synthetic,bensin pertamax,15
+bensin pertalite,transportasi,synthetic,bensin pertalite,16
+bensin premium,transportasi,synthetic,bensin premium,14
+solar,transportasi,synthetic,solar,5
+isi solar,transportasi,synthetic,isi solar,9
+bbm,transportasi,synthetic,bbm,3
+isi bbm,transportasi,synthetic,isi bbm,7
+pertamina,transportasi,synthetic,pertamina,9
+shell,transportasi,synthetic,shell,5
+vivo bbm,transportasi,synthetic,vivo bbm,8
+isi full tank,transportasi,synthetic,isi full tank,13
+bensin motor,transportasi,synthetic,bensin motor,12
+bensin mobil,transportasi,synthetic,bensin mobil,12
+isi tangki,transportasi,synthetic,isi tangki,10
+beli solar,transportasi,synthetic,beli solar,10
+pertamax plus,transportasi,synthetic,pertamax plus,13
+dex pertamina,transportasi,synthetic,dex pertamina,13
+gojek,transportasi,synthetic,gojek,5
+grab motor,transportasi,synthetic,grab motor,10
+grab car,transportasi,synthetic,grab car,8
+gocar,transportasi,synthetic,gocar,5
+maxim,transportasi,synthetic,maxim,5
+indriver,transportasi,synthetic,indriver,8
+blu jek,transportasi,synthetic,blu jek,7
+ojek online,transportasi,synthetic,ojek online,11
+ojol,transportasi,synthetic,ojol,4
+naik grab,transportasi,synthetic,grab,4
+pesan gojek,transportasi,synthetic,pesan gojek,11
+order grab,transportasi,synthetic,order grab,10
+naik gojek,transportasi,synthetic,gojek,5
+ojek ke kantor,transportasi,synthetic,ojek kantor,11
+grab ke mall,transportasi,synthetic,grab mall,9
+taksi online,transportasi,synthetic,taksi online,12
+ride sharing,transportasi,synthetic,ride sharing,12
+naik ojek,transportasi,synthetic,ojek,4
+ongkos ojek,transportasi,synthetic,ongkos ojek,11
+bayar grab,transportasi,synthetic,bayar grab,10
+busway,transportasi,synthetic,busway,6
+transjakarta,transportasi,synthetic,transjakarta,12
+bis kota,transportasi,synthetic,bis kota,8
+angkot,transportasi,synthetic,angkot,6
+kereta commuter,transportasi,synthetic,kereta commuter,15
+commuterline,transportasi,synthetic,commuterline,12
+krl,transportasi,synthetic,krl,3
+mrt jakarta,transportasi,synthetic,mrt jakarta,11
+lrt,transportasi,synthetic,lrt,3
+kereta api,transportasi,synthetic,kereta api,10
+tiket kereta,transportasi,synthetic,tiket kereta,12
+kai,transportasi,synthetic,kai,3
+naik krl,transportasi,synthetic,krl,3
+naik mrt,transportasi,synthetic,mrt,3
+bus antar kota,transportasi,synthetic,bus kota,8
+bus damri,transportasi,synthetic,bus damri,9
+bus primajasa,transportasi,synthetic,bus primajasa,13
+travel bus,transportasi,synthetic,travel bus,10
+tiket bus,transportasi,synthetic,tiket bus,9
+bentor,transportasi,synthetic,bentor,6
+becak,transportasi,synthetic,becak,5
+bajaj,transportasi,synthetic,bajaj,5
+bemo,transportasi,synthetic,bemo,4
+mikrolet,transportasi,synthetic,mikrolet,8
+parkir motor,transportasi,synthetic,parkir motor,12
+parkir mobil,transportasi,synthetic,parkir mobil,12
+bayar parkir,transportasi,synthetic,bayar parkir,12
+karcis parkir,transportasi,synthetic,karcis parkir,13
+parkir mall,transportasi,synthetic,parkir mall,11
+tol,transportasi,synthetic,tol,3
+bayar tol,transportasi,synthetic,bayar tol,9
+etoll,transportasi,synthetic,etoll,5
+tol jagorawi,transportasi,synthetic,tol jagorawi,12
+tol cipularang,transportasi,synthetic,tol cipularang,14
+tol dalam kota,transportasi,synthetic,tol kota,8
+biaya tol,transportasi,synthetic,biaya tol,9
+masuk tol,transportasi,synthetic,tol,3
+tiket tol,transportasi,synthetic,tiket tol,9
+isi etoll,transportasi,synthetic,isi etoll,9
+servis motor,transportasi,synthetic,servis motor,12
+servis mobil,transportasi,synthetic,servis mobil,12
+ganti oli,transportasi,synthetic,ganti oli,9
+oli mesin,transportasi,synthetic,oli mesin,9
+oli gardan,transportasi,synthetic,oli gardan,10
+tambal ban,transportasi,synthetic,tambal ban,10
+ganti ban,transportasi,synthetic,ganti ban,9
+ban baru,transportasi,synthetic,ban,3
+ban motor,transportasi,synthetic,ban motor,9
+ban mobil,transportasi,synthetic,ban mobil,9
+aki motor,transportasi,synthetic,aki motor,9
+aki mobil,transportasi,synthetic,aki mobil,9
+ganti aki,transportasi,synthetic,ganti aki,9
+tune up motor,transportasi,synthetic,tune up motor,13
+tune up mobil,transportasi,synthetic,tune up mobil,13
+bengkel motor,transportasi,synthetic,bengkel motor,13
+bengkel mobil,transportasi,synthetic,bengkel mobil,13
+cuci motor,transportasi,synthetic,cuci motor,10
+cuci mobil,transportasi,synthetic,cuci mobil,10
+poles mobil,transportasi,synthetic,poles mobil,11
+ganti kampas rem,transportasi,synthetic,ganti kampas rem,16
+ganti busi,transportasi,synthetic,ganti busi,10
+filter udara,transportasi,synthetic,filter udara,12
+radiator,transportasi,synthetic,radiator,8
+rantai motor,transportasi,synthetic,rantai motor,12
+tiket pesawat,transportasi,synthetic,tiket pesawat,13
+lion air,transportasi,synthetic,lion air,8
+garuda indonesia,transportasi,synthetic,garuda indonesia,16
+citilink,transportasi,synthetic,citilink,8
+airasia,transportasi,synthetic,airasia,7
+batik air,transportasi,synthetic,batik air,9
+sriwijaya air,transportasi,synthetic,sriwijaya air,13
+tiket kereta api,transportasi,synthetic,tiket kereta api,16
+tiket kapal,transportasi,synthetic,tiket kapal,11
+tiket ferry,transportasi,synthetic,tiket ferry,11
+tiket travel,transportasi,synthetic,tiket travel,12
+ongkir travel,transportasi,synthetic,ongkir travel,13
+biaya perjalanan,transportasi,synthetic,biaya perjalanan,16
+tiket pp,transportasi,synthetic,tiket pp,8
+tiket pulang,transportasi,synthetic,tiket pulang,12
+sewa motor,transportasi,synthetic,sewa motor,10
+rental motor,transportasi,synthetic,rental motor,12
+sewa mobil,transportasi,synthetic,sewa mobil,10
+rental mobil,transportasi,synthetic,rental mobil,12
+sewa scooter,transportasi,synthetic,sewa scooter,12
+rent car,transportasi,synthetic,rent car,8
+grab rental,transportasi,synthetic,grab rental,11
+gocar sewa,transportasi,synthetic,gocar sewa,10
+sewa sepeda,transportasi,synthetic,sewa sepeda,11
+bike sharing,transportasi,synthetic,bike sharing,12
+isi saldo emoney,transportasi,synthetic,isi saldo emoney,16
+flazz,transportasi,synthetic,flazz,5
+emoney mandiri,transportasi,synthetic,emoney mandiri,14
+tapcash,transportasi,synthetic,tapcash,7
+brizzi,transportasi,synthetic,brizzi,6
+isi kartu krl,transportasi,synthetic,isi kartu krl,13
+isi kartu mrt,transportasi,synthetic,isi kartu mrt,13
+denda parkir,transportasi,synthetic,denda parkir,12
+tilang,transportasi,synthetic,tilang,6
+biaya sim,transportasi,synthetic,biaya sim,9
+bensin,transportasi,synthetic,bensin,6
+isi bensin,transportasi,synthetic,isi bensin,10
+beli bensin,transportasi,synthetic,beli bensin,11
+bensin pertamax,transportasi,synthetic,bensin pertamax,15
+bensin pertalite,transportasi,synthetic,bensin pertalite,16
+bensin premium,transportasi,synthetic,bensin premium,14
+solar,transportasi,synthetic,solar,5
+isi solar,transportasi,synthetic,isi solar,9
+bbm,transportasi,synthetic,bbm,3
+isi bbm,transportasi,synthetic,isi bbm,7
+pertamina,transportasi,synthetic,pertamina,9
+shell,transportasi,synthetic,shell,5
+vivo bbm,transportasi,synthetic,vivo bbm,8
+isi full tank,transportasi,synthetic,isi full tank,13
+bensin motor,transportasi,synthetic,bensin motor,12
+bensin mobil,transportasi,synthetic,bensin mobil,12
+isi tangki,transportasi,synthetic,isi tangki,10
+beli solar,transportasi,synthetic,beli solar,10
+pertamax plus,transportasi,synthetic,pertamax plus,13
+dex pertamina,transportasi,synthetic,dex pertamina,13
+netflix,hiburan,synthetic,netflix,7
+bayar netflix,hiburan,synthetic,bayar netflix,13
+langganan netflix,hiburan,synthetic,langganan netflix,17
+disney plus,hiburan,synthetic,disney plus,11
+hbo go,hiburan,synthetic,hbo go,6
+vidio premium,hiburan,synthetic,vidio premium,13
+viu,hiburan,synthetic,viu,3
+wetv,hiburan,synthetic,wetv,4
+mola tv,hiburan,synthetic,mola tv,7
+catchplay,hiburan,synthetic,catchplay,9
+spotify,hiburan,synthetic,spotify,7
+langganan spotify,hiburan,synthetic,langganan spotify,17
+youtube premium,hiburan,synthetic,youtube premium,15
+apple music,hiburan,synthetic,apple music,11
+joox,hiburan,synthetic,joox,4
+deezer,hiburan,synthetic,deezer,6
+tidal,hiburan,synthetic,tidal,5
+langganan musik,hiburan,synthetic,langganan musik,15
+streaming musik,hiburan,synthetic,streaming musik,15
+podcast premium,hiburan,synthetic,podcast premium,15
+top up mobile legends,hiburan,synthetic,top up mobile legends,21
+top up ml,hiburan,synthetic,top up ml,9
+top up pubg,hiburan,synthetic,top up pubg,11
+top up free fire,hiburan,synthetic,top up free fire,16
+top up genshin,hiburan,synthetic,top up genshin,14
+top up valorant,hiburan,synthetic,top up valorant,15
+top up steam,hiburan,synthetic,top up steam,12
+beli game steam,hiburan,synthetic,beli game steam,15
+beli game ps5,hiburan,synthetic,beli game ps,12
+beli game xbox,hiburan,synthetic,beli game xbox,14
+nintendo switch game,hiburan,synthetic,nintendo switch game,20
+top up garena,hiburan,synthetic,top up garena,13
+top up roblox,hiburan,synthetic,top up roblox,13
+top up among us,hiburan,synthetic,top up among us,15
+top up ragnarok,hiburan,synthetic,top up ragnarok,15
+top up aov,hiburan,synthetic,top up aov,10
+diamond ml,hiburan,synthetic,diamond ml,10
+uc pubg,hiburan,synthetic,uc pubg,7
+ff diamond,hiburan,synthetic,ff diamond,10
+genesis crystal genshin,hiburan,synthetic,genesis crystal genshin,23
+playstation plus,hiburan,synthetic,playstation plus,16
+xbox game pass,hiburan,synthetic,xbox game pass,14
+ea play,hiburan,synthetic,ea play,7
+ubisoft plus,hiburan,synthetic,ubisoft plus,12
+nonton bioskop,hiburan,synthetic,nonton bioskop,14
+tiket bioskop,hiburan,synthetic,tiket bioskop,13
+cgv,hiburan,synthetic,cgv,3
+cinepolis,hiburan,synthetic,cinepolis,9
+xxi,hiburan,synthetic,xxi,3
+cinemaxx,hiburan,synthetic,cinemaxx,8
+nonton,hiburan,synthetic,nonton,6
+beli tiket nonton,hiburan,synthetic,beli tiket nonton,17
+konser,hiburan,synthetic,konser,6
+festival musik,hiburan,synthetic,festival musik,14
+tiket festival,hiburan,synthetic,tiket festival,14
+nonton konser,hiburan,synthetic,nonton konser,13
+stand up comedy,hiburan,synthetic,stand up comedy,15
+tiket stand up,hiburan,synthetic,tiket stand up,14
+wayang,hiburan,synthetic,wayang,6
+pertunjukan seni,hiburan,synthetic,pertunjukan seni,16
+teater,hiburan,synthetic,teater,6
+tiket masuk wahana,hiburan,synthetic,tiket wahana,12
+dufan,hiburan,synthetic,dufan,5
+taman safari,hiburan,synthetic,taman safari,12
+ancol,hiburan,synthetic,ancol,5
+ragunan,hiburan,synthetic,ragunan,7
+tiket kebun binatang,hiburan,synthetic,tiket kebun binatang,20
+water boom,hiburan,synthetic,water boom,10
+kolam renang,hiburan,synthetic,kolam renang,12
+tiket wisata,hiburan,synthetic,tiket wisata,12
+taman hiburan,hiburan,synthetic,taman hiburan,13
+tiket masuk museum,hiburan,synthetic,tiket museum,12
+wisata alam,hiburan,synthetic,wisata alam,11
+glamping,hiburan,synthetic,glamping,8
+tiket rafting,hiburan,synthetic,tiket rafting,13
+paintball,hiburan,synthetic,paintball,9
+go kart,hiburan,synthetic,go kart,7
+bowling,hiburan,synthetic,bowling,7
+laser game,hiburan,synthetic,laser game,10
+karaoke,hiburan,synthetic,karaoke,7
+inul vizta,hiburan,synthetic,inul vizta,10
+happy puppy,hiburan,synthetic,happy puppy,11
+nav karaoke,hiburan,synthetic,nav karaoke,11
+karaoke family,hiburan,synthetic,karaoke family,14
+billiard,hiburan,synthetic,billiard,8
+futsal,hiburan,synthetic,futsal,6
+badminton,hiburan,synthetic,badminton,9
+voli,hiburan,synthetic,voli,4
+tenis,hiburan,synthetic,tenis,5
+gym,hiburan,synthetic,gym,3
+fitness center,hiburan,synthetic,fitness center,14
+kolam renang gym,hiburan,synthetic,kolam renang gym,16
+climbing,hiburan,synthetic,climbing,8
+archery,hiburan,synthetic,archery,7
+buku novel,hiburan,synthetic,buku novel,10
+komik,hiburan,synthetic,komik,5
+manga,hiburan,synthetic,manga,5
+beli buku,hiburan,synthetic,beli buku,9
+jalan jalan mall,hiburan,synthetic,jalan jalan mall,16
+nongkrong cafe,hiburan,synthetic,nongkrong cafe,14
+hangout,hiburan,synthetic,hangout,7
+nongkrong,hiburan,synthetic,nongkrong,9
+piknik,hiburan,synthetic,piknik,6
+camping,hiburan,synthetic,camping,7
+hiking,hiburan,synthetic,hiking,6
+liburan,hiburan,synthetic,liburan,7
+wisata,hiburan,synthetic,wisata,6
+foto studio,hiburan,synthetic,foto studio,11
+photobooth,hiburan,synthetic,photobooth,10
+selfie studio,hiburan,synthetic,selfie studio,13
+foto polaroid,hiburan,synthetic,foto polaroid,13
+cetak foto,hiburan,synthetic,cetak foto,10
+escape room,hiburan,synthetic,escape room,11
+museum lilin,hiburan,synthetic,museum lilin,12
+museum interaktif,hiburan,synthetic,museum interaktif,17
+pameran seni,hiburan,synthetic,pameran seni,12
+canva pro,hiburan,synthetic,canva pro,9
+adobe creative,hiburan,synthetic,adobe creative,14
+grammarly,hiburan,synthetic,grammarly,9
+notion premium,hiburan,synthetic,notion premium,14
+zoom premium,hiburan,synthetic,zoom premium,12
+microsoft 365,hiburan,synthetic,microsoft,9
+google one,hiburan,synthetic,google one,10
+icloud storage,hiburan,synthetic,icloud storage,14
+duolingo plus,hiburan,synthetic,duolingo plus,13
+coursera,hiburan,synthetic,coursera,8
+udemy,hiburan,synthetic,udemy,5
+skillshare,hiburan,synthetic,skillshare,10
+masterclass,hiburan,synthetic,masterclass,11
+netflix,hiburan,synthetic,netflix,7
+bayar netflix,hiburan,synthetic,bayar netflix,13
+langganan netflix,hiburan,synthetic,langganan netflix,17
+disney plus,hiburan,synthetic,disney plus,11
+hbo go,hiburan,synthetic,hbo go,6
+vidio premium,hiburan,synthetic,vidio premium,13
+viu,hiburan,synthetic,viu,3
+wetv,hiburan,synthetic,wetv,4
+mola tv,hiburan,synthetic,mola tv,7
+catchplay,hiburan,synthetic,catchplay,9
+spotify,hiburan,synthetic,spotify,7
+langganan spotify,hiburan,synthetic,langganan spotify,17
+youtube premium,hiburan,synthetic,youtube premium,15
+apple music,hiburan,synthetic,apple music,11
+joox,hiburan,synthetic,joox,4
+deezer,hiburan,synthetic,deezer,6
+tidal,hiburan,synthetic,tidal,5
+langganan musik,hiburan,synthetic,langganan musik,15
+streaming musik,hiburan,synthetic,streaming musik,15
+podcast premium,hiburan,synthetic,podcast premium,15
+top up mobile legends,hiburan,synthetic,top up mobile legends,21
+top up ml,hiburan,synthetic,top up ml,9
+top up pubg,hiburan,synthetic,top up pubg,11
+top up free fire,hiburan,synthetic,top up free fire,16
+top up genshin,hiburan,synthetic,top up genshin,14
+top up valorant,hiburan,synthetic,top up valorant,15
+top up steam,hiburan,synthetic,top up steam,12
+beli game steam,hiburan,synthetic,beli game steam,15
+beli game ps5,hiburan,synthetic,beli game ps,12
+beli game xbox,hiburan,synthetic,beli game xbox,14
+nintendo switch game,hiburan,synthetic,nintendo switch game,20
+top up garena,hiburan,synthetic,top up garena,13
+top up roblox,hiburan,synthetic,top up roblox,13
+top up among us,hiburan,synthetic,top up among us,15
+top up ragnarok,hiburan,synthetic,top up ragnarok,15
+top up aov,hiburan,synthetic,top up aov,10
+diamond ml,hiburan,synthetic,diamond ml,10
+uc pubg,hiburan,synthetic,uc pubg,7
+ff diamond,hiburan,synthetic,ff diamond,10
+genesis crystal genshin,hiburan,synthetic,genesis crystal genshin,23
+playstation plus,hiburan,synthetic,playstation plus,16
+xbox game pass,hiburan,synthetic,xbox game pass,14
+ea play,hiburan,synthetic,ea play,7
+ubisoft plus,hiburan,synthetic,ubisoft plus,12
+nonton bioskop,hiburan,synthetic,nonton bioskop,14
+tiket bioskop,hiburan,synthetic,tiket bioskop,13
+cgv,hiburan,synthetic,cgv,3
+cinepolis,hiburan,synthetic,cinepolis,9
+xxi,hiburan,synthetic,xxi,3
+cinemaxx,hiburan,synthetic,cinemaxx,8
+nonton,hiburan,synthetic,nonton,6
+beli tiket nonton,hiburan,synthetic,beli tiket nonton,17
+konser,hiburan,synthetic,konser,6
+festival musik,hiburan,synthetic,festival musik,14
+tiket festival,hiburan,synthetic,tiket festival,14
+nonton konser,hiburan,synthetic,nonton konser,13
+stand up comedy,hiburan,synthetic,stand up comedy,15
+tiket stand up,hiburan,synthetic,tiket stand up,14
+wayang,hiburan,synthetic,wayang,6
+pertunjukan seni,hiburan,synthetic,pertunjukan seni,16
+teater,hiburan,synthetic,teater,6
+tiket masuk wahana,hiburan,synthetic,tiket wahana,12
+dufan,hiburan,synthetic,dufan,5
+taman safari,hiburan,synthetic,taman safari,12
+ancol,hiburan,synthetic,ancol,5
+ragunan,hiburan,synthetic,ragunan,7
+tiket kebun binatang,hiburan,synthetic,tiket kebun binatang,20
+water boom,hiburan,synthetic,water boom,10
+kolam renang,hiburan,synthetic,kolam renang,12
+tiket wisata,hiburan,synthetic,tiket wisata,12
+taman hiburan,hiburan,synthetic,taman hiburan,13
+tiket masuk museum,hiburan,synthetic,tiket museum,12
+wisata alam,hiburan,synthetic,wisata alam,11
+glamping,hiburan,synthetic,glamping,8
+tiket rafting,hiburan,synthetic,tiket rafting,13
+paintball,hiburan,synthetic,paintball,9
+go kart,hiburan,synthetic,go kart,7
+bowling,hiburan,synthetic,bowling,7
+laser game,hiburan,synthetic,laser game,10
+karaoke,hiburan,synthetic,karaoke,7
+inul vizta,hiburan,synthetic,inul vizta,10
+happy puppy,hiburan,synthetic,happy puppy,11
+nav karaoke,hiburan,synthetic,nav karaoke,11
+karaoke family,hiburan,synthetic,karaoke family,14
+billiard,hiburan,synthetic,billiard,8
+futsal,hiburan,synthetic,futsal,6
+badminton,hiburan,synthetic,badminton,9
+voli,hiburan,synthetic,voli,4
+tenis,hiburan,synthetic,tenis,5
+gym,hiburan,synthetic,gym,3
+fitness center,hiburan,synthetic,fitness center,14
+kolam renang gym,hiburan,synthetic,kolam renang gym,16
+climbing,hiburan,synthetic,climbing,8
+archery,hiburan,synthetic,archery,7
+buku novel,hiburan,synthetic,buku novel,10
+komik,hiburan,synthetic,komik,5
+manga,hiburan,synthetic,manga,5
+beli buku,hiburan,synthetic,beli buku,9
+jalan jalan mall,hiburan,synthetic,jalan jalan mall,16
+nongkrong cafe,hiburan,synthetic,nongkrong cafe,14
+hangout,hiburan,synthetic,hangout,7
+nongkrong,hiburan,synthetic,nongkrong,9
+piknik,hiburan,synthetic,piknik,6
+camping,hiburan,synthetic,camping,7
+hiking,hiburan,synthetic,hiking,6
+liburan,hiburan,synthetic,liburan,7
+wisata,hiburan,synthetic,wisata,6
+foto studio,hiburan,synthetic,foto studio,11
+photobooth,hiburan,synthetic,photobooth,10
+selfie studio,hiburan,synthetic,selfie studio,13
+foto polaroid,hiburan,synthetic,foto polaroid,13
+cetak foto,hiburan,synthetic,cetak foto,10
+escape room,hiburan,synthetic,escape room,11
+museum lilin,hiburan,synthetic,museum lilin,12
+museum interaktif,hiburan,synthetic,museum interaktif,17
+pameran seni,hiburan,synthetic,pameran seni,12
+canva pro,hiburan,synthetic,canva pro,9
+adobe creative,hiburan,synthetic,adobe creative,14
+grammarly,hiburan,synthetic,grammarly,9
+notion premium,hiburan,synthetic,notion premium,14
+zoom premium,hiburan,synthetic,zoom premium,12
+microsoft 365,hiburan,synthetic,microsoft,9
+google one,hiburan,synthetic,google one,10
+icloud storage,hiburan,synthetic,icloud storage,14
+duolingo plus,hiburan,synthetic,duolingo plus,13
+coursera,hiburan,synthetic,coursera,8
+udemy,hiburan,synthetic,udemy,5
+skillshare,hiburan,synthetic,skillshare,10
+masterclass,hiburan,synthetic,masterclass,11
+netflix,hiburan,synthetic,netflix,7
+bayar netflix,hiburan,synthetic,bayar netflix,13
+langganan netflix,hiburan,synthetic,langganan netflix,17
+disney plus,hiburan,synthetic,disney plus,11
+hbo go,hiburan,synthetic,hbo go,6
+vidio premium,hiburan,synthetic,vidio premium,13
+viu,hiburan,synthetic,viu,3
+wetv,hiburan,synthetic,wetv,4
+mola tv,hiburan,synthetic,mola tv,7
+catchplay,hiburan,synthetic,catchplay,9
+spotify,hiburan,synthetic,spotify,7
+langganan spotify,hiburan,synthetic,langganan spotify,17
+youtube premium,hiburan,synthetic,youtube premium,15
+apple music,hiburan,synthetic,apple music,11
+joox,hiburan,synthetic,joox,4
+deezer,hiburan,synthetic,deezer,6
+tidal,hiburan,synthetic,tidal,5
+langganan musik,hiburan,synthetic,langganan musik,15
+streaming musik,hiburan,synthetic,streaming musik,15
+podcast premium,hiburan,synthetic,podcast premium,15
+top up mobile legends,hiburan,synthetic,top up mobile legends,21
+top up ml,hiburan,synthetic,top up ml,9
+top up pubg,hiburan,synthetic,top up pubg,11
+top up free fire,hiburan,synthetic,top up free fire,16
+top up genshin,hiburan,synthetic,top up genshin,14
+top up valorant,hiburan,synthetic,top up valorant,15
+top up steam,hiburan,synthetic,top up steam,12
+beli game steam,hiburan,synthetic,beli game steam,15
+beli game ps5,hiburan,synthetic,beli game ps,12
+beli game xbox,hiburan,synthetic,beli game xbox,14
+nintendo switch game,hiburan,synthetic,nintendo switch game,20
+top up garena,hiburan,synthetic,top up garena,13
+alfamidi,belanja,synthetic,alfamidi,8
+lawson,belanja,synthetic,lawson,6
+circle k,belanja,synthetic,circle,6
+superindo,belanja,synthetic,superindo,9
+hypermart,belanja,synthetic,hypermart,9
+carrefour,belanja,synthetic,carrefour,9
+hero supermarket,belanja,synthetic,hero supermarket,16
+giant,belanja,synthetic,giant,5
+lottemart,belanja,synthetic,lottemart,9
+transmart,belanja,synthetic,transmart,9
+yogya,belanja,synthetic,yogya,5
+borma,belanja,synthetic,borma,5
+tip top,belanja,synthetic,tip top,7
+beli di alfamart,belanja,synthetic,beli alfamart,13
+beli di indomaret,belanja,synthetic,beli indomaret,14
+belanja supermarket,belanja,synthetic,belanja supermarket,19
+belanja bulanan,belanja,synthetic,belanja bulanan,15
+sabun mandi,belanja,synthetic,sabun mandi,11
+sabun lifebuoy,belanja,synthetic,sabun lifebuoy,14
+sabun dettol,belanja,synthetic,sabun dettol,12
+sabun dove,belanja,synthetic,sabun dove,10
+lux sabun,belanja,synthetic,lux sabun,9
+shampoo,belanja,synthetic,shampoo,7
+shampoo clear,belanja,synthetic,shampoo clear,13
+shampoo pantene,belanja,synthetic,shampoo pantene,15
+shampoo head shoulders,belanja,synthetic,shampoo head shoulders,22
+kondisioner,belanja,synthetic,kondisioner,11
+sabun cuci muka,belanja,synthetic,sabun cuci muka,15
+facial wash,belanja,synthetic,facial wash,11
+sabun cuci tangan,belanja,synthetic,sabun cuci tangan,17
+sikat gigi,belanja,synthetic,sikat gigi,10
+odol pepsodent,belanja,synthetic,odol pepsodent,14
+odol sensodyne,belanja,synthetic,odol sensodyne,14
+odol closeup,belanja,synthetic,odol closeup,12
+deodorant,belanja,synthetic,deodorant,9
+parfum,belanja,synthetic,parfum,6
+body lotion,belanja,synthetic,body lotion,11
+hand sanitizer,belanja,synthetic,hand sanitizer,14
+antiseptik,belanja,synthetic,antiseptik,10
+tisu basah,belanja,synthetic,tisu basah,10
+kapas,belanja,synthetic,kapas,5
+cotton bud,belanja,synthetic,cotton bud,10
+pembalut,belanja,synthetic,pembalut,8
+detergen,belanja,synthetic,detergen,8
+rinso,belanja,synthetic,rinso,5
+attack detergen,belanja,synthetic,attack detergen,15
+so klin,belanja,synthetic,so klin,7
+detergen bubuk,belanja,synthetic,detergen bubuk,14
+detergen cair,belanja,synthetic,detergen cair,13
+softener,belanja,synthetic,softener,8
+pewangi pakaian,belanja,synthetic,pewangi pakaian,15
+molto,belanja,synthetic,molto,5
+downy,belanja,synthetic,downy,5
+sabun cuci piring,belanja,synthetic,sabun cuci piring,17
+sunlight,belanja,synthetic,sunlight,8
+mama lime,belanja,synthetic,mama lime,9
+pel lantai,belanja,synthetic,pel lantai,10
+karbol,belanja,synthetic,karbol,6
+wipol,belanja,synthetic,wipol,5
+baygon,belanja,synthetic,baygon,6
+obat nyamuk,belanja,synthetic,obat nyamuk,11
+hit obat nyamuk,belanja,synthetic,hit obat nyamuk,15
+autan lotion,belanja,synthetic,autan lotion,12
+skincare,belanja,synthetic,skincare,8
+moisturizer,belanja,synthetic,moisturizer,11
+serum wajah,belanja,synthetic,serum wajah,11
+sunscreen,belanja,synthetic,sunscreen,9
+spf lotion,belanja,synthetic,spf lotion,10
+toner,belanja,synthetic,toner,5
+micellar water,belanja,synthetic,micellar water,14
+makeup,belanja,synthetic,makeup,6
+foundation,belanja,synthetic,foundation,10
+bedak,belanja,synthetic,bedak,5
+lipstik,belanja,synthetic,lipstik,7
+lipbalm,belanja,synthetic,lipbalm,7
+blush on,belanja,synthetic,blush on,8
+maskara,belanja,synthetic,maskara,7
+eyeliner,belanja,synthetic,eyeliner,8
+skincare wardah,belanja,synthetic,skincare wardah,15
+emina,belanja,synthetic,emina,5
+ms glow,belanja,synthetic,ms glow,7
+somethinc,belanja,synthetic,somethinc,9
+skintific,belanja,synthetic,skintific,9
+beli baju,belanja,synthetic,beli baju,9
+beli kaos,belanja,synthetic,beli kaos,9
+kemeja,belanja,synthetic,kemeja,6
+celana jeans,belanja,synthetic,celana jeans,12
+celana pendek,belanja,synthetic,celana pendek,13
+jaket,belanja,synthetic,jaket,5
+hoodie,belanja,synthetic,hoodie,6
+dress,belanja,synthetic,dress,5
+gamis,belanja,synthetic,gamis,5
+hijab,belanja,synthetic,hijab,5
+beli sepatu,belanja,synthetic,beli sepatu,11
+sandal,belanja,synthetic,sandal,6
+sepatu sneakers,belanja,synthetic,sepatu sneakers,15
+sepatu kerja,belanja,synthetic,sepatu,6
+sendal jepit,belanja,synthetic,sendal jepit,12
+tas,belanja,synthetic,tas,3
+dompet,belanja,synthetic,dompet,6
+ikat pinggang,belanja,synthetic,ikat pinggang,13
+topi,belanja,synthetic,topi,4
+kacamata,belanja,synthetic,kacamata,8
+beli charger,belanja,synthetic,beli charger,12
+kabel data,belanja,synthetic,kabel data,10
+earphone,belanja,synthetic,earphone,8
+headset,belanja,synthetic,headset,7
+powerbank,belanja,synthetic,powerbank,9
+casing hp,belanja,synthetic,casing hp,9
+pelindung layar,belanja,synthetic,pelindung layar,15
+mouse,belanja,synthetic,mouse,5
+keyboard,belanja,synthetic,keyboard,8
+flashdisk,belanja,synthetic,flashdisk,9
+lampu led,belanja,synthetic,lampu led,9
+baterai,belanja,synthetic,baterai,7
+bolpoin,belanja,synthetic,bolpoin,7
+pulpen,belanja,synthetic,pulpen,6
+buku tulis,belanja,synthetic,buku tulis,10
+perlengkapan dapur,belanja,synthetic,perlengkapan dapur,18
+piring,belanja,synthetic,piring,6
+gelas,belanja,synthetic,gelas,5
+sendok garpu,belanja,synthetic,sendok garpu,12
+wajan,belanja,synthetic,wajan,5
+ember,belanja,synthetic,ember,5
+sapu,belanja,synthetic,sapu,4
+pel,belanja,synthetic,pel,3
+sikat wc,belanja,synthetic,sikat wc,8
+tempat sampah,belanja,synthetic,sampah,6
+hanger baju,belanja,synthetic,hanger baju,11
+gantungan,belanja,synthetic,gantungan,9
+bantal,belanja,synthetic,bantal,6
+sprei,belanja,synthetic,sprei,5
+handuk,belanja,synthetic,handuk,6
+alfamidi,belanja,synthetic,alfamidi,8
+lawson,belanja,synthetic,lawson,6
+circle k,belanja,synthetic,circle,6
+superindo,belanja,synthetic,superindo,9
+hypermart,belanja,synthetic,hypermart,9
+carrefour,belanja,synthetic,carrefour,9
+hero supermarket,belanja,synthetic,hero supermarket,16
+giant,belanja,synthetic,giant,5
+lottemart,belanja,synthetic,lottemart,9
+transmart,belanja,synthetic,transmart,9
+yogya,belanja,synthetic,yogya,5
+borma,belanja,synthetic,borma,5
+tip top,belanja,synthetic,tip top,7
+beli di alfamart,belanja,synthetic,beli alfamart,13
+beli di indomaret,belanja,synthetic,beli indomaret,14
+belanja supermarket,belanja,synthetic,belanja supermarket,19
+belanja bulanan,belanja,synthetic,belanja bulanan,15
+sabun mandi,belanja,synthetic,sabun mandi,11
+sabun lifebuoy,belanja,synthetic,sabun lifebuoy,14
+sabun dettol,belanja,synthetic,sabun dettol,12
+sabun dove,belanja,synthetic,sabun dove,10
+lux sabun,belanja,synthetic,lux sabun,9
+shampoo,belanja,synthetic,shampoo,7
+shampoo clear,belanja,synthetic,shampoo clear,13
+shampoo pantene,belanja,synthetic,shampoo pantene,15
+shampoo head shoulders,belanja,synthetic,shampoo head shoulders,22
+kondisioner,belanja,synthetic,kondisioner,11
+sabun cuci muka,belanja,synthetic,sabun cuci muka,15
+facial wash,belanja,synthetic,facial wash,11
+sabun cuci tangan,belanja,synthetic,sabun cuci tangan,17
+sikat gigi,belanja,synthetic,sikat gigi,10
+odol pepsodent,belanja,synthetic,odol pepsodent,14
+odol sensodyne,belanja,synthetic,odol sensodyne,14
+odol closeup,belanja,synthetic,odol closeup,12
+deodorant,belanja,synthetic,deodorant,9
+parfum,belanja,synthetic,parfum,6
+body lotion,belanja,synthetic,body lotion,11
+hand sanitizer,belanja,synthetic,hand sanitizer,14
+antiseptik,belanja,synthetic,antiseptik,10
+tisu basah,belanja,synthetic,tisu basah,10
+kapas,belanja,synthetic,kapas,5
+cotton bud,belanja,synthetic,cotton bud,10
+pembalut,belanja,synthetic,pembalut,8
+detergen,belanja,synthetic,detergen,8
+rinso,belanja,synthetic,rinso,5
+attack detergen,belanja,synthetic,attack detergen,15
+so klin,belanja,synthetic,so klin,7
+detergen bubuk,belanja,synthetic,detergen bubuk,14
+detergen cair,belanja,synthetic,detergen cair,13
+softener,belanja,synthetic,softener,8
+pewangi pakaian,belanja,synthetic,pewangi pakaian,15
+molto,belanja,synthetic,molto,5
+downy,belanja,synthetic,downy,5
+sabun cuci piring,belanja,synthetic,sabun cuci piring,17
+sunlight,belanja,synthetic,sunlight,8
+mama lime,belanja,synthetic,mama lime,9
+pel lantai,belanja,synthetic,pel lantai,10
+karbol,belanja,synthetic,karbol,6
+wipol,belanja,synthetic,wipol,5
+baygon,belanja,synthetic,baygon,6
+obat nyamuk,belanja,synthetic,obat nyamuk,11
+hit obat nyamuk,belanja,synthetic,hit obat nyamuk,15
+autan lotion,belanja,synthetic,autan lotion,12
+skincare,belanja,synthetic,skincare,8
+moisturizer,belanja,synthetic,moisturizer,11
+serum wajah,belanja,synthetic,serum wajah,11
+sunscreen,belanja,synthetic,sunscreen,9
+spf lotion,belanja,synthetic,spf lotion,10
+toner,belanja,synthetic,toner,5
+micellar water,belanja,synthetic,micellar water,14
+makeup,belanja,synthetic,makeup,6
+foundation,belanja,synthetic,foundation,10
+bedak,belanja,synthetic,bedak,5
+lipstik,belanja,synthetic,lipstik,7
+lipbalm,belanja,synthetic,lipbalm,7
+blush on,belanja,synthetic,blush on,8
+maskara,belanja,synthetic,maskara,7
+eyeliner,belanja,synthetic,eyeliner,8
+skincare wardah,belanja,synthetic,skincare wardah,15
+emina,belanja,synthetic,emina,5
+ms glow,belanja,synthetic,ms glow,7
+somethinc,belanja,synthetic,somethinc,9
+skintific,belanja,synthetic,skintific,9
+beli baju,belanja,synthetic,beli baju,9
+beli kaos,belanja,synthetic,beli kaos,9
+kemeja,belanja,synthetic,kemeja,6
+celana jeans,belanja,synthetic,celana jeans,12
+celana pendek,belanja,synthetic,celana pendek,13
+jaket,belanja,synthetic,jaket,5
+hoodie,belanja,synthetic,hoodie,6
+dress,belanja,synthetic,dress,5
+gamis,belanja,synthetic,gamis,5
+hijab,belanja,synthetic,hijab,5
+beli sepatu,belanja,synthetic,beli sepatu,11
+sandal,belanja,synthetic,sandal,6
+sepatu sneakers,belanja,synthetic,sepatu sneakers,15
+sepatu kerja,belanja,synthetic,sepatu,6
+sendal jepit,belanja,synthetic,sendal jepit,12
+tas,belanja,synthetic,tas,3
+dompet,belanja,synthetic,dompet,6
+ikat pinggang,belanja,synthetic,ikat pinggang,13
+topi,belanja,synthetic,topi,4
+kacamata,belanja,synthetic,kacamata,8
+beli charger,belanja,synthetic,beli charger,12
+kabel data,belanja,synthetic,kabel data,10
+earphone,belanja,synthetic,earphone,8
+headset,belanja,synthetic,headset,7
+powerbank,belanja,synthetic,powerbank,9
+casing hp,belanja,synthetic,casing hp,9
+pelindung layar,belanja,synthetic,pelindung layar,15
+mouse,belanja,synthetic,mouse,5
+keyboard,belanja,synthetic,keyboard,8
+flashdisk,belanja,synthetic,flashdisk,9
+lampu led,belanja,synthetic,lampu led,9
+baterai,belanja,synthetic,baterai,7
+bolpoin,belanja,synthetic,bolpoin,7
+pulpen,belanja,synthetic,pulpen,6
+buku tulis,belanja,synthetic,buku tulis,10
+perlengkapan dapur,belanja,synthetic,perlengkapan dapur,18
+piring,belanja,synthetic,piring,6
+gelas,belanja,synthetic,gelas,5
+sendok garpu,belanja,synthetic,sendok garpu,12
+wajan,belanja,synthetic,wajan,5
+ember,belanja,synthetic,ember,5
+sapu,belanja,synthetic,sapu,4
+pel,belanja,synthetic,pel,3
+sikat wc,belanja,synthetic,sikat wc,8
+tempat sampah,belanja,synthetic,sampah,6
+hanger baju,belanja,synthetic,hanger baju,11
+gantungan,belanja,synthetic,gantungan,9
+bantal,belanja,synthetic,bantal,6
+sprei,belanja,synthetic,sprei,5
+handuk,belanja,synthetic,handuk,6
+alfamidi,belanja,synthetic,alfamidi,8
+lawson,belanja,synthetic,lawson,6
+circle k,belanja,synthetic,circle,6
+superindo,belanja,synthetic,superindo,9
+hypermart,belanja,synthetic,hypermart,9
+carrefour,belanja,synthetic,carrefour,9
+hero supermarket,belanja,synthetic,hero supermarket,16
+giant,belanja,synthetic,giant,5
+lottemart,belanja,synthetic,lottemart,9
+transmart,belanja,synthetic,transmart,9
+yogya,belanja,synthetic,yogya,5
+borma,belanja,synthetic,borma,5
+tip top,belanja,synthetic,tip top,7
+beli di alfamart,belanja,synthetic,beli alfamart,13
+beli di indomaret,belanja,synthetic,beli indomaret,14
+belanja supermarket,belanja,synthetic,belanja supermarket,19
+belanja bulanan,belanja,synthetic,belanja bulanan,15
+sabun mandi,belanja,synthetic,sabun mandi,11
+sabun lifebuoy,belanja,synthetic,sabun lifebuoy,14
+sabun dettol,belanja,synthetic,sabun dettol,12
+sabun dove,belanja,synthetic,sabun dove,10
+lux sabun,belanja,synthetic,lux sabun,9
+shampoo,belanja,synthetic,shampoo,7
+shampoo clear,belanja,synthetic,shampoo clear,13
+dokter umum,kesehatan,synthetic,dokter umum,11
+klinik,kesehatan,synthetic,klinik,6
+puskesmas,kesehatan,synthetic,puskesmas,9
+konsultasi dokter,kesehatan,synthetic,konsultasi dokter,17
+periksa dokter,kesehatan,synthetic,periksa dokter,14
+dokter gigi,kesehatan,synthetic,dokter gigi,11
+cabut gigi,kesehatan,synthetic,cabut gigi,10
+tambal gigi,kesehatan,synthetic,tambal gigi,11
+scaling gigi,kesehatan,synthetic,scaling gigi,12
+perawatan gigi,kesehatan,synthetic,perawatan gigi,14
+dokter spesialis,kesehatan,synthetic,dokter spesialis,16
+dokter anak,kesehatan,synthetic,dokter anak,11
+dokter kandungan,kesehatan,synthetic,dokter kandungan,16
+dokter mata,kesehatan,synthetic,dokter,6
+dokter kulit,kesehatan,synthetic,dokter kulit,12
+rumah sakit,kesehatan,synthetic,rumah sakit,11
+ugd,kesehatan,synthetic,ugd,3
+rawat jalan,kesehatan,synthetic,rawat jalan,11
+rawat inap,kesehatan,synthetic,rawat inap,10
+operasi,kesehatan,synthetic,operasi,7
+bidan,kesehatan,synthetic,bidan,5
+konsultasi bidan,kesehatan,synthetic,konsultasi bidan,16
+cek kehamilan,kesehatan,synthetic,cek kehamilan,13
+usg kandungan,kesehatan,synthetic,usg kandungan,13
+imunisasi,kesehatan,synthetic,imunisasi,9
+apotek,kesehatan,synthetic,apotek,6
+kimia farma,kesehatan,synthetic,kimia farma,11
+guardian apotek,kesehatan,synthetic,guardian apotek,15
+century apotek,kesehatan,synthetic,century apotek,14
+k24 apotek,kesehatan,synthetic,apotek,6
+beli obat,kesehatan,synthetic,beli obat,9
+obat batuk,kesehatan,synthetic,obat batuk,10
+obat pilek,kesehatan,synthetic,obat pilek,10
+obat demam,kesehatan,synthetic,obat demam,10
+obat sakit kepala,kesehatan,synthetic,obat sakit kepala,17
+paracetamol,kesehatan,synthetic,paracetamol,11
+ibuprofen,kesehatan,synthetic,ibuprofen,9
+amoxicillin,kesehatan,synthetic,amoxicillin,11
+vitamin c,kesehatan,synthetic,vitamin,7
+vitamin d,kesehatan,synthetic,vitamin,7
+suplemen,kesehatan,synthetic,suplemen,8
+minyak kayu putih,kesehatan,synthetic,minyak kayu putih,17
+betadine,kesehatan,synthetic,betadine,8
+hansaplast,kesehatan,synthetic,hansaplast,10
+perban,kesehatan,synthetic,perban,6
+obat maag,kesehatan,synthetic,obat maag,9
+antasida,kesehatan,synthetic,antasida,8
+promag,kesehatan,synthetic,promag,6
+mylanta,kesehatan,synthetic,mylanta,7
+obat diare,kesehatan,synthetic,obat diare,10
+obat alergi,kesehatan,synthetic,obat alergi,11
+antimo,kesehatan,synthetic,antimo,6
+tolak angin,kesehatan,synthetic,tolak angin,11
+woods obat batuk,kesehatan,synthetic,woods obat batuk,16
+vicks,kesehatan,synthetic,vicks,5
+cek darah,kesehatan,synthetic,cek darah,9
+laboratorium,kesehatan,synthetic,laboratorium,12
+lab prodia,kesehatan,synthetic,lab prodia,10
+lab pramita,kesehatan,synthetic,lab pramita,11
+cek kolesterol,kesehatan,synthetic,cek kolesterol,14
+cek gula darah,kesehatan,synthetic,cek gula darah,14
+cek tensi,kesehatan,synthetic,cek tensi,9
+cek urine,kesehatan,synthetic,cek urine,9
+rontgen,kesehatan,synthetic,rontgen,7
+ct scan,kesehatan,synthetic,ct scan,7
+rapid test,kesehatan,synthetic,rapid test,10
+pcr test,kesehatan,synthetic,pcr test,8
+antigen test,kesehatan,synthetic,antigen test,12
+medical check up,kesehatan,synthetic,medical check up,16
+cek kesehatan,kesehatan,synthetic,cek kesehatan,13
+gym,kesehatan,synthetic,gym,3
+fitness center,kesehatan,synthetic,fitness center,14
+membership gym,kesehatan,synthetic,membership gym,14
+daftar gym,kesehatan,synthetic,daftar gym,10
+bayar gym,kesehatan,synthetic,bayar gym,9
+gold gym,kesehatan,synthetic,gold gym,8
+celebrity fitness,kesehatan,synthetic,celebrity fitness,17
+fit hub,kesehatan,synthetic,fit hub,7
+sports club,kesehatan,synthetic,sports club,11
+anytime fitness,kesehatan,synthetic,anytime fitness,15
+yoga,kesehatan,synthetic,yoga,4
+kelas yoga,kesehatan,synthetic,kelas yoga,10
+pilates,kesehatan,synthetic,pilates,7
+zumba,kesehatan,synthetic,zumba,5
+aerobik,kesehatan,synthetic,aerobik,7
+renang,kesehatan,synthetic,renang,6
+lari,kesehatan,synthetic,lari,4
+jogging,kesehatan,synthetic,jogging,7
+badminton fitness,kesehatan,synthetic,badminton fitness,17
+sepeda,kesehatan,synthetic,sepeda,6
+vitamin,kesehatan,synthetic,vitamin,7
+multivitamin,kesehatan,synthetic,multivitamin,12
+zinc,kesehatan,synthetic,zinc,4
+omega 3,kesehatan,synthetic,omega,5
+kolagen,kesehatan,synthetic,kolagen,7
+protein whey,kesehatan,synthetic,protein whey,12
+protein shake,kesehatan,synthetic,protein shake,13
+susu ensure,kesehatan,synthetic,susu ensure,11
+susu anlene,kesehatan,synthetic,susu anlene,11
+susu diabetasol,kesehatan,synthetic,susu diabetasol,15
+madu,kesehatan,synthetic,madu,4
+propolis,kesehatan,synthetic,propolis,8
+herbal,kesehatan,synthetic,herbal,6
+jamu,kesehatan,synthetic,jamu,4
+temulawak,kesehatan,synthetic,temulawak,9
+masker wajah,kesehatan,synthetic,masker wajah,12
+obat jerawat,kesehatan,synthetic,obat jerawat,12
+benzoil peroksida,kesehatan,synthetic,benzoil peroksida,17
+salicylic acid,kesehatan,synthetic,salicylic acid,14
+termometer,kesehatan,synthetic,termometer,10
+tensimeter,kesehatan,synthetic,tensimeter,10
+oximeter,kesehatan,synthetic,oximeter,8
+masker medis,kesehatan,synthetic,masker medis,12
+sarung tangan medis,kesehatan,synthetic,sarung tangan medis,19
+timbangan badan,kesehatan,synthetic,timbangan badan,15
+beli masker,kesehatan,synthetic,beli masker,11
+kacamata baca,kesehatan,synthetic,kacamata baca,13
+lensa kontak,kesehatan,synthetic,lensa kontak,12
+obat mata,kesehatan,synthetic,obat,4
+tetes mata,kesehatan,synthetic,tetes,5
+obat telinga,kesehatan,synthetic,obat telinga,12
+obat tetes hidung,kesehatan,synthetic,obat tetes hidung,17
+dokter umum,kesehatan,synthetic,dokter umum,11
+klinik,kesehatan,synthetic,klinik,6
+puskesmas,kesehatan,synthetic,puskesmas,9
+konsultasi dokter,kesehatan,synthetic,konsultasi dokter,17
+periksa dokter,kesehatan,synthetic,periksa dokter,14
+dokter gigi,kesehatan,synthetic,dokter gigi,11
+cabut gigi,kesehatan,synthetic,cabut gigi,10
+tambal gigi,kesehatan,synthetic,tambal gigi,11
+scaling gigi,kesehatan,synthetic,scaling gigi,12
+perawatan gigi,kesehatan,synthetic,perawatan gigi,14
+dokter spesialis,kesehatan,synthetic,dokter spesialis,16
+dokter anak,kesehatan,synthetic,dokter anak,11
+dokter kandungan,kesehatan,synthetic,dokter kandungan,16
+dokter mata,kesehatan,synthetic,dokter,6
+dokter kulit,kesehatan,synthetic,dokter kulit,12
+rumah sakit,kesehatan,synthetic,rumah sakit,11
+ugd,kesehatan,synthetic,ugd,3
+rawat jalan,kesehatan,synthetic,rawat jalan,11
+rawat inap,kesehatan,synthetic,rawat inap,10
+operasi,kesehatan,synthetic,operasi,7
+bidan,kesehatan,synthetic,bidan,5
+konsultasi bidan,kesehatan,synthetic,konsultasi bidan,16
+cek kehamilan,kesehatan,synthetic,cek kehamilan,13
+usg kandungan,kesehatan,synthetic,usg kandungan,13
+imunisasi,kesehatan,synthetic,imunisasi,9
+apotek,kesehatan,synthetic,apotek,6
+kimia farma,kesehatan,synthetic,kimia farma,11
+guardian apotek,kesehatan,synthetic,guardian apotek,15
+century apotek,kesehatan,synthetic,century apotek,14
+k24 apotek,kesehatan,synthetic,apotek,6
+beli obat,kesehatan,synthetic,beli obat,9
+obat batuk,kesehatan,synthetic,obat batuk,10
+obat pilek,kesehatan,synthetic,obat pilek,10
+obat demam,kesehatan,synthetic,obat demam,10
+obat sakit kepala,kesehatan,synthetic,obat sakit kepala,17
+paracetamol,kesehatan,synthetic,paracetamol,11
+ibuprofen,kesehatan,synthetic,ibuprofen,9
+amoxicillin,kesehatan,synthetic,amoxicillin,11
+vitamin c,kesehatan,synthetic,vitamin,7
+vitamin d,kesehatan,synthetic,vitamin,7
+suplemen,kesehatan,synthetic,suplemen,8
+minyak kayu putih,kesehatan,synthetic,minyak kayu putih,17
+betadine,kesehatan,synthetic,betadine,8
+hansaplast,kesehatan,synthetic,hansaplast,10
+perban,kesehatan,synthetic,perban,6
+obat maag,kesehatan,synthetic,obat maag,9
+antasida,kesehatan,synthetic,antasida,8
+promag,kesehatan,synthetic,promag,6
+mylanta,kesehatan,synthetic,mylanta,7
+obat diare,kesehatan,synthetic,obat diare,10
+obat alergi,kesehatan,synthetic,obat alergi,11
+antimo,kesehatan,synthetic,antimo,6
+tolak angin,kesehatan,synthetic,tolak angin,11
+woods obat batuk,kesehatan,synthetic,woods obat batuk,16
+vicks,kesehatan,synthetic,vicks,5
+cek darah,kesehatan,synthetic,cek darah,9
+laboratorium,kesehatan,synthetic,laboratorium,12
+lab prodia,kesehatan,synthetic,lab prodia,10
+lab pramita,kesehatan,synthetic,lab pramita,11
+cek kolesterol,kesehatan,synthetic,cek kolesterol,14
+cek gula darah,kesehatan,synthetic,cek gula darah,14
+cek tensi,kesehatan,synthetic,cek tensi,9
+cek urine,kesehatan,synthetic,cek urine,9
+rontgen,kesehatan,synthetic,rontgen,7
+ct scan,kesehatan,synthetic,ct scan,7
+rapid test,kesehatan,synthetic,rapid test,10
+pcr test,kesehatan,synthetic,pcr test,8
+antigen test,kesehatan,synthetic,antigen test,12
+medical check up,kesehatan,synthetic,medical check up,16
+cek kesehatan,kesehatan,synthetic,cek kesehatan,13
+gym,kesehatan,synthetic,gym,3
+fitness center,kesehatan,synthetic,fitness center,14
+membership gym,kesehatan,synthetic,membership gym,14
+daftar gym,kesehatan,synthetic,daftar gym,10
+bayar gym,kesehatan,synthetic,bayar gym,9
+gold gym,kesehatan,synthetic,gold gym,8
+celebrity fitness,kesehatan,synthetic,celebrity fitness,17
+fit hub,kesehatan,synthetic,fit hub,7
+sports club,kesehatan,synthetic,sports club,11
+anytime fitness,kesehatan,synthetic,anytime fitness,15
+yoga,kesehatan,synthetic,yoga,4
+kelas yoga,kesehatan,synthetic,kelas yoga,10
+pilates,kesehatan,synthetic,pilates,7
+zumba,kesehatan,synthetic,zumba,5
+aerobik,kesehatan,synthetic,aerobik,7
+renang,kesehatan,synthetic,renang,6
+lari,kesehatan,synthetic,lari,4
+jogging,kesehatan,synthetic,jogging,7
+badminton fitness,kesehatan,synthetic,badminton fitness,17
+sepeda,kesehatan,synthetic,sepeda,6
+vitamin,kesehatan,synthetic,vitamin,7
+multivitamin,kesehatan,synthetic,multivitamin,12
+zinc,kesehatan,synthetic,zinc,4
+omega 3,kesehatan,synthetic,omega,5
+kolagen,kesehatan,synthetic,kolagen,7
+protein whey,kesehatan,synthetic,protein whey,12
+protein shake,kesehatan,synthetic,protein shake,13
+susu ensure,kesehatan,synthetic,susu ensure,11
+susu anlene,kesehatan,synthetic,susu anlene,11
+susu diabetasol,kesehatan,synthetic,susu diabetasol,15
+madu,kesehatan,synthetic,madu,4
+propolis,kesehatan,synthetic,propolis,8
+herbal,kesehatan,synthetic,herbal,6
+jamu,kesehatan,synthetic,jamu,4
+temulawak,kesehatan,synthetic,temulawak,9
+masker wajah,kesehatan,synthetic,masker wajah,12
+obat jerawat,kesehatan,synthetic,obat jerawat,12
+benzoil peroksida,kesehatan,synthetic,benzoil peroksida,17
+salicylic acid,kesehatan,synthetic,salicylic acid,14
+termometer,kesehatan,synthetic,termometer,10
+tensimeter,kesehatan,synthetic,tensimeter,10
+oximeter,kesehatan,synthetic,oximeter,8
+masker medis,kesehatan,synthetic,masker medis,12
+sarung tangan medis,kesehatan,synthetic,sarung tangan medis,19
+timbangan badan,kesehatan,synthetic,timbangan badan,15
+beli masker,kesehatan,synthetic,beli masker,11
+kacamata baca,kesehatan,synthetic,kacamata baca,13
+lensa kontak,kesehatan,synthetic,lensa kontak,12
+obat mata,kesehatan,synthetic,obat,4
+tetes mata,kesehatan,synthetic,tetes,5
+obat telinga,kesehatan,synthetic,obat telinga,12
+obat tetes hidung,kesehatan,synthetic,obat tetes hidung,17
+dokter umum,kesehatan,synthetic,dokter umum,11
+klinik,kesehatan,synthetic,klinik,6
+puskesmas,kesehatan,synthetic,puskesmas,9
+konsultasi dokter,kesehatan,synthetic,konsultasi dokter,17
+periksa dokter,kesehatan,synthetic,periksa dokter,14
+dokter gigi,kesehatan,synthetic,dokter gigi,11
+cabut gigi,kesehatan,synthetic,cabut gigi,10
+tambal gigi,kesehatan,synthetic,tambal gigi,11
+scaling gigi,kesehatan,synthetic,scaling gigi,12
+perawatan gigi,kesehatan,synthetic,perawatan gigi,14
+dokter spesialis,kesehatan,synthetic,dokter spesialis,16
+dokter anak,kesehatan,synthetic,dokter anak,11
+dokter kandungan,kesehatan,synthetic,dokter kandungan,16
+dokter mata,kesehatan,synthetic,dokter,6
+dokter kulit,kesehatan,synthetic,dokter kulit,12
+rumah sakit,kesehatan,synthetic,rumah sakit,11
+ugd,kesehatan,synthetic,ugd,3
+rawat jalan,kesehatan,synthetic,rawat jalan,11
+rawat inap,kesehatan,synthetic,rawat inap,10
+operasi,kesehatan,synthetic,operasi,7
+bidan,kesehatan,synthetic,bidan,5
+konsultasi bidan,kesehatan,synthetic,konsultasi bidan,16
+cek kehamilan,kesehatan,synthetic,cek kehamilan,13
+usg kandungan,kesehatan,synthetic,usg kandungan,13
+imunisasi,kesehatan,synthetic,imunisasi,9
+apotek,kesehatan,synthetic,apotek,6
+kimia farma,kesehatan,synthetic,kimia farma,11
+guardian apotek,kesehatan,synthetic,guardian apotek,15
+century apotek,kesehatan,synthetic,century apotek,14
+k24 apotek,kesehatan,synthetic,apotek,6
+beli obat,kesehatan,synthetic,beli obat,9
+obat batuk,kesehatan,synthetic,obat batuk,10
+obat pilek,kesehatan,synthetic,obat pilek,10
+obat demam,kesehatan,synthetic,obat demam,10
+obat sakit kepala,kesehatan,synthetic,obat sakit kepala,17
+paracetamol,kesehatan,synthetic,paracetamol,11
+ibuprofen,kesehatan,synthetic,ibuprofen,9
+amoxicillin,kesehatan,synthetic,amoxicillin,11
+vitamin c,kesehatan,synthetic,vitamin,7
+vitamin d,kesehatan,synthetic,vitamin,7
+suplemen,kesehatan,synthetic,suplemen,8
+minyak kayu putih,kesehatan,synthetic,minyak kayu putih,17
+betadine,kesehatan,synthetic,betadine,8
+hansaplast,kesehatan,synthetic,hansaplast,10
+perban,kesehatan,synthetic,perban,6
+obat maag,kesehatan,synthetic,obat maag,9
+antasida,kesehatan,synthetic,antasida,8
+promag,kesehatan,synthetic,promag,6
+mylanta,kesehatan,synthetic,mylanta,7
+obat diare,kesehatan,synthetic,obat diare,10
+obat alergi,kesehatan,synthetic,obat alergi,11
+antimo,kesehatan,synthetic,antimo,6
+tolak angin,kesehatan,synthetic,tolak angin,11
+woods obat batuk,kesehatan,synthetic,woods obat batuk,16
+vicks,kesehatan,synthetic,vicks,5
+cek darah,kesehatan,synthetic,cek darah,9
+bayar listrik,tagihan,synthetic,bayar listrik,13
+listrik pln,tagihan,synthetic,listrik pln,11
+token listrik,tagihan,synthetic,token listrik,13
+beli token listrik,tagihan,synthetic,beli token listrik,18
+isi token pln,tagihan,synthetic,isi token pln,13
+pulsa listrik,tagihan,synthetic,pulsa listrik,13
+listrik rumah,tagihan,synthetic,listrik rumah,13
+listrik kos,tagihan,synthetic,listrik kos,11
+bayar pln,tagihan,synthetic,bayar pln,9
+listrik bulanan,tagihan,synthetic,listrik bulanan,15
+token pln 50rb,tagihan,synthetic,token pln rb,12
+token pln 100rb,tagihan,synthetic,token pln rb,12
+token pln 200rb,tagihan,synthetic,token pln rb,12
+bayar air,tagihan,synthetic,bayar air,9
+air pdam,tagihan,synthetic,air pdam,8
+tagihan pdam,tagihan,synthetic,tagihan pdam,12
+bayar pdam,tagihan,synthetic,bayar pdam,10
+air bulanan,tagihan,synthetic,air bulanan,11
+iuran air,tagihan,synthetic,iuran air,9
+air ledeng,tagihan,synthetic,air ledeng,10
+air bersih,tagihan,synthetic,air bersih,10
+wifi,tagihan,synthetic,wifi,4
+bayar wifi,tagihan,synthetic,bayar wifi,10
+tagihan internet,tagihan,synthetic,tagihan internet,16
+indihome,tagihan,synthetic,indihome,8
+firstmedia,tagihan,synthetic,firstmedia,10
+mncplay,tagihan,synthetic,mncplay,7
+biznet,tagihan,synthetic,biznet,6
+myrepublic,tagihan,synthetic,myrepublic,10
+telkomsel orbit,tagihan,synthetic,telkomsel orbit,15
+wifi bulanan,tagihan,synthetic,wifi bulanan,12
+paket internet,tagihan,synthetic,paket internet,14
+pasang wifi,tagihan,synthetic,pasang wifi,11
+bayar indihome,tagihan,synthetic,bayar indihome,14
+upgrade wifi,tagihan,synthetic,upgrade wifi,12
+tv kabel,tagihan,synthetic,tv kabel,8
+tagihan tv,tagihan,synthetic,tagihan tv,10
+bayar tv kabel,tagihan,synthetic,bayar tv kabel,14
+useetv,tagihan,synthetic,useetv,6
+transvision,tagihan,synthetic,transvision,11
+beli pulsa,tagihan,synthetic,beli pulsa,10
+isi pulsa,tagihan,synthetic,isi pulsa,9
+pulsa telkomsel,tagihan,synthetic,pulsa telkomsel,15
+pulsa xl,tagihan,synthetic,pulsa xl,8
+pulsa indosat,tagihan,synthetic,pulsa indosat,13
+pulsa tri,tagihan,synthetic,pulsa tri,9
+pulsa smartfren,tagihan,synthetic,pulsa smartfren,15
+paket data,tagihan,synthetic,paket data,10
+beli paket data,tagihan,synthetic,beli paket data,15
+paket telkomsel,tagihan,synthetic,paket telkomsel,15
+paket xl,tagihan,synthetic,paket xl,8
+paket indosat,tagihan,synthetic,paket indosat,13
+paket tri,tagihan,synthetic,paket tri,9
+kuota internet,tagihan,synthetic,kuota internet,14
+paket nelpon,tagihan,synthetic,paket nelpon,12
+paket sms,tagihan,synthetic,paket sms,9
+perpanjang paket,tagihan,synthetic,perpanjang paket,16
+beli kuota,tagihan,synthetic,beli kuota,10
+isi kuota,tagihan,synthetic,isi kuota,9
+bayar bpjs,tagihan,synthetic,bayar bpjs,10
+bpjs kesehatan,tagihan,synthetic,bpjs kesehatan,14
+bpjs ketenagakerjaan,tagihan,synthetic,bpjs ketenagakerjaan,20
+iuran bpjs,tagihan,synthetic,iuran bpjs,10
+asuransi,tagihan,synthetic,asuransi,8
+premi asuransi,tagihan,synthetic,premi asuransi,14
+asuransi jiwa,tagihan,synthetic,asuransi jiwa,13
+asuransi kesehatan,tagihan,synthetic,asuransi kesehatan,18
+asuransi kendaraan,tagihan,synthetic,asuransi kendaraan,18
+bayar premi,tagihan,synthetic,bayar premi,11
+asuransi allianz,tagihan,synthetic,asuransi allianz,16
+asuransi prudential,tagihan,synthetic,asuransi prudential,19
+asuransi manulife,tagihan,synthetic,asuransi manulife,17
+kos,tagihan,synthetic,kos,3
+bayar kos,tagihan,synthetic,bayar kos,9
+sewa kos,tagihan,synthetic,sewa kos,8
+kontrakan,tagihan,synthetic,kontrakan,9
+sewa kontrakan,tagihan,synthetic,sewa kontrakan,14
+sewa rumah,tagihan,synthetic,sewa rumah,10
+bayar kontrakan,tagihan,synthetic,bayar kontrakan,15
+iuran kos,tagihan,synthetic,iuran kos,9
+wifi kos,tagihan,synthetic,wifi kos,8
+listrik kos,tagihan,synthetic,listrik kos,11
+kos bulanan,tagihan,synthetic,kos bulanan,11
+bayar sewa,tagihan,synthetic,bayar sewa,10
+uang kos,tagihan,synthetic,uang kos,8
+biaya kos,tagihan,synthetic,biaya kos,9
+deposit kos,tagihan,synthetic,deposit kos,11
+cicilan,tagihan,synthetic,cicilan,7
+angsuran,tagihan,synthetic,angsuran,8
+kredit,tagihan,synthetic,kredit,6
+bayar cicilan,tagihan,synthetic,bayar cicilan,13
+cicilan hp,tagihan,synthetic,cicilan hp,10
+cicilan motor,tagihan,synthetic,cicilan motor,13
+cicilan mobil,tagihan,synthetic,cicilan mobil,13
+cicilan kulkas,tagihan,synthetic,cicilan kulkas,14
+cicilan ac,tagihan,synthetic,cicilan ac,10
+bayar kredit,tagihan,synthetic,bayar kredit,12
+kartu kredit,tagihan,synthetic,kartu kredit,12
+tagihan kartu kredit,tagihan,synthetic,tagihan kartu kredit,20
+bayar cc,tagihan,synthetic,bayar cc,8
+minimum payment,tagihan,synthetic,minimum payment,15
+iuran rt,tagihan,synthetic,iuran rt,8
+iuran rw,tagihan,synthetic,iuran rw,8
+kas rt,tagihan,synthetic,kas rt,6
+sumbangan wajib,tagihan,synthetic,sumbangan wajib,15
+pajak motor,tagihan,synthetic,pajak motor,11
+pajak mobil,tagihan,synthetic,pajak mobil,11
+bayar pajak,tagihan,synthetic,bayar pajak,11
+stnk,tagihan,synthetic,stnk,4
+perpanjang stnk,tagihan,synthetic,perpanjang stnk,15
+parkir bulanan,tagihan,synthetic,parkir bulanan,14
+langganan koran,tagihan,synthetic,langganan koran,15
+tagihan gas,tagihan,synthetic,tagihan gas,11
+gas elpiji,tagihan,synthetic,gas elpiji,10
+gas bulanan,tagihan,synthetic,gas bulanan,11
+bayar listrik,tagihan,synthetic,bayar listrik,13
+listrik pln,tagihan,synthetic,listrik pln,11
+token listrik,tagihan,synthetic,token listrik,13
+beli token listrik,tagihan,synthetic,beli token listrik,18
+isi token pln,tagihan,synthetic,isi token pln,13
+pulsa listrik,tagihan,synthetic,pulsa listrik,13
+listrik rumah,tagihan,synthetic,listrik rumah,13
+listrik kos,tagihan,synthetic,listrik kos,11
+bayar pln,tagihan,synthetic,bayar pln,9
+listrik bulanan,tagihan,synthetic,listrik bulanan,15
+token pln 50rb,tagihan,synthetic,token pln rb,12
+token pln 100rb,tagihan,synthetic,token pln rb,12
+token pln 200rb,tagihan,synthetic,token pln rb,12
+bayar air,tagihan,synthetic,bayar air,9
+air pdam,tagihan,synthetic,air pdam,8
+tagihan pdam,tagihan,synthetic,tagihan pdam,12
+bayar pdam,tagihan,synthetic,bayar pdam,10
+air bulanan,tagihan,synthetic,air bulanan,11
+iuran air,tagihan,synthetic,iuran air,9
+air ledeng,tagihan,synthetic,air ledeng,10
+air bersih,tagihan,synthetic,air bersih,10
+wifi,tagihan,synthetic,wifi,4
+bayar wifi,tagihan,synthetic,bayar wifi,10
+tagihan internet,tagihan,synthetic,tagihan internet,16
+indihome,tagihan,synthetic,indihome,8
+firstmedia,tagihan,synthetic,firstmedia,10
+mncplay,tagihan,synthetic,mncplay,7
+biznet,tagihan,synthetic,biznet,6
+myrepublic,tagihan,synthetic,myrepublic,10
+telkomsel orbit,tagihan,synthetic,telkomsel orbit,15
+wifi bulanan,tagihan,synthetic,wifi bulanan,12
+paket internet,tagihan,synthetic,paket internet,14
+pasang wifi,tagihan,synthetic,pasang wifi,11
+bayar indihome,tagihan,synthetic,bayar indihome,14
+upgrade wifi,tagihan,synthetic,upgrade wifi,12
+tv kabel,tagihan,synthetic,tv kabel,8
+tagihan tv,tagihan,synthetic,tagihan tv,10
+bayar tv kabel,tagihan,synthetic,bayar tv kabel,14
+useetv,tagihan,synthetic,useetv,6
+transvision,tagihan,synthetic,transvision,11
+beli pulsa,tagihan,synthetic,beli pulsa,10
+isi pulsa,tagihan,synthetic,isi pulsa,9
+pulsa telkomsel,tagihan,synthetic,pulsa telkomsel,15
+pulsa xl,tagihan,synthetic,pulsa xl,8
+pulsa indosat,tagihan,synthetic,pulsa indosat,13
+pulsa tri,tagihan,synthetic,pulsa tri,9
+pulsa smartfren,tagihan,synthetic,pulsa smartfren,15
+paket data,tagihan,synthetic,paket data,10
+beli paket data,tagihan,synthetic,beli paket data,15
+paket telkomsel,tagihan,synthetic,paket telkomsel,15
+paket xl,tagihan,synthetic,paket xl,8
+paket indosat,tagihan,synthetic,paket indosat,13
+paket tri,tagihan,synthetic,paket tri,9
+kuota internet,tagihan,synthetic,kuota internet,14
+paket nelpon,tagihan,synthetic,paket nelpon,12
+paket sms,tagihan,synthetic,paket sms,9
+perpanjang paket,tagihan,synthetic,perpanjang paket,16
+beli kuota,tagihan,synthetic,beli kuota,10
+isi kuota,tagihan,synthetic,isi kuota,9
+bayar bpjs,tagihan,synthetic,bayar bpjs,10
+bpjs kesehatan,tagihan,synthetic,bpjs kesehatan,14
+bpjs ketenagakerjaan,tagihan,synthetic,bpjs ketenagakerjaan,20
+iuran bpjs,tagihan,synthetic,iuran bpjs,10
+asuransi,tagihan,synthetic,asuransi,8
+premi asuransi,tagihan,synthetic,premi asuransi,14
+asuransi jiwa,tagihan,synthetic,asuransi jiwa,13
+asuransi kesehatan,tagihan,synthetic,asuransi kesehatan,18
+asuransi kendaraan,tagihan,synthetic,asuransi kendaraan,18
+bayar premi,tagihan,synthetic,bayar premi,11
+asuransi allianz,tagihan,synthetic,asuransi allianz,16
+asuransi prudential,tagihan,synthetic,asuransi prudential,19
+asuransi manulife,tagihan,synthetic,asuransi manulife,17
+kos,tagihan,synthetic,kos,3
+bayar kos,tagihan,synthetic,bayar kos,9
+sewa kos,tagihan,synthetic,sewa kos,8
+kontrakan,tagihan,synthetic,kontrakan,9
+sewa kontrakan,tagihan,synthetic,sewa kontrakan,14
+sewa rumah,tagihan,synthetic,sewa rumah,10
+bayar kontrakan,tagihan,synthetic,bayar kontrakan,15
+iuran kos,tagihan,synthetic,iuran kos,9
+wifi kos,tagihan,synthetic,wifi kos,8
+listrik kos,tagihan,synthetic,listrik kos,11
+kos bulanan,tagihan,synthetic,kos bulanan,11
+bayar sewa,tagihan,synthetic,bayar sewa,10
+uang kos,tagihan,synthetic,uang kos,8
+biaya kos,tagihan,synthetic,biaya kos,9
+deposit kos,tagihan,synthetic,deposit kos,11
+cicilan,tagihan,synthetic,cicilan,7
+angsuran,tagihan,synthetic,angsuran,8
+kredit,tagihan,synthetic,kredit,6
+bayar cicilan,tagihan,synthetic,bayar cicilan,13
+cicilan hp,tagihan,synthetic,cicilan hp,10
+cicilan motor,tagihan,synthetic,cicilan motor,13
+cicilan mobil,tagihan,synthetic,cicilan mobil,13
+cicilan kulkas,tagihan,synthetic,cicilan kulkas,14
+cicilan ac,tagihan,synthetic,cicilan ac,10
+bayar kredit,tagihan,synthetic,bayar kredit,12
+kartu kredit,tagihan,synthetic,kartu kredit,12
+tagihan kartu kredit,tagihan,synthetic,tagihan kartu kredit,20
+bayar cc,tagihan,synthetic,bayar cc,8
+minimum payment,tagihan,synthetic,minimum payment,15
+iuran rt,tagihan,synthetic,iuran rt,8
+iuran rw,tagihan,synthetic,iuran rw,8
+kas rt,tagihan,synthetic,kas rt,6
+sumbangan wajib,tagihan,synthetic,sumbangan wajib,15
+pajak motor,tagihan,synthetic,pajak motor,11
+pajak mobil,tagihan,synthetic,pajak mobil,11
+bayar pajak,tagihan,synthetic,bayar pajak,11
+stnk,tagihan,synthetic,stnk,4
+perpanjang stnk,tagihan,synthetic,perpanjang stnk,15
+parkir bulanan,tagihan,synthetic,parkir bulanan,14
+langganan koran,tagihan,synthetic,langganan koran,15
+tagihan gas,tagihan,synthetic,tagihan gas,11
+gas elpiji,tagihan,synthetic,gas elpiji,10
+gas bulanan,tagihan,synthetic,gas bulanan,11
+bayar listrik,tagihan,synthetic,bayar listrik,13
+listrik pln,tagihan,synthetic,listrik pln,11
+token listrik,tagihan,synthetic,token listrik,13
+beli token listrik,tagihan,synthetic,beli token listrik,18
+isi token pln,tagihan,synthetic,isi token pln,13
+pulsa listrik,tagihan,synthetic,pulsa listrik,13
+listrik rumah,tagihan,synthetic,listrik rumah,13
+listrik kos,tagihan,synthetic,listrik kos,11
+bayar pln,tagihan,synthetic,bayar pln,9
+listrik bulanan,tagihan,synthetic,listrik bulanan,15
+token pln 50rb,tagihan,synthetic,token pln rb,12
+token pln 100rb,tagihan,synthetic,token pln rb,12
+token pln 200rb,tagihan,synthetic,token pln rb,12
+bayar air,tagihan,synthetic,bayar air,9
+air pdam,tagihan,synthetic,air pdam,8
+tagihan pdam,tagihan,synthetic,tagihan pdam,12
+bayar pdam,tagihan,synthetic,bayar pdam,10
+air bulanan,tagihan,synthetic,air bulanan,11
+iuran air,tagihan,synthetic,iuran air,9
+air ledeng,tagihan,synthetic,air ledeng,10
+air bersih,tagihan,synthetic,air bersih,10
+wifi,tagihan,synthetic,wifi,4
+bayar wifi,tagihan,synthetic,bayar wifi,10
+tagihan internet,tagihan,synthetic,tagihan internet,16
+indihome,tagihan,synthetic,indihome,8
+firstmedia,tagihan,synthetic,firstmedia,10
+mncplay,tagihan,synthetic,mncplay,7
+biznet,tagihan,synthetic,biznet,6
+myrepublic,tagihan,synthetic,myrepublic,10
+telkomsel orbit,tagihan,synthetic,telkomsel orbit,15
+wifi bulanan,tagihan,synthetic,wifi bulanan,12
+paket internet,tagihan,synthetic,paket internet,14
+pasang wifi,tagihan,synthetic,pasang wifi,11
+bayar indihome,tagihan,synthetic,bayar indihome,14
+upgrade wifi,tagihan,synthetic,upgrade wifi,12
+tv kabel,tagihan,synthetic,tv kabel,8
+tagihan tv,tagihan,synthetic,tagihan tv,10
+bayar tv kabel,tagihan,synthetic,bayar tv kabel,14
+useetv,tagihan,synthetic,useetv,6
+transvision,tagihan,synthetic,transvision,11
+beli pulsa,tagihan,synthetic,beli pulsa,10
+isi pulsa,tagihan,synthetic,isi pulsa,9
+pulsa telkomsel,tagihan,synthetic,pulsa telkomsel,15
+pulsa xl,tagihan,synthetic,pulsa xl,8
+pulsa indosat,tagihan,synthetic,pulsa indosat,13
+pulsa tri,tagihan,synthetic,pulsa tri,9
+pulsa smartfren,tagihan,synthetic,pulsa smartfren,15
+paket data,tagihan,synthetic,paket data,10
+biaya admin bank,tagihan,synthetic,biaya admin bank,16
+admin bca,tagihan,synthetic,admin bca,9
+admin bri,tagihan,synthetic,admin bri,9
+admin mandiri,tagihan,synthetic,admin mandiri,13
+admin bni,tagihan,synthetic,admin bni,9
+admin transfer,lainnya,synthetic,admin transfer,14
+biaya transfer,tagihan,synthetic,biaya transfer,14
+biaya tarik tunai,tagihan,synthetic,biaya tarik tunai,17
+biaya atm,tagihan,synthetic,biaya atm,9
+denda bank,tagihan,synthetic,denda bank,10
+biaya rekening,tagihan,synthetic,biaya rekening,14
+provisi,tagihan,synthetic,provisi,7
+biaya materai,tagihan,synthetic,biaya materai,13
+cek saldo,lainnya,synthetic,cek saldo,9
+biaya bulanan bank,tagihan,synthetic,biaya bulanan bank,18
+biaya kartu debit,tagihan,synthetic,biaya kartu debit,17
+biaya kartu kredit,tagihan,synthetic,biaya kartu kredit,18
+ongkir,belanja,synthetic,ongkir,6
+ongkos kirim,belanja,synthetic,ongkos kirim,12
+biaya pengiriman,belanja,synthetic,biaya pengiriman,16
+ongkir shopee,belanja,synthetic,ongkir shopee,13
+ongkir tokopedia,belanja,synthetic,ongkir tokopedia,16
+ongkir lazada,belanja,synthetic,ongkir lazada,13
+ongkir bukalapak,belanja,synthetic,ongkir bukalapak,16
+biaya platform,belanja,synthetic,biaya platform,14
+biaya marketplace,belanja,synthetic,biaya marketplace,17
+potongan aplikasi,lainnya,synthetic,potongan aplikasi,17
+fee aplikasi,lainnya,synthetic,fee aplikasi,12
+biaya jasa,lainnya,synthetic,biaya jasa,10
+jasa pengiriman,belanja,synthetic,jasa pengiriman,15
+jne,belanja,synthetic,jne,3
+jnt,belanja,synthetic,jnt,3
+sicepat,belanja,synthetic,sicepat,7
+anteraja,belanja,synthetic,anteraja,8
+ninja express,belanja,synthetic,ninja express,13
+donasi,lainnya,synthetic,donasi,6
+sedekah,lainnya,synthetic,sedekah,7
+infak,lainnya,synthetic,infak,5
+zakat,lainnya,synthetic,zakat,5
+wakaf,lainnya,synthetic,wakaf,5
+sumbangan,lainnya,synthetic,sumbangan,9
+amal,lainnya,synthetic,amal,4
+kolekte,lainnya,synthetic,kolekte,7
+iuran sosial,lainnya,synthetic,iuran sosial,12
+bantuan,lainnya,synthetic,bantuan,7
+bayar arisan,lainnya,synthetic,bayar arisan,12
+arisan,lainnya,synthetic,arisan,6
+kas kelas,lainnya,synthetic,kas kelas,9
+kas kantor,lainnya,synthetic,kas kantor,10
+patungan,lainnya,synthetic,patungan,8
+uang sekolah,lainnya,synthetic,uang sekolah,12
+spp,lainnya,synthetic,spp,3
+uang kuliah,lainnya,synthetic,uang kuliah,11
+ukt,lainnya,synthetic,ukt,3
+biaya kursus,lainnya,synthetic,biaya kursus,12
+les privat,lainnya,synthetic,les privat,10
+les bahasa inggris,lainnya,synthetic,les bahasa inggris,18
+les matematika,lainnya,synthetic,les matematika,14
+bimbel,lainnya,synthetic,bimbel,6
+biaya bimbel,lainnya,synthetic,biaya bimbel,12
+beli buku pelajaran,lainnya,synthetic,beli buku pelajaran,19
+buku kuliah,lainnya,synthetic,buku kuliah,11
+fotocopy,lainnya,synthetic,fotocopy,8
+print tugas,lainnya,synthetic,print tugas,11
+jilid,lainnya,synthetic,jilid,5
+biaya notaris,lainnya,synthetic,biaya notaris,13
+biaya legalisir,lainnya,synthetic,biaya legalisir,15
+biaya cap,lainnya,synthetic,biaya cap,9
+materai,lainnya,synthetic,materai,7
+fotocopy ktp,lainnya,synthetic,fotocopy ktp,12
+urus surat,lainnya,synthetic,urus surat,10
+biaya administrasi,lainnya,synthetic,biaya administrasi,18
+biaya pendaftaran,lainnya,synthetic,biaya pendaftaran,17
+daftar ujian,lainnya,synthetic,daftar ujian,12
+biaya ujian,lainnya,synthetic,biaya ujian,11
+biaya perpanjang sim,transportasi,synthetic,biaya perpanjang sim,20
+sim baru,transportasi,synthetic,sim,3
+biaya kir,transportasi,synthetic,biaya kir,9
+bayar denda,transportasi,synthetic,bayar denda,11
+denda tilang,transportasi,synthetic,denda tilang,12
+biaya tak terduga,lainnya,synthetic,biaya terduga,13
+pengeluaran tak terduga,lainnya,synthetic,pengeluaran terduga,19
+keperluan lain,lainnya,synthetic,keperluan,9
+beli ini itu,lainnya,synthetic,beli,4
+belanja random,lainnya,synthetic,belanja random,14
+pengeluaran random,lainnya,synthetic,pengeluaran random,18
+biaya tambahan,lainnya,synthetic,biaya tambahan,14
+biaya ekstra,lainnya,synthetic,biaya ekstra,12
+uang jajan,lainnya,synthetic,uang jajan,10
+uang saku,lainnya,synthetic,uang saku,9
+uang lebih,lainnya,synthetic,uang,4
+kelebihan uang,lainnya,synthetic,kelebihan uang,14
+sisipan,lainnya,synthetic,sisipan,7
+pengeluaran kecil,lainnya,synthetic,pengeluaran,11
+jajan,lainnya,synthetic,jajan,5
+beli ini,lainnya,synthetic,beli,4
+transfer ke teman,lainnya,synthetic,transfer teman,14
+bayar utang,lainnya,synthetic,bayar utang,11
+bayar hutang,lainnya,synthetic,bayar hutang,12
+pinjaman,lainnya,synthetic,pinjaman,8
+kasih uang,lainnya,synthetic,kasih uang,10
+hadiah,belanja,synthetic,hadiah,6
+kado,belanja,synthetic,kado,4
+beli kado,belanja,synthetic,beli kado,9
+parcel,belanja,synthetic,parcel,6
+hampers,belanja,synthetic,hampers,7
+biaya laundry,belanja,synthetic,biaya laundry,13
+laundry kiloan,belanja,synthetic,laundry kiloan,14
+dry clean,belanja,synthetic,dry clean,9
+setrika,belanja,synthetic,setrika,7
+jahit baju,belanja,synthetic,jahit baju,10
+biaya admin bank,tagihan,synthetic,biaya admin bank,16
+admin bca,tagihan,synthetic,admin bca,9
+admin bri,tagihan,synthetic,admin bri,9
+admin mandiri,tagihan,synthetic,admin mandiri,13
+admin bni,tagihan,synthetic,admin bni,9
+admin transfer,lainnya,synthetic,admin transfer,14
+biaya transfer,tagihan,synthetic,biaya transfer,14
+biaya tarik tunai,tagihan,synthetic,biaya tarik tunai,17
+biaya atm,tagihan,synthetic,biaya atm,9
+denda bank,tagihan,synthetic,denda bank,10
+biaya rekening,tagihan,synthetic,biaya rekening,14
+provisi,tagihan,synthetic,provisi,7
+biaya materai,tagihan,synthetic,biaya materai,13
+cek saldo,lainnya,synthetic,cek saldo,9
+biaya bulanan bank,tagihan,synthetic,biaya bulanan bank,18
+biaya kartu debit,tagihan,synthetic,biaya kartu debit,17
+biaya kartu kredit,tagihan,synthetic,biaya kartu kredit,18
+ongkir,belanja,synthetic,ongkir,6
+ongkos kirim,belanja,synthetic,ongkos kirim,12
+biaya pengiriman,belanja,synthetic,biaya pengiriman,16
+ongkir shopee,belanja,synthetic,ongkir shopee,13
+ongkir tokopedia,belanja,synthetic,ongkir tokopedia,16
+ongkir lazada,belanja,synthetic,ongkir lazada,13
+ongkir bukalapak,belanja,synthetic,ongkir bukalapak,16
+biaya platform,belanja,synthetic,biaya platform,14
+biaya marketplace,belanja,synthetic,biaya marketplace,17
+potongan aplikasi,lainnya,synthetic,potongan aplikasi,17
+fee aplikasi,lainnya,synthetic,fee aplikasi,12
+biaya jasa,lainnya,synthetic,biaya jasa,10
+jasa pengiriman,belanja,synthetic,jasa pengiriman,15
+jne,belanja,synthetic,jne,3
+jnt,belanja,synthetic,jnt,3
+sicepat,belanja,synthetic,sicepat,7
+anteraja,belanja,synthetic,anteraja,8
+ninja express,belanja,synthetic,ninja express,13
+donasi,lainnya,synthetic,donasi,6
+sedekah,lainnya,synthetic,sedekah,7
+infak,lainnya,synthetic,infak,5
+zakat,lainnya,synthetic,zakat,5
+wakaf,lainnya,synthetic,wakaf,5
+sumbangan,lainnya,synthetic,sumbangan,9
+amal,lainnya,synthetic,amal,4
+kolekte,lainnya,synthetic,kolekte,7
+iuran sosial,lainnya,synthetic,iuran sosial,12
+bantuan,lainnya,synthetic,bantuan,7
+bayar arisan,lainnya,synthetic,bayar arisan,12
+arisan,lainnya,synthetic,arisan,6
+kas kelas,lainnya,synthetic,kas kelas,9
+kas kantor,lainnya,synthetic,kas kantor,10
+patungan,lainnya,synthetic,patungan,8
+uang sekolah,lainnya,synthetic,uang sekolah,12
+spp,lainnya,synthetic,spp,3
+uang kuliah,lainnya,synthetic,uang kuliah,11
+ukt,lainnya,synthetic,ukt,3
+biaya kursus,lainnya,synthetic,biaya kursus,12
+les privat,lainnya,synthetic,les privat,10
+les bahasa inggris,lainnya,synthetic,les bahasa inggris,18
+les matematika,lainnya,synthetic,les matematika,14
+bimbel,lainnya,synthetic,bimbel,6
+biaya bimbel,lainnya,synthetic,biaya bimbel,12
+beli buku pelajaran,lainnya,synthetic,beli buku pelajaran,19
+buku kuliah,lainnya,synthetic,buku kuliah,11
+fotocopy,lainnya,synthetic,fotocopy,8
+print tugas,lainnya,synthetic,print tugas,11
+jilid,lainnya,synthetic,jilid,5
+biaya notaris,lainnya,synthetic,biaya notaris,13
+biaya legalisir,lainnya,synthetic,biaya legalisir,15
+biaya cap,lainnya,synthetic,biaya cap,9
+materai,lainnya,synthetic,materai,7
+fotocopy ktp,lainnya,synthetic,fotocopy ktp,12
+urus surat,lainnya,synthetic,urus surat,10
+biaya administrasi,lainnya,synthetic,biaya administrasi,18
+biaya pendaftaran,lainnya,synthetic,biaya pendaftaran,17
+daftar ujian,lainnya,synthetic,daftar ujian,12
+biaya ujian,lainnya,synthetic,biaya ujian,11
+biaya perpanjang sim,transportasi,synthetic,biaya perpanjang sim,20
+sim baru,transportasi,synthetic,sim,3
+biaya kir,transportasi,synthetic,biaya kir,9
+bayar denda,transportasi,synthetic,bayar denda,11
+denda tilang,transportasi,synthetic,denda tilang,12
+biaya tak terduga,lainnya,synthetic,biaya terduga,13
+pengeluaran tak terduga,lainnya,synthetic,pengeluaran terduga,19
+keperluan lain,lainnya,synthetic,keperluan,9
+beli ini itu,lainnya,synthetic,beli,4
+belanja random,lainnya,synthetic,belanja random,14
+pengeluaran random,lainnya,synthetic,pengeluaran random,18
+biaya tambahan,lainnya,synthetic,biaya tambahan,14
+biaya ekstra,lainnya,synthetic,biaya ekstra,12
+uang jajan,lainnya,synthetic,uang jajan,10
+uang saku,lainnya,synthetic,uang saku,9
+uang lebih,lainnya,synthetic,uang,4
+kelebihan uang,lainnya,synthetic,kelebihan uang,14
+sisipan,lainnya,synthetic,sisipan,7
+pengeluaran kecil,lainnya,synthetic,pengeluaran,11
+jajan,lainnya,synthetic,jajan,5
+beli ini,lainnya,synthetic,beli,4
+transfer ke teman,lainnya,synthetic,transfer teman,14
+bayar utang,lainnya,synthetic,bayar utang,11
+bayar hutang,lainnya,synthetic,bayar hutang,12
+pinjaman,lainnya,synthetic,pinjaman,8
+kasih uang,lainnya,synthetic,kasih uang,10
+hadiah,belanja,synthetic,hadiah,6
+kado,belanja,synthetic,kado,4
+beli kado,belanja,synthetic,beli kado,9
+parcel,belanja,synthetic,parcel,6
+hampers,belanja,synthetic,hampers,7
+biaya laundry,belanja,synthetic,biaya laundry,13
+laundry kiloan,belanja,synthetic,laundry kiloan,14
+dry clean,belanja,synthetic,dry clean,9
+setrika,belanja,synthetic,setrika,7
+jahit baju,belanja,synthetic,jahit baju,10
+biaya admin bank,tagihan,synthetic,biaya admin bank,16
+admin bca,tagihan,synthetic,admin bca,9
+admin bri,tagihan,synthetic,admin bri,9
+admin mandiri,tagihan,synthetic,admin mandiri,13
+admin bni,tagihan,synthetic,admin bni,9
+admin transfer,lainnya,synthetic,admin transfer,14
+biaya transfer,tagihan,synthetic,biaya transfer,14
+biaya tarik tunai,tagihan,synthetic,biaya tarik tunai,17
+biaya atm,tagihan,synthetic,biaya atm,9
+denda bank,tagihan,synthetic,denda bank,10
+biaya rekening,tagihan,synthetic,biaya rekening,14
+provisi,tagihan,synthetic,provisi,7
+biaya materai,tagihan,synthetic,biaya materai,13
+cek saldo,lainnya,synthetic,cek saldo,9
+biaya bulanan bank,tagihan,synthetic,biaya bulanan bank,18
+biaya kartu debit,tagihan,synthetic,biaya kartu debit,17
+biaya kartu kredit,tagihan,synthetic,biaya kartu kredit,18
+ongkir,belanja,synthetic,ongkir,6
+ongkos kirim,belanja,synthetic,ongkos kirim,12
+biaya pengiriman,belanja,synthetic,biaya pengiriman,16
+ongkir shopee,belanja,synthetic,ongkir shopee,13
+ongkir tokopedia,belanja,synthetic,ongkir tokopedia,16
+ongkir lazada,belanja,synthetic,ongkir lazada,13
+ongkir bukalapak,belanja,synthetic,ongkir bukalapak,16
+biaya platform,belanja,synthetic,biaya platform,14
+biaya marketplace,belanja,synthetic,biaya marketplace,17
+potongan aplikasi,lainnya,synthetic,potongan aplikasi,17
+fee aplikasi,lainnya,synthetic,fee aplikasi,12
+biaya jasa,lainnya,synthetic,biaya jasa,10
+jasa pengiriman,belanja,synthetic,jasa pengiriman,15
+jne,belanja,synthetic,jne,3
+jnt,belanja,synthetic,jnt,3
+sicepat,belanja,synthetic,sicepat,7
+anteraja,belanja,synthetic,anteraja,8
+ninja express,belanja,synthetic,ninja express,13
+donasi,lainnya,synthetic,donasi,6
+sedekah,lainnya,synthetic,sedekah,7
+infak,lainnya,synthetic,infak,5
+zakat,lainnya,synthetic,zakat,5
+wakaf,lainnya,synthetic,wakaf,5
+sumbangan,lainnya,synthetic,sumbangan,9
+amal,lainnya,synthetic,amal,4
+kolekte,lainnya,synthetic,kolekte,7
+iuran sosial,lainnya,synthetic,iuran sosial,12
+bantuan,lainnya,synthetic,bantuan,7
+bayar arisan,lainnya,synthetic,bayar arisan,12
+arisan,lainnya,synthetic,arisan,6
+kas kelas,lainnya,synthetic,kas kelas,9
+kas kantor,lainnya,synthetic,kas kantor,10
+patungan,lainnya,synthetic,patungan,8
+uang sekolah,lainnya,synthetic,uang sekolah,12
+spp,lainnya,synthetic,spp,3
+uang kuliah,lainnya,synthetic,uang kuliah,11
+ukt,lainnya,synthetic,ukt,3
+biaya kursus,lainnya,synthetic,biaya kursus,12
+les privat,lainnya,synthetic,les privat,10
+les bahasa inggris,lainnya,synthetic,les bahasa inggris,18
+les matematika,lainnya,synthetic,les matematika,14
+bimbel,lainnya,synthetic,bimbel,6
+biaya bimbel,lainnya,synthetic,biaya bimbel,12
+beli buku pelajaran,lainnya,synthetic,beli buku pelajaran,19
+buku kuliah,lainnya,synthetic,buku kuliah,11
+fotocopy,lainnya,synthetic,fotocopy,8
+print tugas,lainnya,synthetic,print tugas,11
+jilid,lainnya,synthetic,jilid,5
+biaya notaris,lainnya,synthetic,biaya notaris,13
+biaya legalisir,lainnya,synthetic,biaya legalisir,15
+biaya cap,lainnya,synthetic,biaya cap,9
+materai,lainnya,synthetic,materai,7
+fotocopy ktp,lainnya,synthetic,fotocopy ktp,12
+urus surat,lainnya,synthetic,urus surat,10
+ngopi,makanan,augmentasi,ngopi,5
+ngemil,makanan,augmentasi,ngemil,6
+makan siang bareng,makanan,augmentasi,makan siang bareng,18
+jajan bentar,makanan,augmentasi,jajan bentar,12
+beli minum,makanan,augmentasi,beli minum,10
+nongkrong kafe,makanan,augmentasi,nongkrong kafe,14
+sarapan,makanan,augmentasi,sarapan,7
+makan malem,makanan,augmentasi,makan malem,11
+beli cemilan,makanan,augmentasi,beli cemilan,12
+jajan pasar,makanan,augmentasi,jajan pasar,11
+beli kopi,makanan,augmentasi,beli kopi,9
+makan warteg,makanan,augmentasi,makan warteg,12
+pesan ojol,makanan,augmentasi,pesan ojol,10
+order gofood,makanan,augmentasi,order gofood,12
+beli es,makanan,augmentasi,beli es,7
+makan padang,makanan,augmentasi,makan padang,12
+beli gorengan,makanan,augmentasi,beli gorengan,13
+mie instan,makanan,augmentasi,mie instan,10
+beli nasi,makanan,augmentasi,beli nasi,9
+beli baju,belanja,augmentasi,beli baju,9
+beli sepatu baru,belanja,augmentasi,beli sepatu,11
+belanja bulanan,belanja,augmentasi,belanja bulanan,15
+beli keperluan rumah,belanja,augmentasi,beli keperluan rumah,20
+beli alat mandi,belanja,augmentasi,beli alat mandi,15
+belanja online,belanja,augmentasi,belanja online,14
+beli tas baru,belanja,augmentasi,beli tas,8
+beli aksesoris,belanja,augmentasi,beli aksesoris,14
+beli peralatan dapur,belanja,augmentasi,beli peralatan dapur,20
+belanja shopee,belanja,augmentasi,belanja shopee,14
+belanja tokopedia,belanja,augmentasi,belanja tokopedia,17
+beli skincare,belanja,augmentasi,beli skincare,13
+beli parfum,belanja,augmentasi,beli parfum,11
+beli jam tangan,belanja,augmentasi,beli jam tangan,15
+beli kacamata,belanja,augmentasi,beli kacamata,13
+byr listrik,tagihan,augmentasi,byr listrik,11
+bayar wifi,tagihan,augmentasi,bayar wifi,10
+bayar kos,tagihan,augmentasi,bayar kos,9
+bayar kontrakan,tagihan,augmentasi,bayar kontrakan,15
+byr air,tagihan,augmentasi,byr air,7
+bayar bpjs,tagihan,augmentasi,bayar bpjs,10
+byr telpon,tagihan,augmentasi,byr telpon,10
+isi token listrik,tagihan,augmentasi,isi token listrik,17
+bayar cicilan,tagihan,augmentasi,bayar cicilan,13
+byr pulsa,tagihan,augmentasi,byr pulsa,9
+bayar premi asuransi,tagihan,augmentasi,bayar premi asuransi,20
+byr tv kabel,tagihan,augmentasi,byr tv kabel,12
+bayar indihome,tagihan,augmentasi,bayar indihome,14
+byr gas,tagihan,augmentasi,byr gas,7
+naik grab,transportasi,augmentasi,grab,4
+naik gojek,transportasi,augmentasi,gojek,5
+naik ojol,transportasi,augmentasi,ojol,4
+isi bensin,transportasi,augmentasi,isi bensin,10
+bayar tol,transportasi,augmentasi,bayar tol,9
+naik lrt,transportasi,augmentasi,lrt,3
+naik mrt,transportasi,augmentasi,mrt,3
+naik busway,transportasi,augmentasi,busway,6
+parkir motor,transportasi,augmentasi,parkir motor,12
+parkir mobil,transportasi,augmentasi,parkir mobil,12
+servis motor,transportasi,augmentasi,servis motor,12
+ganti oli,transportasi,augmentasi,ganti oli,9
+beli bensin,transportasi,augmentasi,beli bensin,11
+naik kereta,transportasi,augmentasi,kereta,6
+naik angkot,transportasi,augmentasi,angkot,6
+beli obat,kesehatan,augmentasi,beli obat,9
+ke dokter,kesehatan,augmentasi,dokter,6
+cek kesehatan,kesehatan,augmentasi,cek kesehatan,13
+beli vitamin,kesehatan,augmentasi,beli vitamin,12
+ke klinik,kesehatan,augmentasi,klinik,6
+beli masker,kesehatan,augmentasi,beli masker,11
+beli suplemen,kesehatan,augmentasi,beli suplemen,13
+ke rs,kesehatan,augmentasi,rs,2
+beli obat flu,kesehatan,augmentasi,beli obat flu,13
+periksa gigi,kesehatan,augmentasi,periksa gigi,12
+beli obat sakit kepala,kesehatan,augmentasi,beli obat sakit kepala,22
+yoga,kesehatan,augmentasi,yoga,4
+gym,kesehatan,augmentasi,gym,3
+olahraga,kesehatan,augmentasi,olahraga,8
+lari pagi,kesehatan,augmentasi,lari pagi,9
+nonton bioskop,hiburan,augmentasi,nonton bioskop,14
+beli game,hiburan,augmentasi,beli game,9
+nonton netflix,hiburan,augmentasi,nonton netflix,14
+beli tiket konser,hiburan,augmentasi,beli tiket konser,17
+karaoke,hiburan,augmentasi,karaoke,7
+main game,hiburan,augmentasi,main game,9
+beli buku baru,hiburan,augmentasi,beli buku,9
+nonton youtube premium,hiburan,augmentasi,nonton youtube premium,22
+beli tiket,hiburan,augmentasi,beli tiket,10
+jalan jalan mall,hiburan,augmentasi,jalan jalan mall,16
+nonton film,hiburan,augmentasi,nonton film,11
+beli spotify,hiburan,augmentasi,beli spotify,12
+langganan netflix,hiburan,augmentasi,langganan netflix,17
+transfer teman,lainnya,augmentasi,transfer teman,14
+bayar utang,lainnya,augmentasi,bayar utang,11
+kasih uang ortu,lainnya,augmentasi,kasih uang ortu,15
+biaya tak terduga,lainnya,augmentasi,biaya terduga,13
+keperluan dadakan,lainnya,augmentasi,keperluan dadakan,17
+bayar iuran,lainnya,augmentasi,bayar iuran,11
+sumbangan,lainnya,augmentasi,sumbangan,9
+uang saku,lainnya,augmentasi,uang saku,9

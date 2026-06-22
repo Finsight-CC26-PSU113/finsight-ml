@@ -1,0 +1,75 @@
+deskripsi,category,length_deskripsi,jumlah_kata,label
+shopping electronics,belanja,20,2,0
+food restaurant meal,makanan,20,3,4
+friend activities dinner with friends,hiburan,37,5,1
+groceries chicken,makanan,17,2,4
+shopping car,belanja,12,2,0
+personal hygiene soap,belanja,21,3,0
+subscriptions streaming service,hiburan,31,3,1
+shopping clothes,belanja,16,2,0
+kebutuhan pokok,belanja,15,2,0
+food coffee,makanan,11,2,4
+transportation car repair,transportasi,25,3,6
+travel hotel stay,transportasi,17,3,6
+gifts kids games,belanja,16,3,0
+medicaldental doctor visit,kesehatan,26,3,2
+transportation gas,transportasi,18,2,6
+sabun,belanja,5,1,0
+fitness workout equipment,kesehatan,25,3,2
+housing and utilities water bill,tagihan,32,5,5
+friend activities movie tickets,hiburan,31,4,1
+medicaldental medicine,kesehatan,22,2,2
+personal hygiene toothpaste,belanja,27,3,0
+gifts flowers,belanja,13,2,0
+medicaldental dentist visit,kesehatan,27,3,2
+biaya admin,lainnya,11,2,3
+transportation public transit,transportasi,29,3,6
+gifts gift cards,belanja,16,3,0
+personal hygiene shampoo,belanja,24,3,0
+groceries bread,makanan,15,2,4
+food fast food,makanan,14,3,4
+personal hygiene skin care products,belanja,35,5,0
+shopping shoes,belanja,14,2,0
+groceries meat,makanan,14,2,4
+fitness yoga class,kesehatan,18,3,2
+hobbies video games,hiburan,19,3,1
+friend activities concert tickets,hiburan,33,4,1
+makan siang,makanan,11,2,4
+subscriptions gym membership,hiburan,28,3,1
+warung nasi,makanan,11,2,4
+hobbies art supplies,hiburan,20,3,1
+hobbies books,hiburan,13,2,1
+subscriptions magazine,hiburan,22,2,1
+housing and utilities rent,tagihan,26,4,5
+hobbies crochet supplies,hiburan,24,3,1
+housing and utilities gas bill,tagihan,30,5,5
+travel taxiuber,transportasi,15,2,6
+groceries snacks,makanan,16,2,4
+bioskop,hiburan,7,1,1
+fitness personal trainer,kesehatan,24,3,2
+tissue,belanja,6,1,0
+travel plane ticket,transportasi,19,3,6
+jajan sore,makanan,10,2,4
+iuran bulanan,tagihan,13,2,5
+gifts jewelry,belanja,13,2,0
+groceries milk,makanan,14,2,4
+groceries fruits,makanan,16,2,4
+air,tagihan,3,1,5
+housing and utilities electricity bill,tagihan,38,5,5
+bpjs,tagihan,4,1,5
+lainlain,lainnya,8,1,3
+kopi pagi,makanan,9,2,4
+listrik,tagihan,7,1,5
+streaming,hiburan,9,1,1
+indomaret,belanja,9,1,0
+internet,tagihan,8,1,5
+gofood,makanan,6,1,4
+pulsa,tagihan,5,1,5
+top up game,hiburan,11,3,1
+belanja mingguan,belanja,16,2,0
+parkir,tagihan,6,1,5
+cemilan,makanan,7,1,4
+groceries vegetables,makanan,20,2,4
+makan malam,makanan,11,2,4
+main ke mall,hiburan,12,3,1
+alfamart,belanja,8,1,0
