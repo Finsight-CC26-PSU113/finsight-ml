@@ -31,8 +31,9 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 
 COPY app/ ./app/
 COPY models/ ./models/
+COPY .env ./
 
-RUN python -c "import easyocr; easyocr.Reader(['en', 'id'], gpu=False, verbose=False)"
+RUN python -c "from paddleocr import PaddleOCR; PaddleOCR(lang='latin', use_gpu=False, show_log=False)"
 
 ENV PYTHONUNBUFFERED=1
 ENV TF_CPP_MIN_LOG_LEVEL=2

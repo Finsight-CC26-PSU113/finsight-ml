@@ -10,22 +10,25 @@ services:
     ports:
       - "8000:8000"
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - PYTHONUNBUFFERED=1
       - TF_CPP_MIN_LOG_LEVEL=2
       - CUDA_VISIBLE_DEVICES=-1
+      - OCR_GPU=false
     volumes:
       - ./models:/app/models:ro
     healthcheck:
       test:
         [
           "CMD", "python", "-c",
-          "import requests; requests.get('http://localhost:8000/api/health', timeout=5)",
+          "import requests; requests.get('http://localhost:8000/api/v1/health', timeout=5)",
         ]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 90s
+      start_period: 120s
     deploy:
       resources:
         limits:

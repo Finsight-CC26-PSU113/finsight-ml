@@ -6,7 +6,9 @@ OpenCV pipeline for receipt images.
 import cv2
 import numpy as np
 from pathlib import Path
-from app.config import MAX_IMAGE_SIZE
+from app.core.config import settings
+
+MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
 
 def load_image(image_path: str | Path) -> np.ndarray:
