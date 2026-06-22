@@ -44,7 +44,8 @@ models/visualizations_with_boxes/
 models/test_results/*.png
 models/extracted_receipts/
 models/extracted_receipts_smart/
-
+DOCR/
+DOCRFinSight_LFS.patch
 # ── Legacy (restructured to app/) ────────────────────────────
 src/
 web/
