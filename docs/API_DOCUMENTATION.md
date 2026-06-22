@@ -159,10 +159,10 @@ console.log(data.store, data.items, data.total);
 
 ```bash
 # Development
-uvicorn app.main:app --reload --port 8000
+python web/api_v2.py
 
 # Production
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+uvicorn web.api_v2:app --host 0.0.0.0 --port 8000
 
 # Docker
 docker run -p 8000:8000 ocr-finsight
