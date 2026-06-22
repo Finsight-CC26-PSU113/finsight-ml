@@ -17,12 +17,13 @@ from app.services.extractor import ReceiptExtractor
 
 _ocr_engine: Optional[OCREngine] = None
 _classifier: Optional[ContextAwareClassifier] = None
+_category_model: Optional[object] = None
 _extractor: Optional[ReceiptExtractor] = None
 
 
 def startup_models() -> None:
     """Load all ML models at application startup."""
-    global _ocr_engine, _classifier, _extractor
+    global _ocr_engine, _classifier, _category_model, _extractor
 
     print("=" * 55)
     print("  OCR FinSight — Loading models")
@@ -33,16 +34,26 @@ def startup_models() -> None:
     _ocr_engine = OCREngine()
     print("[startup] PaddleOCR ready")
 
-    # 2. Classifier V5
+    # 2. Classifier V5 (line classification)
     print("[startup] Loading Classifier V5 Indonesia...")
     try:
         _classifier = load_v5_classifier()
         print("[startup] Classifier V5 ready (86.26% acc)")
     except Exception as e:
-        print(f"[startup] Classifier failed: {e}")
+        print(f"[startup] Classifier V5 failed: {e}")
         _classifier = None
 
-    # 3. Extractor
+    # 3. Category Classifier (transaction category)
+    print("[startup] Loading Category Classifier...")
+    try:
+        import tensorflow as tf
+        _category_model = tf.keras.models.load_model(settings.CATEGORY_MODEL)
+        print("[startup] Category Classifier ready")
+    except Exception as e:
+        print(f"[startup] Category Classifier failed: {e}")
+        _category_model = None
+
+    # 4. Extractor
     _extractor = ReceiptExtractor()
     print("[startup] Extractor ready")
     print("=" * 55)
@@ -50,9 +61,10 @@ def startup_models() -> None:
 
 def shutdown_models() -> None:
     """Release model resources on shutdown."""
-    global _ocr_engine, _classifier, _extractor
+    global _ocr_engine, _classifier, _category_model, _extractor
     _ocr_engine = None
     _classifier = None
+    _category_model = None
     _extractor = None
 
 
@@ -67,6 +79,10 @@ def get_ocr() -> OCREngine:
 
 def get_classifier() -> Optional[ContextAwareClassifier]:
     return _classifier
+
+
+def get_category_model() -> Optional[object]:
+    return _category_model
 
 
 def get_extractor() -> ReceiptExtractor:

@@ -31,13 +31,35 @@ class Settings(BaseSettings):
     OCR_GPU: bool = False
     OCR_LANG: str = "latin"
 
-    # ── Classifier V5 ──────────────────────────────────────────────────
+    # ── Classifier V5 (line classification) ────────────────────────────
     CLASSIFIER_V5_WEIGHTS: Path = Field(
         default_factory=lambda: Settings.MODELS_DIR
         / "classifier_v5_indonesia"
         / "best_weights.weights.h5"
     )
     CONTEXT_WINDOW: int = 4  # V5 uses ±4 lines
+
+    # ── Category Classifier (transaction category) ─────────────────────
+    CATEGORY_MODEL: Path = Field(
+        default_factory=lambda: Settings.MODELS_DIR
+        / "category_classifier"
+        / "best_model.keras"
+    )
+    CATEGORY_CONFIG: Path = Field(
+        default_factory=lambda: Settings.MODELS_DIR
+        / "category_classifier"
+        / "config.json"
+    )
+    CATEGORY_LABEL_MAPPING: Path = Field(
+        default_factory=lambda: Settings.MODELS_DIR
+        / "category_classifier"
+        / "label_mapping.json"
+    )
+    CATEGORY_TOKENIZER: Path = Field(
+        default_factory=lambda: Settings.MODELS_DIR
+        / "category_classifier"
+        / "tokenizer.json"
+    )
 
     # ── Image preprocessing ────────────────────────────────────────────
     MAX_IMAGE_SIZE: int = 1920

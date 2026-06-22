@@ -13,3 +13,4 @@ class ScanResult(BaseModel):
     date: str
     items: list[ItemResult]
     total: float
+    category: str | None = None

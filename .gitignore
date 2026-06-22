@@ -27,6 +27,10 @@ env/
 # ── Data & datasets ─────────────────────────────────────────
 data/
 !data/.gitkeep
+
+# ── Category classifier training artifacts ──────────────────
+notebook/
+docs/training/
 fullDataset/
 clean_dataset/
 Dataset Baru/

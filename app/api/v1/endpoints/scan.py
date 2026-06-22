@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from fastapi import APIRouter, UploadFile, File, HTTPException
 
-from app.api.deps import get_classifier, get_extractor, get_ocr
+from app.api.deps import get_category_model, get_classifier, get_extractor, get_ocr
 from app.schemas.receipt import ScanResult
 from app.services.classifier import predict_lines
 from app.services.preprocessor import preprocess_for_easyocr
@@ -63,6 +63,31 @@ async def _run_pipeline(image_bytes: bytes) -> dict:
     # 5. Extract
     extracted = get_extractor().extract(classified_lines)
 
+    # 6. Category classification (optional)
+    category = None
+    cat_model = get_category_model()
+    if cat_model and extracted.get("items"):
+        try:
+            import json
+            import numpy as np
+            from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+            with open("models/category_classifier/tokenizer.json") as f:
+                tokenizer = json.load(f)
+            with open("models/category_classifier/label_mapping.json") as f:
+                label_mapping = json.load(f)
+
+            # Concatenate item descriptions
+            text = " ".join(it["name"] for it in extracted["items"])
+            seq = tokenizer.texts_to_sequences([text])
+            padded = pad_sequences(seq, maxlen=100)
+            pred = cat_model.predict(padded, verbose=0)
+            pred_idx = int(np.argmax(pred))
+            inv_mapping = {int(v): k for k, v in label_mapping.items()}
+            category = inv_mapping.get(pred_idx, "unknown")
+        except Exception as e:
+            print(f"[category] prediction failed: {e}")
+
     return {
         "success": True,
         "store": extracted.get("store", ""),
@@ -72,6 +97,7 @@ async def _run_pipeline(image_bytes: bytes) -> dict:
             for it in extracted.get("items", [])
         ],
         "total": float(extracted.get("total", 0.0)),
+        "category": category,
     }
 
 
