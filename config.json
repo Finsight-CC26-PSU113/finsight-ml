@@ -1,0 +1,21 @@
+{
+  "max_len": 30,
+  "vocab_size": 5000,
+  "embed_dim": 64,
+  "lstm_units": 128,
+  "dropout": 0.3,
+  "categories": [
+    "makanan",
+    "belanja",
+    "hiburan",
+    "transportasi",
+    "tagihan",
+    "kesehatan",
+    "lainnya"
+  ],
+  "test_accuracy": 0.9400656819343567,
+  "best_val_accuracy": 0.947826087474823,
+  "total_train_samples": 6207,
+  "augmented_samples": 7000,
+  "epochs_trained": 14
+}
