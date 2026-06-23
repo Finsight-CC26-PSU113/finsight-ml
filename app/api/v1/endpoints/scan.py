@@ -69,22 +69,24 @@ async def _run_pipeline(image_bytes: bytes) -> dict:
     if cat_model and extracted.get("items"):
         try:
             import json
-            import numpy as np
+            import tensorflow as tf
             from tensorflow.keras.preprocessing.sequence import pad_sequences
 
             with open("models/category_classifier/tokenizer.json") as f:
-                tokenizer = json.load(f)
-            with open("models/category_classifier/label_mapping.json") as f:
-                label_mapping = json.load(f)
+                tokenizer_json = f.read()
+            tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(tokenizer_json)
+
+            with open("models/category_classifier/config.json") as f:
+                cat_config = json.load(f)
 
             # Concatenate item descriptions
             text = " ".join(it["name"] for it in extracted["items"])
             seq = tokenizer.texts_to_sequences([text])
-            padded = pad_sequences(seq, maxlen=100)
+            padded = pad_sequences(seq, maxlen=cat_config["max_len"])
             pred = cat_model.predict(padded, verbose=0)
             pred_idx = int(np.argmax(pred))
-            inv_mapping = {int(v): k for k, v in label_mapping.items()}
-            category = inv_mapping.get(pred_idx, "unknown")
+            idx2label = cat_config["idx2label"]
+            category = idx2label.get(str(pred_idx), "unknown")
         except Exception as e:
             print(f"[category] prediction failed: {e}")
 

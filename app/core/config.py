@@ -33,7 +33,8 @@ class Settings(BaseSettings):
 
     # ── Classifier V5 (line classification) ────────────────────────────
     CLASSIFIER_V5_WEIGHTS: Path = Field(
-        default_factory=lambda: Settings.MODELS_DIR
+        default_factory=lambda: Path(__file__).parent.parent.parent
+        / "models"
         / "classifier_v5_indonesia"
         / "best_weights.weights.h5"
     )
@@ -41,22 +42,26 @@ class Settings(BaseSettings):
 
     # ── Category Classifier (transaction category) ─────────────────────
     CATEGORY_MODEL: Path = Field(
-        default_factory=lambda: Settings.MODELS_DIR
+        default_factory=lambda: Path(__file__).parent.parent.parent
+        / "models"
         / "category_classifier"
         / "best_model.keras"
     )
     CATEGORY_CONFIG: Path = Field(
-        default_factory=lambda: Settings.MODELS_DIR
+        default_factory=lambda: Path(__file__).parent.parent.parent
+        / "models"
         / "category_classifier"
         / "config.json"
     )
     CATEGORY_LABEL_MAPPING: Path = Field(
-        default_factory=lambda: Settings.MODELS_DIR
+        default_factory=lambda: Path(__file__).parent.parent.parent
+        / "models"
         / "category_classifier"
         / "label_mapping.json"
     )
     CATEGORY_TOKENIZER: Path = Field(
-        default_factory=lambda: Settings.MODELS_DIR
+        default_factory=lambda: Path(__file__).parent.parent.parent
+        / "models"
         / "category_classifier"
         / "tokenizer.json"
     )

@@ -67,8 +67,9 @@ class ContextAwareClassifier(Model):
         )
 
         # ── Merge + classify ──
+        # Note: merge_dense=128 to match pretrained weights (448→128)
         self.merge_dense = layers.Dense(
-            settings.DENSE_UNITS, activation="relu", name="merge_dense"
+            settings.LSTM_UNITS, activation="relu", name="merge_dense"
         )
         self.merge_bn = layers.BatchNormalization(name="merge_bn")
         self.merge_dropout = layers.Dropout(settings.DROPOUT_RATE * 1.33)  # 0.4
